@@ -38,3 +38,6 @@ body { /* Design für alle nicht weiter spezifizierten Elemente und den Hintergr
 .vdiButton:hover {
   background-color: orange;
 }
+a {
+  color: orange;
+}
