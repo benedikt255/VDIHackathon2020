@@ -14,3 +14,8 @@ body { /* Design für alle nicht weiter spezifizierten Elemente und den Hintergr
     background-color: white;
     color: blue;
   }
+  div.card {
+    background-color: #fff;
+    margin: 1em 0em;
+    color: black;
+  }
