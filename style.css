@@ -1,7 +1,16 @@
 /* CSS fügt die Designbeschreibung hinzu */
 body { /* Design für alle nicht weiter spezifizierten Elemente und den Hintergrund */
     font-family: helvetica, arial, sans-serif; /* Schriftarten werden von links nach rechts gelesen, falls vorhanden wird die erste Schriftart genommen, sonst die nächste, usw. */
-    margin: 2em;
+    margin: 2em; /* Randabstand */
     background-color: #111;
     color: pink; /* eigentlich sollte später kein Text mehr außerhalb weiterer Elemente stehen, deshalb verwenden wir hier als Test eine im Zielfarbschema sehr auffällige Farbe */
+  }
+  footer, header {
+    background-color: white;
+    margin: 1em 0em; /* erste Ziffer ist vertikal, zweite horizontal */
+    color: blue;
+  }
+  nav {
+    background-color: white;
+    color: blue;
   }
