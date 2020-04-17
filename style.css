@@ -8,14 +8,19 @@ body { /* Design für alle nicht weiter spezifizierten Elemente und den Hintergr
   footer, header {
     background-color: white;
     margin: 1em 0em; /* erste Ziffer ist vertikal, zweite horizontal */
+    padding: 1em;
     color: blue;
+    text-align: center;
   }
   nav {
     background-color: white;
+    padding: 1em;
     color: blue;
   }
   div.card {
     background-color: #fff;
     margin: 1em 0em;
+    padding: 1em; /* Randabstand für Text */
     color: black;
+    text-align: justify;
   }
