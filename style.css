@@ -1,4 +1,16 @@
 /* CSS fügt die Designbeschreibung hinzu */
+/*
+ <!--
+  Literatur zum Selbststudium:
+  allgemein:
+  https://www.w3schools.com/default.asp
+  https://wiki.selfhtml.org/
+
+  CSS:
+  https://www.w3schools.com/css/default.asp
+  https://wiki.selfhtml.org/wiki/Schnell-Index/CSS
+-->
+*/
 body { /* Design für alle nicht weiter spezifizierten Elemente und den Hintergrund */
     font-family: helvetica, arial, sans-serif; /* Schriftarten werden von links nach rechts gelesen, falls vorhanden wird die erste Schriftart genommen, sonst die nächste, usw. */
     margin: 2em; /* Randabstand */
