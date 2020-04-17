@@ -31,3 +31,10 @@ body { /* Design für alle nicht weiter spezifizierten Elemente und den Hintergr
     color: #373fff;
     font-weight: bold; /* fett */
   }
+.vdiButton {
+  background-color: lightblue;
+  border-radius: 0.5em;
+}
+.vdiButton:hover {
+  background-color: orange;
+}
