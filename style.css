@@ -3,6 +3,7 @@ body { /* Design für alle nicht weiter spezifizierten Elemente und den Hintergr
     font-family: helvetica, arial, sans-serif; /* Schriftarten werden von links nach rechts gelesen, falls vorhanden wird die erste Schriftart genommen, sonst die nächste, usw. */
     margin: 2em; /* Randabstand */
     background-color: #111;
+    border-radius: 1em;
     color: pink; /* eigentlich sollte später kein Text mehr außerhalb weiterer Elemente stehen, deshalb verwenden wir hier als Test eine im Zielfarbschema sehr auffällige Farbe */
   }
   footer, header {
@@ -19,8 +20,14 @@ body { /* Design für alle nicht weiter spezifizierten Elemente und den Hintergr
   }
   div.card {
     background-color: #fff;
+    border-radius: 1em;
     margin: 1em 0em;
     padding: 1em; /* Randabstand für Text */
     color: black;
     text-align: justify;
+  }
+  h1 {
+    /*font-style: italic;*/ /* kursiv */
+    color: #373fff;
+    font-weight: bold; /* fett */
   }
