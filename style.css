@@ -12,16 +12,16 @@
 -->
 */
 body { /* Design für alle nicht weiter spezifizierten Elemente und den Hintergrund */
-    font-family: helvetica, arial, sans-serif; /* Schriftarten werden von links nach rechts gelesen, falls vorhanden wird die erste Schriftart genommen, sonst die nächste, usw. */
+    font-family: "Open Sans",Arial,Helvetica,sans-serif; /* Schriftarten werden von links nach rechts gelesen, falls vorhanden wird die erste Schriftart genommen, sonst die nächste, usw. */
     margin: 2em; /* Randabstand */
-    background-color: #111;
+    background-color: #373a3a;
     color: pink; /* eigentlich sollte später kein Text mehr außerhalb weiterer Elemente stehen, deshalb verwenden wir hier als Test eine im Zielfarbschema sehr auffällige Farbe */
   }
   footer, header {
-    background-color: white;
+    background-color: #fff;
     margin: 1em 0em; /* erste Ziffer ist vertikal, zweite horizontal */
     padding: 1em;
-    color: blue;
+    color: #373a3a;
     text-align: center;
     border-radius: 1em;
   }
@@ -38,17 +38,20 @@ body { /* Design für alle nicht weiter spezifizierten Elemente und den Hintergr
     color: black;
     text-align: justify;
   }
-  h1 {
+  h1, h2, h3 {
     /*font-style: italic;*/ /* kursiv */
-    color: #373fff;
+    color: #008fd9;;
     font-weight: bold; /* fett */
   }
 .vdiButton {
-  background-color: lightblue;
+  background-color: #008fd9;
+  border-color: #008fd9;
+  color: #fff;
   border-radius: 0.5em;
 }
 .vdiButton:hover {
-  background-color: orange;
+  background-color: #f2a33a;
+  border-color: #f2a33a;
 }
 a {
   color: orange;
