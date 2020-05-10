@@ -1,6 +1,4 @@
-![alt text](https://www.vdi.de/typo3conf/ext/vdi/Resources/Public/Images/Logo/VDI.png "VDI")
-
-
+<img src="https://www.vdi.de/typo3conf/ext/vdi/Resources/Public/Images/Logo/VDI.png" width="200" height="200">
 
 # VDIHackathon2020
 Repository für den VDI-Hackathon 2020
@@ -12,3 +10,4 @@ Oder schreibt uns einfach unter: suj-digital@vdi.de
 ## Aufbau
 
 In diesem Repository liegen im ersten Schritt schulungsartige Unterlagen mit vielen Kommentaren und sehr kleinteiligen Commits, um die Änderungen nachvollziehbar zu machen.
+
