@@ -1,7 +1,9 @@
 # VDIHackathon2020
 Repository für den VDI-Hackathon 2020
 
-weitere Informationen unter: https://www.vdi.de/fileadmin/veranstaltungen/cp_va_files/e084c91e-5097-45b7-9ff0-376cd731a696.pdf
+Weitere Informationen unter: https://www.vdi.de/fileadmin/pages/vdi_de/redakteure/netzwerke_aktivitaeten/dateien/SuJ_CollHackathon2020.pdf
+
+Oder schreibt uns einfach unter: suj-digital@vdi.de
 
 ## Aufbau
 
