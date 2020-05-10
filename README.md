@@ -1,3 +1,7 @@
+![alt text](https://www.vdi.de/typo3conf/ext/vdi/Resources/Public/Images/Logo/VDI.png "VDI")
+
+
+
 # VDIHackathon2020
 Repository für den VDI-Hackathon 2020
 
