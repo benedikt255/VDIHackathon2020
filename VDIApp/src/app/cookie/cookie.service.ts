@@ -15,29 +15,17 @@ export class CookieService {
     document.cookie = cookieValue;
   }
 
-  setWithExpiryInYears(key: string, value: string, expires: number) {
-    this.setWithExpiryInDays(key, value, expires * 365);
-  }
-
   setWithExpiryInDays(key: string, value: string, expires: number) {
     this.setWithExpiryInHours(key, value, expires * 24);
   }
 
   setWithExpiryInHours(key: string, value: string, expires: number) {
-    this.setWithExpiryInMinutes(key, value, expires * 60);
-  }
-
-  setWithExpiryInMinutes(key: string, value: string, expires: number) {
-    this.setWithExpiryInSeconds(key, value, expires * 60);
+    this.setWithExpiryInSeconds(key, value, expires * 3600);
   }
 
   setWithExpiryInSeconds(key: string, value: string, expires: number) {
-    this.setWithExpiryInMiliseconds(key, value, expires * 1000);
-  }
-
-  setWithExpiryInMiliseconds(key: string, value: string, expires: number) {
     let expireDate = new Date();
-    let time = expireDate.getTime() + expires;
+    let time = expireDate.getTime() + (expires * 1000);
     expireDate.setTime(time);
 
     this.set(key, value, expireDate);
