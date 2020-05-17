@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './../auth/auth.service';
@@ -15,23 +15,40 @@ class CurrentPerson {
   templateUrl: './vdi-test.component.html',
   styleUrls: ['./vdi-test.component.css']
 })
-export class VdiTestComponent implements OnInit {
+export class VdiTestComponent implements OnInit, DoCheck {
   private accessCode: string;
+  private oldCode: string;
+  private oldAuth: boolean;
   name: string;
   constructor(private route: ActivatedRoute, private authSvc: AuthService, private http: HttpClient) {
+    this.route.queryParams.subscribe(params => {
+      this.accessCode = params['code'];
+      console.log(this.accessCode);
+    });
     this.name = '';
+    this.checkAuthAndGetName();
+  }
+
+  //better find a suitable OnChange event for this
+  ngDoCheck() {
+    if ((this.accessCode != this.oldCode) || (this.oldAuth != (this.authSvc.getAuth() != ''))) {
+      this.checkAuthAndGetName();
+    }
+    this.oldCode = this.accessCode;
+  }
+
+  private checkAuthAndGetName() {
     if (this.authSvc.getAuth() == '') {
-      this.route.queryParams.subscribe(params => {
-        this.accessCode = params['code'];
-        if (this.accessCode != undefined) {
-          this.authSvc.requestAuthWithAccessCode(this.accessCode);
-          this.accessCode = null;
-        }
-      });
+      console.log(this.accessCode);
+      if (this.accessCode != undefined) {
+        this.authSvc.requestAuthWithAccessCode(this.accessCode);
+        this.accessCode = null;
+      }
     }
     this.http.get<CurrentPerson>('https://labs.linkando.co/api/Objects/GetCurrentPerson',
       { headers: { Authorization: this.authSvc.getAuth() } , responseType: 'json' })
-       .subscribe(person => { this.name = person.name; console.log(person); } );
+      .subscribe(person => { this.name = person.name; console.log(person); } );
+      this.oldAuth = this.authSvc.getAuth() != '';
   }
 
 
