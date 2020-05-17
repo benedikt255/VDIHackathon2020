@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1589705392713,
+  "timestamp": 1589706903915,
   "index": "https://benedikt255.github.io/VDIHackathon2020/index.html",
   "assetGroups": [
     {
@@ -10,8 +10,8 @@
       "urls": [
         "https://benedikt255.github.io/VDIHackathon2020/favicon.ico",
         "https://benedikt255.github.io/VDIHackathon2020/index.html",
-        "https://benedikt255.github.io/VDIHackathon2020/main-es2015.911499609fe66c0958f3.js",
-        "https://benedikt255.github.io/VDIHackathon2020/main-es5.911499609fe66c0958f3.js",
+        "https://benedikt255.github.io/VDIHackathon2020/main-es2015.ad3ca527594707293e5a.js",
+        "https://benedikt255.github.io/VDIHackathon2020/main-es5.ad3ca527594707293e5a.js",
         "https://benedikt255.github.io/VDIHackathon2020/manifest.webmanifest",
         "https://benedikt255.github.io/VDIHackathon2020/polyfills-es2015.690002c25ea8557bb4b0.js",
         "https://benedikt255.github.io/VDIHackathon2020/polyfills-es5.1fd9b76218eca8053895.js",
@@ -32,9 +32,9 @@
   "dataGroups": [],
   "hashTable": {
     "https://benedikt255.github.io/VDIHackathon2020/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "https://benedikt255.github.io/VDIHackathon2020/index.html": "edeb3bb78c41137ab0c4175196b92032edcb95e6",
-    "https://benedikt255.github.io/VDIHackathon2020/main-es2015.911499609fe66c0958f3.js": "198f6e8c9cb263d48207bddcc7453fa51dae1f72",
-    "https://benedikt255.github.io/VDIHackathon2020/main-es5.911499609fe66c0958f3.js": "32dc8aa0b6946e4a1940197c177b7f69ff2ef77a",
+    "https://benedikt255.github.io/VDIHackathon2020/index.html": "c36471cc25fffd50776d4d482df633f15ed52476",
+    "https://benedikt255.github.io/VDIHackathon2020/main-es2015.ad3ca527594707293e5a.js": "b07a840ee4f2105b1c55a6b964703f58f4c9075f",
+    "https://benedikt255.github.io/VDIHackathon2020/main-es5.ad3ca527594707293e5a.js": "f8391ac22ce7142a751d50a15bee88eed04c6f03",
     "https://benedikt255.github.io/VDIHackathon2020/manifest.webmanifest": "8b9298e9aa641e4b957270e43a75be8330ad221c",
     "https://benedikt255.github.io/VDIHackathon2020/polyfills-es2015.690002c25ea8557bb4b0.js": "72ad4ccc0a3916ae4598199447cdeadd6d380570",
     "https://benedikt255.github.io/VDIHackathon2020/polyfills-es5.1fd9b76218eca8053895.js": "89222a28dbabb780fc372d33834080e0cd3083d9",
