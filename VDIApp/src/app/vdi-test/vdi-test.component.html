@@ -1,7 +1,6 @@
 <div class="card">
   <h2>VDI Test</h2>
   <p *ngIf="this.name != ''">Hallo {{name}}</p>
-  <!-- localhost <a *ngIf="this.name == ''" href="https://identity.linkando.co/oauth/auth?redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Fvdi-test">LogIn</a> -->
-  <a *ngIf="this.name == ''" href="https://identity.linkando.co/oauth/auth?redirect_uri=https%3A%2F%2Fbenedikt255.github.io%2FVDIHackathon2020%2Fvdi-test">LogIn</a>
+  <a *ngIf="this.name == ''" href="https://identity.linkando.co/oauth/auth?redirect_uri={{authURI}}">LogIn</a>
 </div>
 

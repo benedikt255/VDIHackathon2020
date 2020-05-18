@@ -2,6 +2,7 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './../auth/auth.service';
+import { environment } from './../../environments/environment';
 
 class CurrentPerson {
   href: string;
@@ -19,6 +20,7 @@ export class VdiTestComponent implements OnInit, DoCheck {
   private accessCode: string;
   private oldCode: string;
   private oldAuth: boolean;
+  authURI = encodeURIComponent(environment.authURI); //use URI from environment, so we can debug on localhost but deploy on github/linkando
   name: string;
   constructor(private route: ActivatedRoute, private authSvc: AuthService, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
