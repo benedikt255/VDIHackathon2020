@@ -127,8 +127,8 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "https://benedikt255.github.io/VDIHackathon2020/",
-            "inactive_baseHref": "https://vdi.linkando.co/_content/PWA/"
+            "inactive_baseHref": "https://benedikt255.github.io/VDIHackathon2020/",
+            "baseHref": "https://vdi.linkando.co/_content/PWA/"
           }
         }
       }

@@ -6,15 +6,10 @@ import { StaticPageComponent } from './static-page/static-page.component';
 
 
 const routes: Routes = [
-  {
-    path: 'vdi-test',
-    component: VdiTestComponent
-  },
-  {
-    path: 'static-page',
-    component: StaticPageComponent
-  },
-  { path: '',   redirectTo: '/vdi-test', pathMatch: 'full' }
+  { path: 'vdi-test', component: VdiTestComponent },
+  { path: 'static-page', component: StaticPageComponent },
+  { path: '',   redirectTo: '/vdi-test', pathMatch: 'full' },
+  { path: '**', component:  VdiTestComponent}
 ];
 
 @NgModule({
