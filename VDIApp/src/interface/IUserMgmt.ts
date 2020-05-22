@@ -1,6 +1,6 @@
 // data type of user with all attributes
 export class ConnectingUser {
-  id!: string; // (internal) id of the user
+  readonly id!: string; // (internal) id of the user
   firstName!: string; // first name
   lastName!: string; // last name
   location!: string; // location of the user
@@ -16,11 +16,12 @@ export interface IUserManagement {
   registerUser(user: ConnectingUser, password: string): string; // create user
   unregisterUser(email: string): boolean; // delete user
   updateUser(user: ConnectingUser): boolean; // change user data
-  getUsers(): ConnectingUser[];
+  getUsers(): ConnectingUser[]; // not implemented
   getUser(): ConnectingUser; // gets user data of current user
 }
 
-class MockUserManagement implements IUserManagement {
+// mock class for UI tests
+export class MockUserManagement implements IUserManagement {
   private user: ConnectingUser = {
       id: '1',
       firstName: 'Mustermann',
@@ -48,7 +49,7 @@ class MockUserManagement implements IUserManagement {
     return true;
   }
   getUsers(): ConnectingUser[] {
-    return [];
+    throw new Error('Method not implemented.');
   }
   getUser(): ConnectingUser {
     return this.user;
