@@ -1,9 +1,9 @@
-import { IPost, mockPostMgmt } from './IPostMgmt';
+import { IPost, MockPostMgmt } from './IPostMgmt';
 import { IUser } from './IUserMgmt';
 
 //MockClasses
 import { MockUserMgmt } from './IUserMgmt';
-import { MockPostMgmt } from "./IPostMgmt";
+import { MockPostMgmt } from './IPostMgmt';
 
 
 enum enumConnectIngChannelTypes{

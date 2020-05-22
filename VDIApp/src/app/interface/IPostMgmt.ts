@@ -1,6 +1,6 @@
 import { IComment } from './ICommentMgmt';
 import { IChannel } from './IChannelMgmt';
-import { IUser, IUserMgmt } from './IUserMgmt';
+import { IUser } from './IUserMgmt';
 
 
 // Interface - IConnectIngPost
@@ -73,4 +73,42 @@ export interface IPostMgmt
     // Method - GetPosts
     // returns the posts under an existing channel
     getPosts(user: IUser, parent: IChannel): Array<IPost>;
+}
+
+// mock class for UI tests
+export class MockPostMgmt implements I {
+  private user: IUser = {
+    id: '1',
+    firstName: 'Mustermann',
+    lastName: 'Max',
+    location: 'Berlin',
+    image: '',
+    jobTitle: 'Ingenieur',
+    email: 'Max.Mustermann@example.com',
+    username: 'user1',
+    token: 'Basic 12345'
+  };
+
+  connectUser(username: string, password: string): IUser {
+    return this.user;
+  }
+  disconnectUser(user: IUser): boolean {
+    return true;
+  }
+  registerUser(user: IUser, password: string): string {
+    return '1';
+  }
+  unregisterUser(user: IUser): boolean {
+    return true;
+  }
+  updateUser(user: IUser): boolean {
+    this.user = user;
+    return true;
+  }
+  getUsers(user: IUser): IUser[] {
+    throw new Error('Method not implemented.');
+  }
+  getUser(user: IUser): IUser {
+    return this.user;
+  }
 }
