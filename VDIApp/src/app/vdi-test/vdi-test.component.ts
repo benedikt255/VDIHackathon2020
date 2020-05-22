@@ -53,7 +53,7 @@ export class VdiTestComponent implements OnInit, DoCheck {
       console.log(this.accessCode);
       if (this.accessCode !== undefined) {
         this.authSvc.requestAuthWithAccessCode(this.accessCode);
-        this.accessCode = null;
+        this.accessCode = '';
       }
     }
     this.http.get<CurrentPerson>('https://labs.linkando.co/api/Objects/GetCurrentPerson',
