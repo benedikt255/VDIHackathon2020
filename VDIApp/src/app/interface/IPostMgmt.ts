@@ -1,13 +1,14 @@
-import { IComment } from './ICommentMgmt';
 import { IChannel } from './IChannelMgmt';
 import { IUser } from './IUserMgmt';
 
 
-// Interface - IConnectIngPost
+// Interface - IPost
 // It represents an elementary post under a channel
 export interface IPost {
     // Post Identifier
     id: string;
+    // Channel Identifier
+    channelId: string;
     // Author Identifier
     authorId: string;
     // Author Display Name
@@ -18,12 +19,10 @@ export interface IPost {
     title: string;
     // Post Text
     message: string;
-    // Comments to Psot
-    comments: Array<IComment>;
 }
 
 
-// Class - ConnectIngComment
+// Class - ConnectIngPost
 // represents the elementary comment object
 export class ConnectIngPost implements IPost {
     id: string;
@@ -33,7 +32,6 @@ export class ConnectIngPost implements IPost {
     creationTS: Date;
     title: string;
     message: string;
-    comments: Array<IComment>;
 
     constructor(id: string, channelId: string, authorId: string, author: string, ts: Date, title: string, message: string) {
         this.id = id;
@@ -43,9 +41,7 @@ export class ConnectIngPost implements IPost {
         this.creationTS = ts;
         this.title = title;
         this.message = message;
-        this.comments = [];
     }
-
 }
 
 
@@ -75,40 +71,32 @@ export interface IPostMgmt
     getPosts(user: IUser, parent: IChannel): Array<IPost>;
 }
 
-// mock class for UI tests
-export class MockPostMgmt implements I {
-  private user: IUser = {
+export class MockPostMgmt implements IPostMgmt {
+  private post: IPost = {
     id: '1',
-    firstName: 'Mustermann',
-    lastName: 'Max',
-    location: 'Berlin',
-    image: '',
-    jobTitle: 'Ingenieur',
-    email: 'Max.Mustermann@example.com',
-    username: 'user1',
-    token: 'Basic 12345'
+    channelId: '1',
+    authorId: '1',
+    author: 'VDI',
+    creationTS: new Date('24.05.2020'),
+    title: 'Test',
+    message: 'Dies ist ein Test.',
   };
+  offlineMode = false;
 
-  connectUser(username: string, password: string): IUser {
-    return this.user;
+  createPost(user: IUser, parent: IChannel, title: string, message: string): IPost {
+    return this.post;
   }
-  disconnectUser(user: IUser): boolean {
-    return true;
+
+  getPosts(user: IUser, parent: IChannel): Array<IPost> {
+    return [this.post];
   }
-  registerUser(user: IUser, password: string): string {
-    return '1';
+
+  removePost(user: IUser, comment: IPost): boolean {
+    return false;
   }
-  unregisterUser(user: IUser): boolean {
-    return true;
-  }
-  updateUser(user: IUser): boolean {
-    this.user = user;
-    return true;
-  }
-  getUsers(user: IUser): IUser[] {
-    throw new Error('Method not implemented.');
-  }
-  getUser(user: IUser): IUser {
-    return this.user;
+
+  updatePost(user: IUser, comment: IPost, text: string): IPost {
+    this.post.author += ' - SUJ';
+    return this.post;
   }
 }
