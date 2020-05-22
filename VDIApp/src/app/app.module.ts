@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { VdiTestComponent } from './vdi-test/vdi-test.component';
+import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -18,7 +18,7 @@ import { ChannelOverviewComponent } from './channel-overview/channel-overview.co
 @NgModule({
   declarations: [
     AppComponent,
-    VdiTestComponent,
+    LoginComponent,
     StaticPageComponent,
     ChannelOverviewComponent
   ],

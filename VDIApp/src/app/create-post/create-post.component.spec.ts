@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VdiTestComponent } from './vdi-test.component';
+import { CreatePostComponent } from './create-post.component';
 
-describe('VdiTestComponent', () => {
-  let component: VdiTestComponent;
-  let fixture: ComponentFixture<VdiTestComponent>;
+describe('CreatePostComponent', () => {
+  let component: CreatePostComponent;
+  let fixture: ComponentFixture<CreatePostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VdiTestComponent ]
+      declarations: [ CreatePostComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VdiTestComponent);
+    fixture = TestBed.createComponent(CreatePostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

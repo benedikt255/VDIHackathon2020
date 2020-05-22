@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { VdiTestComponent } from './vdi-test/vdi-test.component';
+//Screen 1
+import { LoginComponent } from './login/login.component';
+//Screen 2
 import { ChannelOverviewComponent} from './channel-overview/channel-overview.component';
-import { StaticPageComponent } from './static-page/static-page.component';
-
+//Screen 3
+import { PostComponent} from './post/post.component';
+//Screen 4
+import { CreatePostComponent } from './create-post/create-post.component';
 
 const routes: Routes = [
-  { path: 'vdi-test', component: VdiTestComponent },
-  { path: 'static-page', component: StaticPageComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'channel-overview', component: ChannelOverviewComponent },
-  { path: '',   redirectTo: '/vdi-test', pathMatch: 'full' },
-  { path: '**', component:  VdiTestComponent}
+  { path: 'post', component: PostComponent },
+  { path: 'create-post', component: CreatePostComponent },
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', component:  LoginComponent}
 ];
 
 @NgModule({
