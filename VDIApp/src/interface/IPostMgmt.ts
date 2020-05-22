@@ -1,4 +1,4 @@
-import { IConnectIngComment } from "./ICommentMgmt";;
+import { IConnectIngComment } from './ICommentMgmt';
 
 // Interface - IConnectIngPost
 // It represents a post under a person
