@@ -23,7 +23,7 @@ export interface IComment
     readonly creationTS: Date;
 
     // Comment Text
-    readonly text: string;
+    text: string;
 }
 
 
