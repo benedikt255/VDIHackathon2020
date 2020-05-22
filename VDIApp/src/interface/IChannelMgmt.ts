@@ -2,7 +2,8 @@ import { IConnectIngPost, mockPostMgmt } from "./IPostMgmt";
 import { ConnectingUser} from "./IUserMgmt";
 
 //MockClasses
-import {MockUserManagement, ConnectingUser} from "./IUserMgmt";
+import {MockUserManagement} from "./IUserMgmt";
+import {mockPostMgmt } from "./IPostMgmt";
 
 
 enum enumConnectIngChannelTypes{
@@ -29,7 +30,7 @@ export interface IConnectIngChannelMgmt{
     createChannel() : IConnectIngChannel
     updateChannel(posts : IConnectIngPost) : IConnectIngChannel
     getChannel(channelId : String) : IConnectIngChannel
-    removePost(postId : String) : boolean
+    removeChannel(channelId : String) : boolean
 }
 
 export class mockConnectingChannelMgmt implements IConnectIngChannelMgmt{
@@ -38,20 +39,20 @@ private channel : IConnectIngChannel = {
     name : "GoldenEye",
     description: "Look your feets!",
     picture: "abc",
-    persons : new MockUserManagement().getUser,
+    persons : new MockUserManagement().getUser(),
     posts : [],
 }
 
     createChannel(): IConnectIngChannel {
-       return new Channel("007","GoldenEye","Look your feets!","abc", ["",""], );
+       return this.channel;
     }
     updateChannel(posts: IConnectIngPost): IConnectIngChannel {
         throw new Error("Method not implemented.");
     }
     getChannel(channelId: String): IConnectIngChannel {
-        return Channel;
+        return this.channel;
     }
-    removePost(postId: String): boolean {
+    removeChannel(postId: String): boolean {
         throw new Error("Method not implemented.");
     }
 
