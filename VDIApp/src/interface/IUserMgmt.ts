@@ -13,21 +13,22 @@ export interface IUser {
 
 // interface for managing users
 export interface IUserMgmt {
-  connectUser(username: string, password: string): IUser; // login user
-  disconnectUser(user: IUser): boolean; // logout user
-  registerUser(user: IUser, password: string): string; // create user
-  unregisterUser(user: IUser): boolean; // delete user
-  updateUser(user: IUser): boolean; // change user data
-  getUsers(user: IUser): IUser[]; // not implemented
-  getUser(user: IUser): IUser; // gets user data of current user
+  connectUserAsync(username: string, password: string, callback: (user: IUser) => void): void; // login user
+  disconnectUserAsync(user: IUser, callback: (disconnected: boolean) => void): void; // logout user
+
+  registerUserAsync(user: IUser, password: string, callback: (registered: boolean) => void): void; // create user
+  unregisterUserAsync(user: IUser, callback: (unregistered: boolean) => void): void; // delete user
+
+  updateUserAsync(user: IUser, callback: (user: IUser) => void): void; // change user data
+  getUsersAsync(user: IUser, callback: (users: IUser[]) => void): void; // not implemented
 }
 
 // mock class for UI tests
 export class MockUserMgmt implements IUserMgmt {
   private user: IUser = {
       id: '1',
-      firstName: 'Mustermann',
-      lastName: 'Max',
+      lastName: 'Mustermann',
+      firstName: 'Max',
       location: 'Berlin',
       image: '',
       jobTitle: 'Ingenieur',
@@ -36,26 +37,48 @@ export class MockUserMgmt implements IUserMgmt {
       token: 'Basic 12345'
   };
 
-  connectUser(username: string, password: string): IUser {
-    return this.user;
+  connectUserAsync(username: string, password: string, callback: (user: IUser) => void): void{
+    callback(this.user);
   }
-  disconnectUser(user: IUser): boolean {
-    return true;
+  disconnectUserAsync(user: IUser, callback: (disconnected: boolean) => void): void {
+    callback(true);
   }
-  registerUser(user: IUser, password: string): string {
-    return '1';
+  registerUserAsync(user: IUser, password: string, callback: (registered: boolean) => void): void{
+    callback(true);
   }
-  unregisterUser(user: IUser): boolean {
-    return true;
+  unregisterUserAsync(user: IUser, callback: (unregistered: boolean) => void): void{
+    callback(true);
   }
-  updateUser(user: IUser): boolean {
+  updateUserAsync(user: IUser, callback: (user: IUser) => void): void{
     this.user = user;
-    return true;
+    callback(this.user);
   }
-  getUsers(user: IUser): IUser[] {
-    throw new Error('Method not implemented.');
+  getUsersAsync(user: IUser, callback: (users: IUser[]) => void): void{
+    callback([
+      this.user,
+      {
+        id: '2',
+        lastName: 'Musterfrau',
+        firstName: 'Melanie',
+        location: 'Busenbach',
+        image: '',
+        jobTitle: 'Ingenieurin',
+        email: 'melanie.musterfrau@example.com',
+        username: 'user2',
+        token: 'Advanced 12345'
+    },
+    {
+      id: '3',
+      lastName: 'Mustermensch',
+      firstName: 'Max-Sophie',
+      location: 'Köln',
+      image: '',
+      jobTitle: 'Ingenieurende',
+      email: 'max-sophie.mustermensch@example.com',
+      username: 'user3',
+      token: 'Divers 12345'
   }
-  getUser(user: IUser): IUser {
-    return this.user;
+    ]);
   }
+
 }
