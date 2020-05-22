@@ -11,7 +11,7 @@ export class CookieService {
   set(key: string, value: string, expires: Date): void;
   set(key: string, value: string, expires?: Date): void {
     let cookieValue = `${key}=${value}`;
-    if (expires) cookieValue += `;expires='${expires.toUTCString()}'`
+    if (expires) { cookieValue += `;expires='${expires.toUTCString()}'`; }
     document.cookie = cookieValue;
   }
 
@@ -24,8 +24,8 @@ export class CookieService {
   }
 
   setWithExpiryInSeconds(key: string, value: string, expires: number) {
-    let expireDate = new Date();
-    let time = expireDate.getTime() + (expires * 1000);
+    const expireDate = new Date();
+    const time = expireDate.getTime() + (expires * 1000);
     expireDate.setTime(time);
 
     this.set(key, value, expireDate);
@@ -37,7 +37,7 @@ export class CookieService {
 
     const prefix = `${key}=`;
     for (const pair of pairs) {
-      if (pair.indexOf(prefix) == 0) {
+      if (pair.indexOf(prefix) === 0) {
         return pair.substring(prefix.length);
       }
     }
