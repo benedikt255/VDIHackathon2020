@@ -6,7 +6,8 @@ import { CookieService } from '../cookie/cookie.service';
 
 class AuthData {
   email!: string;
-  accessToken!: string;
+  // tslint:disable-next-line:variable-name
+  access_token!: string; // ignore naming convention since we need the same fields as in the API
   tenant!: string;
   url!: string;
   image!: string;
@@ -32,7 +33,7 @@ export class AuthService {
   requestAuthWithAccessCode(accessCode: string) {
     this.http.post<AuthData>('https://identity.linkando.co/oauth/token?code=' + accessCode, '', {
       responseType: 'json'
-    }).subscribe(data => { this.cookieService.setWithExpiryInDays('authToken', data.accessToken, 30); } );
+    }).subscribe(data => { this.cookieService.setWithExpiryInDays('authToken', data.access_token, 30); } );
 
   }
 
