@@ -21,6 +21,6 @@ import { trigger, state, style, animate, transition, query, stagger } from '@ang
 export class AppComponent {
   title = 'VDIApp';
   getAnimationData(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 }
