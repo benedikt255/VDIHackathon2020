@@ -19,3 +19,38 @@ export interface IUserManagement {
   getUsers(): ConnectingUser[];
   getUser(): ConnectingUser; // gets user data of current user
 }
+
+class MockUserManagement implements IUserManagement {
+  private user: ConnectingUser = {
+      id: '1',
+      firstName: 'Mustermann',
+      lastName: 'Max',
+      location: 'Berlin',
+      image: '',
+      jobTitle: 'Ingenieur',
+      email: 'Max.Mustermann@example.com'
+  };
+
+  connectUser(email: string, password: string): string {
+    return 'Basic 12345';
+  }
+  disconnectUser(): boolean {
+    return true;
+  }
+  registerUser(user: ConnectingUser, password: string): string {
+    return '1';
+  }
+  unregisterUser(email: string): boolean {
+    return true;
+  }
+  updateUser(user: ConnectingUser): boolean {
+    this.user = user;
+    return true;
+  }
+  getUsers(): ConnectingUser[] {
+    return [];
+  }
+  getUser(): ConnectingUser {
+    return this.user;
+  }
+}
