@@ -1,4 +1,9 @@
-import { IConnectIngPost } from "./IPostMgmt";
+import { IConnectIngPost, mockPostMgmt } from "./IPostMgmt";
+import { ConnectingUser} from "./IUserMgmt";
+
+//MockClasses
+import {MockUserManagement} from "./IUserMgmt";
+import {mockPostMgmt } from "./IPostMgmt";
 
 
 enum enumConnectIngChannelTypes{
@@ -11,51 +16,43 @@ enum enumConnectIngChannelTypes{
 
 export interface IConnectIngChannel{
 
-    readonly id : String
-    name : String
-    description : String
-    picture : String
-    persons  : String[]
-    posts : IConnectIngPost[]
+    readonly id : String;
+    name : String;
+    description : String;
+    picture : String;
+    persons  : ConnectingUser[];
+    posts : IConnectIngPost[];
 
-    createChannel() : boolean
-    updateChannel(posts : IConnectIngPost) : boolean
-    getChannel(channelId : String) : IConnectIngChannel
-    removePost(postId : String) : boolean
+
 }
 
-export class mockChannel implements IConnectIngChannel{
-    readonly id: String;
-    name: String;
-    description: String;
-    picture: String;
-    persons: String[];
-    posts: any[];
+export interface IConnectIngChannelMgmt{
+    createChannel() : IConnectIngChannel
+    updateChannel(posts : IConnectIngPost) : IConnectIngChannel
+    getChannel(channelId : String) : IConnectIngChannel
+    removeChannel(channelId : String) : boolean
+}
 
-    createChannel(): boolean {
-        return false;
+export class mockConnectingChannelMgmt implements IConnectIngChannelMgmt{
+private channel : IConnectIngChannel = {
+    id :"1",
+    name : "GoldenEye",
+    description: "Look your feets!",
+    picture: "abc",
+    persons : new MockUserManagement().getUser(),
+    posts : [],
+}
+
+    createChannel(): IConnectIngChannel {
+       return this.channel;
     }
-
-    private constructor(){
-        this.id = "007"
-        this.name = "GoldenEye"
-        this.description = "you know this!"
-        this.picture = ""
-        this.persons = ["Bond, James"]
-        this.posts = [] //TODO mockPostClass?!?
+    updateChannel(posts: IConnectIngPost): IConnectIngChannel {
+        throw new Error("Method not implemented.");
     }
-
-    updateChannel(posts : IConnectIngPost[]): boolean {
-        this.description = "updated";
-        this.posts = posts;
-        return true;
+    getChannel(channelId: String): IConnectIngChannel {
+        return this.channel;
     }
-
-    getChannel(channelId : String): IConnectIngChannel {
-        return this;
-    }
-
-    removePost(postId: String): boolean {
+    removeChannel(postId: String): boolean {
         throw new Error("Method not implemented.");
     }
 
