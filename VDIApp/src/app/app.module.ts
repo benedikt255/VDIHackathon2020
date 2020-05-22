@@ -1,3 +1,4 @@
+import {MatButtonModule} from '@angular/material/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatSliderModule } from '@angular/material/slider';
@@ -12,14 +13,17 @@ import { environment } from '../environments/environment';
 import { StaticPageComponent } from './static-page/static-page.component';
 import { AuthService } from './auth/auth.service';
 import { CookieService } from './cookie/cookie.service';
+import { ChannelOverviewComponent } from './channel-overview/channel-overview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VdiTestComponent,
-    StaticPageComponent
+    StaticPageComponent,
+    ChannelOverviewComponent
   ],
   imports: [
+    MatButtonModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,

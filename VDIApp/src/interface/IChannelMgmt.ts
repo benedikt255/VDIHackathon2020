@@ -1,8 +1,17 @@
 import { IConnectIngPost } from "./IPostMgmt";
 
+
+enum enumConnectIngChannelTypes{
+    Broadcast = 0,
+    Locals = 1,
+    Events = 2,
+    Topics = 3,
+    Private = 4,
+}
+
 export interface IConnectIngChannel{
 
-    id : String
+    readonly id : String
     name : String
     description : String
     picture : String
@@ -10,13 +19,13 @@ export interface IConnectIngChannel{
     posts : IConnectIngPost[]
 
     createChannel() : boolean
-    updateChannel() : boolean
+    updateChannel(posts : IConnectIngPost) : boolean
     getChannel(channelId : String) : IConnectIngChannel
     removePost(postId : String) : boolean
 }
 
 export class mockChannel implements IConnectIngChannel{
-    id: String;
+    readonly id: String;
     name: String;
     description: String;
     picture: String;
@@ -33,16 +42,17 @@ export class mockChannel implements IConnectIngChannel{
         this.description = "you know this!"
         this.picture = ""
         this.persons = ["Bond, James"]
-        this.posts = [mockPost] //TODO mockPostClass?!?
+        this.posts = [] //TODO mockPostClass?!?
     }
 
-    updateChannel(): boolean {
-        this.description = "updated"
+    updateChannel(posts : IConnectIngPost[]): boolean {
+        this.description = "updated";
+        this.posts = posts;
         return true;
     }
 
     getChannel(channelId : String): IConnectIngChannel {
-        return this
+        return this;
     }
 
     removePost(postId: String): boolean {

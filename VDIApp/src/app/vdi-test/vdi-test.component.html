@@ -1,6 +1,10 @@
 <div class="card">
   <h2>VDI ConnectING</h2>
+  
+ <!-- <img src="../../assets/images/VDI.png"></img>-->
+
   <p *ngIf="this.name != ''">Hallo {{name}}</p>
   <a *ngIf="this.name == ''" href="https://identity.linkando.co/oauth/auth?redirect_uri={{authURI}}">LogIn</a>
+  <button (click)="onclick()" mat-flat-button color="primary">Login</button>
 </div>
 
