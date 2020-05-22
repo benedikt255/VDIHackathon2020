@@ -1,11 +1,11 @@
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { IConnectIngPost } from './IPostMgmt';
-import { IConnectIngUser } from './IUserMgmt';
+import { IPost } from './IPostMgmt';
+import { IUser } from './IUserMgmt';
 
 
 // Interface - IConnectIngComment
 // It represents an elementary comment under a post
-export interface IConnectIngComment
+export interface IComment
 {
     // Comment Identifier
     readonly id: string;
@@ -29,7 +29,7 @@ export interface IConnectIngComment
 
 // Class - ConnectIngComment
 // represents the elementary comment object
-export class ConnectIngComment implements IConnectIngComment {
+export class ConnectIngComment implements IComment {
     id: string;
     postId: string;
     authorId: string;
@@ -62,19 +62,19 @@ export interface ICommentMgmt
 
     // Method - CreateComment
     // creates a new comment under a defined post
-    createComment(user: IConnectIngUser, parent: IConnectIngPost, text: string): IConnectIngComment;
+    createComment(user: IUser, parent: IPost, text: string): IComment;
 
     // Method - UpdateComment
     // updates an existing comment text of an existing comment
-    updateComment(user: IConnectIngUser, comment: IConnectIngComment, text: string): IConnectIngPost;
+    updateComment(user: IUser, comment: IComment, text: string): IPost;
 
     // Method - RemoveComment
     // removes an existing comment
-    removeComment(user: IConnectIngUser, comment: IConnectIngComment): boolean;
+    removeComment(user: IUser, comment: IComment): boolean;
 
     // Method - GetComments
     // returns the comments under an existing post
-    getComments(user: IConnectIngUser, parent: IConnectIngPost): Array<IConnectIngComment>;
+    getComments(user: IUser, parent: IPost): Array<IComment>;
 }
 
 
