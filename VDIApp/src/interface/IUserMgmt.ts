@@ -17,5 +17,5 @@ export interface IUserManagement {
   unregisterUser(email: string): boolean; // delete user
   updateUser(user: ConnectingUser): boolean; // change user data
   getUsers(): ConnectingUser[];
-  getUser(id: string): ConnectingUser;
+  getUser(): ConnectingUser; // gets user data of current user
 }
