@@ -6,17 +6,17 @@ import { IUser } from './IUserMgmt';
 // It represents an elementary post under a channel
 export interface IPost {
     // Post Identifier
-    id: string;
+    readonly id: string;
     // Channel Identifier
-    channelId: string;
+    readonly channelId: string;
     // Author Identifier
-    authorId: string;
+    readonly authorId: string;
     // Author Display Name
-    author: string;
+    readonly author: string;
     // Post Creation Timestamp
-    creationTS: Date;
+    readonly creationTS: Date;
     // Post Title
-    title: string;
+    readonly title: string;
     // Post Text
     message: string;
 }
@@ -96,7 +96,7 @@ export class MockPostMgmt implements IPostMgmt {
   }
 
   updatePost(user: IUser, comment: IPost, text: string): IPost {
-    this.post.author += ' - SUJ';
+    this.post.message += ' - SUJ';
     return this.post;
   }
 }
