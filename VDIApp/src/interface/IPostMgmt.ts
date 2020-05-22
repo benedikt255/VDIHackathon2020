@@ -1,4 +1,6 @@
 import { IConnectIngComment } from './ICommentMgmt';
+import { IConnectIngChannel } from './IChannelMgmt';
+import { IConnectIngUser } from './IUserMgmt';
 
 
 // Interface - IConnectIngPost
@@ -33,7 +35,7 @@ export class ConnectIngPost implements IConnectIngPost {
     message: string;
     comments: Array<IConnectIngComment>;
 
-    constructor(id: string, channelId: string, authorId: string, author: string, ts: Date, title: string, message: string){
+    constructor(id: string, channelId: string, authorId: string, author: string, ts: Date, title: string, message: string) {
         this.id = id;
         this.channelId = channelId;
         this.authorId = authorId;
@@ -58,17 +60,17 @@ export interface IPostMgmt
 
     // Method - CreateComment
     // creates a new post under a defined channel
-    createPost(parent: IConnectIngChannel, title: string, message: string): IConnectIngPost;
+    createPost(user: IConnectIngUser, parent: IConnectIngChannel, title: string, message: string): IConnectIngPost;
 
     // Method - UpdateComment
     // updates an existing post title or message of an existing post
-    updatePost(comment: IConnectIngPost, text: string): IConnectIngPost;
+    updatePost(user: IConnectIngUser, comment: IConnectIngPost, text: string): IConnectIngPost;
 
     // Method - RemoveComment
     // removes an existing post
-    removePost(comment: IConnectIngPost): boolean;
+    removePost(user: IConnectIngUser, comment: IConnectIngPost): boolean;
 
     // Method - GetPosts
     // returns the posts under an existing channel
-    getPosts(parent: IConnectIngChannel): Array<IConnectIngPost>;
+    getPosts(user: IConnectIngUser, parent: IConnectIngChannel): Array<IConnectIngPost>;
 }
