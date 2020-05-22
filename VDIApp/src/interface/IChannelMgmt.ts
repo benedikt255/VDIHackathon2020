@@ -15,15 +15,12 @@ enum enumConnectIngChannelTypes{
 }
 
 export interface IConnectIngChannel{
-
     readonly id : String;
     name : String;
     description : String;
     picture : String;
     persons  : ConnectingUser[];
     posts : IConnectIngPost[];
-
-
 }
 
 export interface IConnectIngChannelMgmt{
@@ -34,14 +31,14 @@ export interface IConnectIngChannelMgmt{
 }
 
 export class mockConnectingChannelMgmt implements IConnectIngChannelMgmt{
-private channel : IConnectIngChannel = {
-    id :"1",
-    name : "GoldenEye",
-    description: "Look your feets!",
-    picture: "abc",
-    persons : new MockUserManagement().getUser(),
-    posts : [],
-}
+    private channel : IConnectIngChannel = {
+        id :"1",
+        name : "GoldenEye",
+        description: "Look your feets!",
+        picture: "abc",
+        persons : new MockUserManagement().getUser(),
+        posts : [],
+    }
 
     createChannel(): IConnectIngChannel {
        return this.channel;
