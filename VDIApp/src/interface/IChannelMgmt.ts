@@ -1,5 +1,14 @@
 import { IConnectIngPost } from "./IPostMgmt";
 
+
+enum enumConnectIngChannelTypes{
+    Broadcast = 0,
+    Locals = 1,
+    Events = 2,
+    Topics = 3,
+    Private = 4,
+}
+
 export interface IConnectIngChannel{
 
     id : String
