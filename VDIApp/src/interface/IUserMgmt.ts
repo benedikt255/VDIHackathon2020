@@ -1,5 +1,5 @@
 // data type of user with all attributes
-export interface IConnectIngUser {
+export interface IUser {
   readonly id: string; // (internal) id of the user
   username: string; // username
   firstName: string; // first name
@@ -12,19 +12,19 @@ export interface IConnectIngUser {
 }
 
 // interface for managing users
-export interface IUserManagement {
-  connectUser(username: string, password: string): IConnectIngUser; // login user
-  disconnectUser(user: IConnectIngUser): boolean; // logout user
-  registerUser(user: IConnectIngUser, password: string): string; // create user
-  unregisterUser(user: IConnectIngUser): boolean; // delete user
-  updateUser(user: IConnectIngUser): boolean; // change user data
-  getUsers(user: IConnectIngUser): IConnectIngUser[]; // not implemented
-  getUser(user: IConnectIngUser): IConnectIngUser; // gets user data of current user
+export interface IUserMgmt {
+  connectUser(username: string, password: string): IUser; // login user
+  disconnectUser(user: IUser): boolean; // logout user
+  registerUser(user: IUser, password: string): string; // create user
+  unregisterUser(user: IUser): boolean; // delete user
+  updateUser(user: IUser): boolean; // change user data
+  getUsers(user: IUser): IUser[]; // not implemented
+  getUser(user: IUser): IUser; // gets user data of current user
 }
 
 // mock class for UI tests
-export class MockUserManagement implements IUserManagement {
-  private user: IConnectIngUser = {
+export class MockUserMgmt implements IUserMgmt {
+  private user: IUser = {
       id: '1',
       firstName: 'Mustermann',
       lastName: 'Max',
@@ -36,26 +36,26 @@ export class MockUserManagement implements IUserManagement {
       token: 'Basic 12345'
   };
 
-  connectUser(username: string, password: string): IConnectIngUser {
+  connectUser(username: string, password: string): IUser {
     return this.user;
   }
-  disconnectUser(user: IConnectIngUser): boolean {
+  disconnectUser(user: IUser): boolean {
     return true;
   }
-  registerUser(user: IConnectIngUser, password: string): string {
+  registerUser(user: IUser, password: string): string {
     return '1';
   }
-  unregisterUser(user: IConnectIngUser): boolean {
+  unregisterUser(user: IUser): boolean {
     return true;
   }
-  updateUser(user: IConnectIngUser): boolean {
+  updateUser(user: IUser): boolean {
     this.user = user;
     return true;
   }
-  getUsers(user: IConnectIngUser): IConnectIngUser[] {
+  getUsers(user: IUser): IUser[] {
     throw new Error('Method not implemented.');
   }
-  getUser(user: IConnectIngUser): IConnectIngUser {
+  getUser(user: IUser): IUser {
     return this.user;
   }
 }

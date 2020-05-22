@@ -1,11 +1,11 @@
-import { IConnectIngComment } from './ICommentMgmt';
-import { IConnectIngChannel } from './IChannelMgmt';
-import { IConnectIngUser } from './IUserMgmt';
+import { IComment } from './ICommentMgmt';
+import { IChannel } from './IChannelMgmt';
+import { IUser, IUserMgmt } from './IUserMgmt';
 
 
 // Interface - IConnectIngPost
 // It represents an elementary post under a channel
-export interface IConnectIngPost {
+export interface IPost {
     // Post Identifier
     id: string;
     // Author Identifier
@@ -19,13 +19,13 @@ export interface IConnectIngPost {
     // Post Text
     message: string;
     // Comments to Psot
-    comments: Array<IConnectIngComment>;
+    comments: Array<IComment>;
 }
 
 
 // Class - ConnectIngComment
 // represents the elementary comment object
-export class ConnectIngPost implements IConnectIngPost {
+export class ConnectIngPost implements IPost {
     id: string;
     channelId: string;
     authorId: string;
@@ -33,7 +33,7 @@ export class ConnectIngPost implements IConnectIngPost {
     creationTS: Date;
     title: string;
     message: string;
-    comments: Array<IConnectIngComment>;
+    comments: Array<IComment>;
 
     constructor(id: string, channelId: string, authorId: string, author: string, ts: Date, title: string, message: string) {
         this.id = id;
@@ -60,17 +60,17 @@ export interface IPostMgmt
 
     // Method - CreateComment
     // creates a new post under a defined channel
-    createPost(user: IConnectIngUser, parent: IConnectIngChannel, title: string, message: string): IConnectIngPost;
+    createPost(user: IUser, parent: IChannel, title: string, message: string): IPost;
 
     // Method - UpdateComment
     // updates an existing post title or message of an existing post
-    updatePost(user: IConnectIngUser, comment: IConnectIngPost, text: string): IConnectIngPost;
+    updatePost(user: IUser, comment: IPost, text: string): IPost;
 
     // Method - RemoveComment
     // removes an existing post
-    removePost(user: IConnectIngUser, comment: IConnectIngPost): boolean;
+    removePost(user: IUser, comment: IPost): boolean;
 
     // Method - GetPosts
     // returns the posts under an existing channel
-    getPosts(user: IConnectIngUser, parent: IConnectIngChannel): Array<IConnectIngPost>;
+    getPosts(user: IUser, parent: IChannel): Array<IPost>;
 }
