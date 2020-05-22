@@ -11,6 +11,9 @@ class CurrentPerson {
   imagePath!: string;
 }
 
+
+
+
 @Component({
   selector: 'app-vdi-test',
   templateUrl: './vdi-test.component.html',
@@ -29,6 +32,12 @@ export class VdiTestComponent implements OnInit, DoCheck {
     });
     this.name = '';
     this.checkAuthAndGetName();
+  }
+
+
+  //Button on login
+  onclick(){
+    //<a *ngIf="this.name == ''" href="https://identity.linkando.co/oauth/auth?redirect_uri={{authURI}}">LogIn</a>
   }
 
   // better find a suitable OnChange event for this

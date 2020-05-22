@@ -47,3 +47,6 @@ border-color: #f2a33a;
 a {
 color: orange;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
