@@ -1,6 +1,6 @@
 import { IConnectIngComment } from './ICommentMgmt';
-import {IConnectIngChannel} from './IChannelMgmt';
-import {ConnectingUser} from './IUserMgmt';
+import { IConnectIngChannel } from './IChannelMgmt';
+import { IConnectIngUser } from './IUserMgmt';
 
 
 // Interface - IConnectIngPost
@@ -60,17 +60,17 @@ export interface IPostMgmt
 
     // Method - CreateComment
     // creates a new post under a defined channel
-    createPost(parent: IConnectIngChannel, title: string, message: string, user: ConnectingUser): IConnectIngPost;
+    createPost(user: IConnectIngUser, parent: IConnectIngChannel, title: string, message: string): IConnectIngPost;
 
     // Method - UpdateComment
     // updates an existing post title or message of an existing post
-    updatePost(comment: IConnectIngPost, text: string, user: ConnectingUser): IConnectIngPost;
+    updatePost(user: IConnectIngUser, comment: IConnectIngPost, text: string): IConnectIngPost;
 
     // Method - RemoveComment
     // removes an existing post
-    removePost(comment: IConnectIngPost, user: ConnectingUser): boolean;
+    removePost(user: IConnectIngUser, comment: IConnectIngPost): boolean;
 
     // Method - GetPosts
     // returns the posts under an existing channel
-    getPosts(parent: IConnectIngChannel, user: ConnectingUser): Array<IConnectIngPost>;
+    getPosts(user: IConnectIngUser, parent: IConnectIngChannel): Array<IConnectIngPost>;
 }

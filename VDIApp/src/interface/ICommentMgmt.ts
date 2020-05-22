@@ -1,6 +1,6 @@
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { IConnectIngPost } from './IPostMgmt';
-import {ConnectingUser} from './IUserMgmt';
+import { IConnectIngUser } from './IUserMgmt';
 
 
 // Interface - IConnectIngComment
@@ -62,19 +62,19 @@ export interface ICommentMgmt
 
     // Method - CreateComment
     // creates a new comment under a defined post
-    createComment(parent: IConnectIngPost, text: string, user: ConnectingUser): IConnectIngComment;
+    createComment(user: IConnectIngUser, parent: IConnectIngPost, text: string): IConnectIngComment;
 
     // Method - UpdateComment
     // updates an existing comment text of an existing comment
-    updateComment(comment: IConnectIngComment, text: string, user: ConnectingUser): IConnectIngPost;
+    updateComment(user: IConnectIngUser, comment: IConnectIngComment, text: string): IConnectIngPost;
 
     // Method - RemoveComment
     // removes an existing comment
-    removeComment(comment: IConnectIngComment, user: ConnectingUser): boolean;
+    removeComment(user: IConnectIngUser, comment: IConnectIngComment): boolean;
 
     // Method - GetComments
     // returns the comments under an existing post
-    getComments(parent: IConnectIngPost, user: ConnectingUser): Array<IConnectIngComment>;
+    getComments(user: IConnectIngUser, parent: IConnectIngPost): Array<IConnectIngComment>;
 }
 
 
