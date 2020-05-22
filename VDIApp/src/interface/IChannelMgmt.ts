@@ -1,6 +1,6 @@
 import { IConnectIngPost } from "./IPostMgmt";
 
-interface IConnectIngChannel{
+export interface IConnectIngChannel{
 
     id : String
     name : String
@@ -11,11 +11,11 @@ interface IConnectIngChannel{
 
     createChannel() : boolean
     updateChannel() : boolean
-    getChannel() : IConnectIngChannel
+    getChannel(channelId : String) : IConnectIngChannel
     removePost(postId : String) : boolean
 }
 
-class mockChannel implements IConnectIngChannel{
+export class mockChannel implements IConnectIngChannel{
     id: String;
     name: String;
     description: String;
@@ -32,8 +32,8 @@ class mockChannel implements IConnectIngChannel{
         this.name = "GoldenEye"
         this.description = "you know this!"
         this.picture = ""
-        this.persons = [""]
-        this.posts = [""]
+        this.persons = ["Bond, James"]
+        this.posts = [mockPost] //TODO mockPostClass?!?
     }
 
     updateChannel(): boolean {
@@ -41,7 +41,7 @@ class mockChannel implements IConnectIngChannel{
         return true;
     }
 
-    getChannel(): IConnectIngChannel {
+    getChannel(channelId : String): IConnectIngChannel {
         return this
     }
 
