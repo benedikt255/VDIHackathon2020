@@ -1,10 +1,5 @@
-import { IPost, mockPostMgmt } from './IPostMgmt';
+import { IPost } from './IPostMgmt';
 import { IUser } from './IUserMgmt';
-
-//MockClasses
-import { MockUserMgmt } from './IUserMgmt';
-import { MockPostMgmt } from "./IPostMgmt";
-
 
 enum enumConnectIngChannelTypes{
     Broadcast = 0,
@@ -20,37 +15,46 @@ export interface IChannel{
     description: string;
     picture: string;
     persons: IUser[];
-    posts: IPost[];
 }
 
 export interface IChannelMgmt{
     createChannel(): IChannel;
     updateChannel(posts: IPost): IChannel;
     getChannel(channelId: string): IChannel;
-    removeChannel(channelId: string): boolean;
+    removeChannel(channelId: string): IChannel;
 }
 
 export class MockConnectingChannelMgmt implements IChannelMgmt{
+    private user: IUser = {
+        id: '1',
+        firstName: 'Mustermann',
+        lastName: 'Max',
+        location: 'Berlin',
+        image: '',
+        jobTitle: 'Ingenieur',
+        email: 'Max.Mustermann@example.com',
+        username: 'user1',
+        token: 'Basic 12345'
+      };
     private channel: IChannel = {
         id : '1',
         name : 'GoldenEye',
         description: 'Look your feets!',
         picture: 'abc',
-        persons : new MockUserMgmt().getUser(),
-        posts : [],
+        persons : [this.user],
     };
 
     createChannel(): IChannel {
        return this.channel;
     }
     updateChannel(posts: IPost): IChannel {
-        throw new Error('Method not implemented.');
+        return this.channel;
     }
     getChannel(channelId: string): IChannel {
         return this.channel;
     }
-    removeChannel(postId: string): boolean {
-        throw new Error('Method not implemented.');
+    removeChannel(postId: string): IChannel {
+        return this.channel;
     }
 
 }

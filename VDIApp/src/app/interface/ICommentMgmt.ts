@@ -1,9 +1,9 @@
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { IPost } from './IPostMgmt';
 import { IUser } from './IUserMgmt';
+import { IPost } from './IPostMgmt';
 
 
-// Interface - IConnectIngComment
+// Interface - IComment
 // It represents an elementary comment under a post
 export interface IComment
 {
@@ -27,9 +27,9 @@ export interface IComment
 }
 
 
-// Class - ConnectIngComment
+// Class - Comment
 // represents the elementary comment object
-export class ConnectIngComment implements IComment {
+export class Comment implements IComment {
     id: string;
     postId: string;
     authorId: string;
@@ -45,9 +45,6 @@ export class ConnectIngComment implements IComment {
         this.creationTS = ts;
         this.text = text;
     }
-
-
-
 }
 
 
@@ -66,7 +63,7 @@ export interface ICommentMgmt
 
     // Method - UpdateComment
     // updates an existing comment text of an existing comment
-    updateComment(user: IUser, comment: IComment, text: string): IPost;
+    updateComment(user: IUser, comment: IComment, text: string): IComment;
 
     // Method - RemoveComment
     // removes an existing comment
@@ -75,6 +72,34 @@ export interface ICommentMgmt
     // Method - GetComments
     // returns the comments under an existing post
     getComments(user: IUser, parent: IPost): Array<IComment>;
+}
+
+export class MockCommentMgmt implements ICommentMgmt {
+  private comment: IComment = {
+    id: '1',
+    postId: '1',
+    authorId: '1',
+    author: 'VDI',
+    creationTS: new Date('24.05.2020'),
+    text: 'Backend Team'
+  };
+  offlineMode = false;
+
+  createComment(user: IUser, parent: IPost, text: string): IComment {
+    return this.comment;
+  }
+
+  getComments(user: IUser, parent: IPost): Array<IComment> {
+    return [this.comment];
+  }
+
+  removeComment(user: IUser, comment: IComment): boolean {
+    return false;
+  }
+
+  updateComment(user: IUser, comment: IComment, text: string): IComment {
+    return this.comment;
+  }
 }
 
 

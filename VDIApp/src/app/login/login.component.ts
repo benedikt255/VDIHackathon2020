@@ -15,11 +15,11 @@ class CurrentPerson {
 
 
 @Component({
-  selector: 'app-vdi-test',
-  templateUrl: './vdi-test.component.html',
-  styleUrls: ['./vdi-test.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class VdiTestComponent implements OnInit, DoCheck {
+export class LoginComponent implements OnInit, DoCheck {
   private accessCode!: string;
   private oldCode!: string;
   private oldAuth!: boolean;
