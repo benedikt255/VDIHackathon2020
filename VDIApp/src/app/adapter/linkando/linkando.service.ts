@@ -445,7 +445,11 @@ export class LinkandoService extends ConnectIngBaseService {
   createCommentAsync(user: ConnectIngUser, parent: ConnectIngPost, text: string, callback: (comment: ConnectIngComment) => void): void {
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
     { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversations => {
-      const post: ConversationPost = { conversationId : conversations[0], text };
+      const person: CurrentPerson = { name : user.userName, id : +user.id, imagePath : '', href : '' };
+      const post: ConversationPost = { conversationId : conversations[0], text, limitedAccess : false, isVotePost : false,
+      isCallRecord : false, postId : 0, isArchiveProcessing : false, previewText : text, deletedByPersonName : '', deletionDate : new Date(''),
+      deletionReason : '', postVotesCount : 0, isVotedFor : false, isOwn : true, postDate : new Date(''), person, editedDate : new Date(),
+      isNotification : false, attachments : [], isEditAllowed : true, referencedMessageId : 0 };
       this.http.post<ConversationPost>('https://labs.linkando.co/api/Conversations/CreateConversationPost', post,
       { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(comment => {
         const commRet: ConnectIngComment = new ConnectIngComment(comment.postId.toString(), parent.id,
