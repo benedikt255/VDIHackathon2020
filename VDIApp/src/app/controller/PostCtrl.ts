@@ -1,7 +1,6 @@
 import {ConnectIngPost, IPost, IPostMgmt} from '../interface/IPostMgmt';
 import {ConnectIngComment, IComment, ICommentMgmt} from '../interface/ICommentMgmt';
-import {ConnectIngUser, IUser} from '../interface/IUserMgmt';
-import {IChannel} from '../interface/IChannelMgmt';
+import {IUser} from '../interface/IUserMgmt';
 import {CommentCtrl} from './CommentCtrl';
 import { ChannelCtrl } from './ChannelCtrl';
 
