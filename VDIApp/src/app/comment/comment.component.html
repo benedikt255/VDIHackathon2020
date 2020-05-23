@@ -1,16 +1,15 @@
-<h2>Edit or delete comment</h2>
-<br>
-
+<div class="main">
 <mat-card class="example-card">
-    <mat-form-field class="inputFormFull">
-      <mat-label>Comment title</mat-label>
-      <input matInput placeholder="TitleOfComment" value="Title">
-    </mat-form-field>
-
+  <mat-card-title>{{current.author}}</mat-card-title>
+  <mat-card-subtitle>Erstellt am: {{current.creationTS | date:'medium' }}</mat-card-subtitle>
     <br>
-  
     <mat-form-field class="inputFormFull">
       <mat-label>Leave a comment</mat-label>
-      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+      <textarea matInput placeholder="Write a comment!">{{current.text}}</textarea>
     </mat-form-field>
-  </mat-card>
+    <mat-card-actions>
+      <button mat-button>Speichern</button>
+      <button mat-button>Löschen</button>
+    </mat-card-actions>
+</mat-card>
+</div>
