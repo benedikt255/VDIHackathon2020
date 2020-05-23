@@ -47,7 +47,7 @@ class ChannelObject {
   parentId!: number;
   kind!: number;
   description!: string;
-  inheritanveAttribute: string;
+  inheritanceAttribute!: string;
   labelTags!: string[];
   id!: number;
   creationDate!: Date;
