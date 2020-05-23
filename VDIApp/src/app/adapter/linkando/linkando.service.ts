@@ -40,6 +40,10 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
 
   constructor(private authSvc: AuthService, private http: HttpClient) { }
 
+  // post interface
+  offlineMode = false;
+
+  // user interface
   connectUserAsync(username: string, password: string, callback: (user: IUser) => void): void {
     let user: IUser;
     let localId: string;
@@ -88,6 +92,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
     callback([]);
   }
 
+  // channel interface
   createChannelAsync(user: IUser, name: string, description: string, callback: (channel: IChannel) => void): void {
     callback(ConnectIngChannel.GetDefault());
   }
@@ -107,5 +112,26 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
       data.forEach(element => { channels.push( new ConnectIngChannel(element.id.toString(), element.name, '', '', [])); });
       callback(channels);
     } );
+  }
+
+  // post interface
+  // Method - CreateComment
+  // creates a new post under a defined channel
+  createPostAsync(user: IUser, parent: IChannel, title: string, message: string, callback: (post: IPost) => void): void;
+
+  // Method - UpdateComment
+  // updates an existing post title or message of an existing post
+  updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void;
+
+  // Method - RemoveComment
+  // removes an existing post
+  removePostAsync(user: IUser, post: IPost, callback: (removed: boolean) => void): void;
+
+  // Method - GetPosts
+  // returns the posts under an existing channel
+  getPostsAsync(user: IUser, parent: IChannel, callback: (posts: Array<IPost>) => void): void {
+  /*  this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetCurrentPerson',
+      { headers: { Authorization: user.token } , responseType: 'json' })
+      .subscribe(person => {*/
   }
 }
