@@ -19,14 +19,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {StaticPageComponent} from './static-page/static-page.component';
-
 import {ChannelComponent} from './channel/channel.component';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 import {CreatePostComponent} from './create-post/create-post.component';
-import {PostComponent} from './post/post.component';
+import {PostComponent, CreateCommentComponent} from './post/post.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -49,9 +48,11 @@ import {MatTabsModule} from '@angular/material/tabs';
      CreatePostComponent,
      PostComponent,
      CommentComponent,
-     WelcomeComponent
+     WelcomeComponent,
+     CreateCommentComponent
   ],
   imports: [
+    MatBottomSheetModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
