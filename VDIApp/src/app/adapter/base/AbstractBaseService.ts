@@ -324,6 +324,14 @@ export class ConnectIngMockService implements ConnectIngBaseService
         persons: [],
       };
 
+      private channel2: ConnectIngChannel = {
+        id: '2',
+        name: 'Tomorrow never dies!',
+        description: 'Look out!',
+        picture: 'def',
+        persons: [],
+      };
+
       private post: ConnectIngPost = {
         id: '1',
         channelId: '1',
@@ -410,7 +418,7 @@ export class ConnectIngMockService implements ConnectIngBaseService
       }
 
       getChannelsAsync(user: ConnectIngUser, callback: (channels: ConnectIngChannel[]) => void) {
-        callback([this.channel]);
+        callback([this.channel,this.channel2]);
       }
 
 
