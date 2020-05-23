@@ -136,9 +136,20 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
   }
 
   updateChannelAsync(user: IUser, channel: IChannel, callback: (channel: IChannel) => void): void {
-    this.http.post('https://labs.linkando.co/api/Objects/Save', dto, {
-      headers: { Authorization: user.token }, responseType: 'json'
-    });
+    let channelToUpdate: ChannelObject;
+    this.http.get('https://labs.linkando.co/api/Objects/Get?id=' + channel.id, {
+      headers: {Authorization: user.token}, responseType: 'json'
+    })
+      .subscribe(object => {
+        channelToUpdate = object;
+        channelToUpdate.name = channel.name;
+        channelToUpdate.description = channel.description;
+        channelToUpdate.picture = channel.picture;
+        channelToUpdate.persons = channel.persons;
+        this.http.post('https://labs.linkando.co/api/Objects/Save', channelToUpdate, {
+          headers: {Authorization: user.token}, responseType: 'json'
+        });
+      });
   }
 
   removeChannelAsync(user: IUser, channel: IChannel, callback: (removed: boolean) => void): void {
