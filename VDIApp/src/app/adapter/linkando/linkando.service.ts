@@ -77,6 +77,21 @@ class ChannelChild {
   imagePath!: string;
 }
 
+class PostObject{
+  name!: string;
+  id!: string;
+  parentId!: string;
+  ObjectTypeId!: string;
+  attributes!: PostAttributes;
+}
+
+class PostAttributes{
+  postBeschreibung!: string;
+  postTags!: string[];
+  postType!: string;
+  dropdownRelatedChannel: String;
+}
+
 class RegisterResponse {
   isSuccess!: boolean;
   message!: string;
@@ -279,6 +294,8 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
       }
     */
   }
+
+
 
   // Method - RemoveComment
   // removes an existing post
