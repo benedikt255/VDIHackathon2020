@@ -97,9 +97,6 @@ export class ChannelCtrl{
         });
     }
 
-
-
-
     /**
      * Method - Load the List of the Posts
      */
@@ -140,9 +137,4 @@ export class ChannelCtrl{
             }
         });
     }
-
-
-
-
-
 }
