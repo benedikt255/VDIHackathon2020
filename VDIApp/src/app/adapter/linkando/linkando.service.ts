@@ -9,7 +9,7 @@ import { stringify } from 'querystring';
 import { ObjectUnsubscribedError } from 'rxjs';
 
 // helper classes
-
+// user
 class CurrentPerson {
   href!: string;
   id!: number;
@@ -24,6 +24,13 @@ class PersonObject {
   email!: string;
   title!: string;
   salutation!: string;
+}
+
+// channel
+class Channel {
+  id!: number;
+  name!: string;
+  imagePath!: string;
 }
 
 
@@ -86,6 +93,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
   createChannelAsync(user: IUser, name: string, description: string, callback: (channel: IChannel) => void): void {
     callback(ConnectIngChannel.GetDefault());
   }
+
   updateChannelAsync(user: IUser, channel: IChannel, callback: (channel: IChannel) => void): void {
 
   }
@@ -93,5 +101,13 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
   removeChannelAsync(user: IUser, channel: IChannel, callback: (removed: boolean) => void): void {
     callback(false);
   }
-  getChannelsAsync(user: IUser, callback: (channels: IChannel[]) => void): void;
+  getChannelsAsync(user: IUser, callback: (channels: IChannel[]) => void): void {
+    this.http.post<Channel[]>('https://labs.linkando.co/api/Objects/FinderSearch', '', {
+      headers: { Authorization: user.token }, responseType: 'json'
+    }).subscribe(data => {
+      let channels!: ConnectIngChannel[];
+      data.forEach(element => { channels.push( new ConnectIngChannel(element.id.toString(), element.name, '', '', [])); });
+      callback(channels);
+    } );
+  }
 }
