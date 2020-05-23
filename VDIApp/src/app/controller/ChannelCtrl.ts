@@ -1,9 +1,6 @@
-import {ConnectIngChannel, IChannel, IChannelMgmt} from '../interface/IChannelMgmt';
-import {ConnectIngPost, IPost, IPostMgmt} from '../interface/IPostMgmt';
-import {IUser} from '../interface/IUserMgmt';
-import {ICommentMgmt} from '../interface/ICommentMgmt';
 import {PostCtrl} from './PostCtrl';
 import {ConnectIngCtrl} from './ConnectIngCtrl';
+import { ConnectIngBaseService, ConnectIngUser, ConnectIngChannel, ConnectIngPost } from '../adapter/base/AbstractBaseService';
 
 
 /**
@@ -13,13 +10,11 @@ import {ConnectIngCtrl} from './ConnectIngCtrl';
  */
 export class ChannelCtrl {
 
-  public currentUser: IUser;
-  public current: IChannel;
+  public currentUser: ConnectIngUser;
+  public current: ConnectIngChannel;
   public posts: Array<PostCtrl>;
   // Management Interfaces
-  private readonly chnMgmt: IChannelMgmt;
-  private readonly postMgmt: IPostMgmt;
-  private readonly commentMgmt: ICommentMgmt;
+  private readonly baseService: ConnectIngBaseService;
   private readonly parent: ConnectIngCtrl;
 
   /**
@@ -31,15 +26,11 @@ export class ChannelCtrl {
    * @param channel Current Channel
    */
   constructor(
-    chnMgmt: IChannelMgmt,
-    postMgmt: IPostMgmt,
-    commentMgmt: ICommentMgmt,
+    baseService: ConnectIngBaseService,
     parent: ConnectIngCtrl,
-    channel: IChannel
+    channel: ConnectIngChannel
   ) {
-    this.chnMgmt = chnMgmt;
-    this.postMgmt = postMgmt;
-    this.commentMgmt = commentMgmt;
+    this.baseService = baseService;
 
     this.parent = parent;
 
@@ -56,8 +47,8 @@ export class ChannelCtrl {
    * change the title and message of a channel object
    * @param channel Channel Object
    */
-  public updateChannel(channel: IChannel) {
-    this.chnMgmt.updateChannelAsync(this.currentUser, channel, (newChannel: IChannel) => {
+  public updateChannel(channel: ConnectIngChannel) {
+    this.baseService.updateChannelAsync(this.currentUser, channel, (newChannel: ConnectIngChannel) => {
       if (newChannel === ConnectIngChannel.GetDefault()) {
         // failed
         // nop
@@ -74,11 +65,11 @@ export class ChannelCtrl {
    * @param channel Channel Object
    */
   public removeChannel() {
-    this.chnMgmt.removeChannelAsync(this.currentUser, this.current, (removed: boolean) => {
+    this.baseService.removeChannelAsync(this.currentUser, this.current, (removed: boolean) => {
       if (removed) {
         // remove successful
         // update channel List
-        this.parent.loadChannels();
+        this.parent.loadChannels(() => {});
       } else {
         // remove failed
         // nop
@@ -90,14 +81,14 @@ export class ChannelCtrl {
    * Method - Load the List of the Posts
    */
   public loadPosts(): void {
-    this.postMgmt.getPostsAsync(this.currentUser, this.current, (posts: IPost[]) => {
+    this.baseService.getPostsAsync(this.currentUser, this.current, (posts: ConnectIngPost[]) => {
       if (posts === undefined) {
         // failed
         // nop
       } else {
         // successfull
-        this.posts = posts.map((value: IPost, index: number, array: IPost[]) => {
-          return new PostCtrl(this.postMgmt, this.commentMgmt, value, this);
+        this.posts = posts.map((value: ConnectIngPost, index: number, array: ConnectIngPost[]) => {
+          return new PostCtrl(this.baseService, value, this);
         });
       }
     });
@@ -109,7 +100,7 @@ export class ChannelCtrl {
    * @param message Message of a Post
    */
   public createPost(title: string, message: string) {
-    this.postMgmt.createPostAsync(this.currentUser, this.current, title, message, (post: IPost) => {
+    this.baseService.createPostAsync(this.currentUser, this.current, title, message, (post: ConnectIngPost) => {
       if (post === ConnectIngPost.GetDefault()) {
         // failed
         // nop
