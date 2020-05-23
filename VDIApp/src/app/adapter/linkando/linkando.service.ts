@@ -5,8 +5,6 @@ import { IUserMgmt, IUser, ConnectIngUser } from './../../interface/IUserMgmt';
 import { IChannelMgmt, IChannel, ConnectIngChannel } from './../../interface/IChannelMgmt';
 import { IPostMgmt } from './../../interface/IPostMgmt';
 import { ICommentMgmt } from './../../interface/ICommentMgmt';
-import { stringify } from 'querystring';
-import { ObjectUnsubscribedError } from 'rxjs';
 
 // helper classes
 // user
