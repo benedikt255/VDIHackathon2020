@@ -10,7 +10,7 @@ import { ChannelCtrl } from './controller/ChannelCtrl';
 import { PostCtrl } from './controller/PostCtrl';
 import { CommentCtrl } from './controller/CommentCtrl';
 
-
+./channel/channel-overview.component
 
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';

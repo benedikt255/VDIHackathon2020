@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 //Screen 1
 import {LoginComponent} from './login/login.component';
 //Screen 2
-import {ChannelOverviewComponent} from './channel-overview/channel-overview.component';
+import {ChannelOverviewComponent} from './channel/channel.component';
 //Screen 3
 import {PostComponent} from './post/post.component';
 //Screen 4
