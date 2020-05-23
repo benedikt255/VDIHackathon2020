@@ -56,19 +56,19 @@ export interface IPostMgmt
 
     // Method - CreateComment
     // creates a new post under a defined channel
-    createPost(user: IUser, parent: IChannel, title: string, message: string): IPost;
+    createPostAsync(user: IUser, parent: IChannel, title: string, message: string, callback: (user: IPost) => void): void;
 
     // Method - UpdateComment
     // updates an existing post title or message of an existing post
-    updatePost(user: IUser, comment: IPost, text: string): IPost;
+    updatePostAsync(user: IUser, comment: IPost, text: string, callback: (posts: IPost) => void): void;
 
     // Method - RemoveComment
     // removes an existing post
-    removePost(user: IUser, comment: IPost): boolean;
+    removePostAsync(user: IUser, comment: IPost, callback: (removed: boolean) => void): void;
 
     // Method - GetPosts
     // returns the posts under an existing channel
-    getPosts(user: IUser, parent: IChannel): Array<IPost>;
+    getPostsAsync(user: IUser, parent: IChannel, callback: (user: Array<IPost>) => void): void;
 }
 
 export class MockPostMgmt implements IPostMgmt {
@@ -83,20 +83,20 @@ export class MockPostMgmt implements IPostMgmt {
   };
   offlineMode = false;
 
-  createPost(user: IUser, parent: IChannel, title: string, message: string): IPost {
-    return this.post;
+  createPostAsync(user: IUser, parent: IChannel, title: string, message: string, callback: (post: IPost) => void): void {
+    callback(this.post);
   }
 
-  getPosts(user: IUser, parent: IChannel): Array<IPost> {
-    return [this.post];
+  getPostsAsync(user: IUser, parent: IChannel, callback: (posts: Array<IPost>) => void): void {
+    callback([this.post]);
   }
 
-  removePost(user: IUser, comment: IPost): boolean {
-    return false;
+  removePostAsync(user: IUser, comment: IPost, callback: (removed: boolean) => void): void {
+    callback( false);
   }
 
-  updatePost(user: IUser, comment: IPost, text: string): IPost {
+  updatePostAsync(user: IUser, comment: IPost, text: string, callback: (post: IPost) => void): void {
     this.post.message += ' - SUJ';
-    return this.post;
+    callback(this.post);
   }
 }
