@@ -69,8 +69,7 @@
     top: 0;
     z-index: 1;
   }
-<<<<<<< HEAD
-=======
+
 
 
  /*channel - by Matthias Walter, NEUE Version*/
@@ -113,7 +112,7 @@
     text-align: right;
 }
 
->>>>>>> 6bfce04bd6a0d929d69afa70f8f3aad6d9da7550
+
   .spacer {
     flex: 1 1 auto;
   }
@@ -122,12 +121,10 @@
     margin: 0 10px;
     color: white;
     text-decoration: none;
-<<<<<<< HEAD
-    
   }
-=======
 
-  }
+    
+
 
 
 
@@ -159,4 +156,3 @@
 .mat-card-subtitle{
   margin-bottom: 8px;
 }
->>>>>>> 6bfce04bd6a0d929d69afa70f8f3aad6d9da7550
