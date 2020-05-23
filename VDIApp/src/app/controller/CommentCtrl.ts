@@ -1,5 +1,6 @@
 import { ICommentMgmt, IComment, ConnectIngComment } from '../interface/ICommentMgmt';
 import { IUser } from '../interface/IUserMgmt';
+import { PostCtrl } from './PostCtrl';
 
 
 /**
@@ -11,20 +12,32 @@ export class CommentCtrl
 
     private readonly commentMgmt: ICommentMgmt;
 
-    public CurrentUser: IUser;
-    public Current: IComment;
+    private readonly parent: PostCtrl;
 
-    constructor(commentMgmt: ICommentMgmt, user: IUser, comment: IComment)
+    public currentUser: IUser;
+    public current: IComment;
+
+    /**
+     * Constructor - Comment Controller
+     * @param commentMgmt Comment Management
+     * @param parent Parent Post Controller
+     * @param comment Comment Object
+     */
+    constructor(commentMgmt: ICommentMgmt, parent: PostCtrl, comment: IComment)
     {
         this.commentMgmt = commentMgmt;
-        this.CurrentUser = user;
-        this.Current = comment;
+        this.parent = parent;
+        this.currentUser = this.parent.currentUser;
+        this.current = comment;
     }
 
-
+    /**
+     * Method - Update Comment
+     * @param comment Comment Object
+     */
     public updateComment(comment: IComment)
     {
-        this.commentMgmt.updateCommentAsync(this.CurrentUser, comment, (newComment: IComment) => {
+        this.commentMgmt.updateCommentAsync(this.currentUser, comment, (newComment: IComment) => {
             if (newComment === ConnectIngComment.GetDefault())
             {
                 // failed
@@ -33,9 +46,29 @@ export class CommentCtrl
             else
             {
                 // successfull
-                this.Current = newComment;
+                this.current = newComment;
             }
         });
     }
+
+    /**
+     * Method - Remove Comment
+     */
+    public removeComment()
+    {
+        this.commentMgmt.removeCommentAsync(this.currentUser, this.current, (removed: boolean) => {
+            if (removed)
+            {
+                // successfull
+                this.parent.loadComments();
+            }
+            else
+            {
+                // failed
+                // nop
+            }
+        }
+    }
+
 
 }

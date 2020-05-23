@@ -50,7 +50,7 @@ export class PostCtrl {
       } else {
         // successfull
         this.comments = comments.map((value: IComment, index: number, array: Array<IComment>) => {
-          return new CommentCtrl(this.commentMgmt, this.currentUser, value);
+          return new CommentCtrl(this.commentMgmt, this, value);
         });
       }
     });
