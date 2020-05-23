@@ -125,5 +125,4 @@ export class MockUserMgmt implements IUserMgmt {
       }
     ]);
   }
-
 }

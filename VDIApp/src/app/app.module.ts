@@ -11,11 +11,12 @@ import { StaticPageComponent } from './static-page/static-page.component';
 import { AuthService } from './adapter/linkando/auth/auth.service';
 import { CookieService } from './cookie/cookie.service';
 import { ChannelOverviewComponent } from './channel-overview/channel-overview.component';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
 import {CreatePostComponent} from './create-post/create-post.component';
+import {PostComponent} from './post/post.component';
 import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
@@ -24,7 +25,8 @@ import {MatCardModule} from '@angular/material/card';
      LoginComponent,
      StaticPageComponent,
      ChannelOverviewComponent,
-     CreatePostComponent
+     CreatePostComponent,
+     PostComponent
   ],
   imports: [
     MatButtonModule,
