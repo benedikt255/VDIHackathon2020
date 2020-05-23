@@ -50,19 +50,23 @@ export class ConnectIngCtrl {
    * @param userName Username of the User
    * @param userPwd Password of the User
    */
-  public connectUser(userName: string, userPwd: string): void {
+  public connectUser(userName: string, userPwd: string, callback: () => void): void {
+    this.setConnecting();
+    callback();
 
     this.userMgmt.connectUserAsync(userName, userPwd, (user: IUser) => {
       if (user === ConnectIngUser.GetDefault()) {
         // Connecting failed
         this.setDisconnected();
         this.currentUser = ConnectIngUser.GetDefault();
+        callback();
       } else {
         // Connecting successfull
         this.currentUser = user;
         this.setConnected();
         // Auto Load of Channels after successful connecting
-        this.loadChannels();
+        this.loadChannels(callback);
+        callback();
       }
     });
   }
@@ -70,16 +74,20 @@ export class ConnectIngCtrl {
   /**
    * Method - DisconnectUser
    */
-  public disconnectUser() {
+  public disconnectUser(callback: () => void) {
+    this.setDisconnecting();
+    callback();
+
     this.userMgmt.disconnectUserAsync(this.currentUser, (disconnected: boolean) => {
       if (disconnected) {
         // disconnection successfull
         this.currentUser = ConnectIngUser.GetDefault();
         this.channels = [];
         this.setDisconnected();
+        callback();
       } else {
         // disconnection failed
-        // nop
+        callback();
       }
     });
   }
@@ -87,15 +95,17 @@ export class ConnectIngCtrl {
   /**
    * Method - LoadChannels
    */
-  public loadChannels(): void {
+  public loadChannels(callback: () => void): void {
     this.chnMgmt.getChannelsAsync(this.currentUser, (channels: IChannel[]) => {
       if (channels === undefined) {
         // Undefined -> error in call
         this.channels = [];
+        callback();
       } else {
         this.channels = channels.map((value: IChannel, index: number, array: IChannel[]) => {
           return new ChannelCtrl(this.chnMgmt, this.postMgmt, this.commentMgmt, this, value);
         });
+        callback();
       }
     });
   }
@@ -105,15 +115,15 @@ export class ConnectIngCtrl {
    * @param name Name of the new Channel
    * @param desc Description of the new Channel
    */
-  public createChannel(name: string, desc: string) {
+  public createChannel(name: string, desc: string, callback: () => void) {
     this.chnMgmt.createChannelAsync(this.currentUser, name, desc, (channel: IChannel) => {
       if (channel === ConnectIngChannel.GetDefault()) {
         // Create failed
-        // nop
+        callback();
       } else {
         // Create successfull
         // Update Channel List
-        this.loadChannels();
+        this.loadChannels(callback);
       }
     });
   }
