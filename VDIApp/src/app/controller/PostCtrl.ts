@@ -1,5 +1,5 @@
 import {ConnectIngPost, IPost, IPostMgmt} from '../interface/IPostMgmt';
-import {IComment, ICommentMgmt} from '../interface/ICommentMgmt';
+import {ConnectIngComment, IComment, ICommentMgmt} from '../interface/ICommentMgmt';
 import {ConnectIngUser, IUser} from '../interface/IUserMgmt';
 import {IChannel} from '../interface/IChannelMgmt';
 
@@ -35,10 +35,10 @@ export class PostCtrl {
     });
   }
 
-  public createComment(title: string, message: string)
+  public createComment(text: string)
   {
-    this.commentMgmt.createCommentAsync(this.curUser, this.parentChannel, title, message, (comment: IComment) => {
-      if (post === ConnectIngPost.GetDefault())
+    this.commentMgmt.createCommentAsync(this.curUser, this.cur, text,  (comment: IComment) => {
+      if (comment === ConnectIngComment.GetDefault())
       {
         // Create failed
         // nop
@@ -47,18 +47,18 @@ export class PostCtrl {
       {
         // Create successfull
         // Update Channel List
-        this.cur = post;
+        //TODO load current comments with get comments
       }
     });
   }
 
-  public removeComment(user: IUser, comment: IPost, callback: (removed: boolean) => void): void {
-    this.commentMgmt.removeCommentAsync(this.curUser, this.cur, (removed: boolean) => {
+  public removeComment(comment: IComment) {
+    this.commentMgmt.removeCommentAsync(this.curUser, comment, (removed: boolean) => {
       if (removed)
       {
         // remove successful
         // update channel List
-        this.cur = ConnectIngPost.GetDefault();
+        //TODO load current comments with get comments
       }
       else
       {
