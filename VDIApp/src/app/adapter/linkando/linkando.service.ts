@@ -177,6 +177,9 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
   // Method - GetPosts
   // returns the posts under an existing channel
   getPostsAsync(user: IUser, parent: IChannel, callback: (posts: Array<IPost>) => void): void {
+    let channel: ChannelObject;
+    this.http.get<ChannelObject>('https://labs.linkando.co/api/Objects/Get?id=' + parent.id,
+    { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(data => channel);
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
       { headers: { Authorization: user.token } , responseType: 'json' })
       .subscribe(convId => {
