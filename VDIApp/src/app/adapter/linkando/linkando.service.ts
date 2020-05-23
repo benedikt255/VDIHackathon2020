@@ -419,7 +419,9 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
   // Method - RemoveComment
   // removes an existing comment
   removeCommentAsync(user: IUser, comment: IComment, callback: (removed: boolean) => void): void {
-
+    this.http.delete('https://labs.linkando.co/api/Conversations/DeleteConversationPost?postId=' + comment.id,
+      { headers: { Authorization: user.token } });
+    callback(true);
   }
 
   // Method - GetComments
