@@ -85,12 +85,8 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
         FirstName: user.firstName,
         LastName: user.lastName,
       };
-    const body = {
-      email: user.email,
-      personType: this.userRoleID,
-      fields: additionalRegistrationInformation,
-    };
-    this.http.post('https://labs.linkando.co/api/People/Register', body, { responseType: 'json' })
+    this.http.post('https://labs.linkando.co/api/People/Register?email=' + user.email + '&personType=' + this.userRoleID,
+      additionalRegistrationInformation, { responseType: 'json' })
       .subscribe( object => {
         console.log(object);
         callback(object.isSuccess);
@@ -114,6 +110,9 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
   }
 
   updateChannelAsync(user: IUser, channel: IChannel, callback: (channel: IChannel) => void): void {
+    this.http.post('https://labs.linkando.co/api/Objects/Save', dto, {
+      headers: { Authorization: user.token }, responseType: 'json'
+    });
   }
 
   removeChannelAsync(user: IUser, channel: IChannel, callback: (removed: boolean) => void): void {
