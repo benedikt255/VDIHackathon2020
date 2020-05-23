@@ -2,7 +2,13 @@ import {ConnectIngPost, IPost, IPostMgmt} from '../interface/IPostMgmt';
 import {ConnectIngComment, IComment, ICommentMgmt} from '../interface/ICommentMgmt';
 import {ConnectIngUser, IUser} from '../interface/IUserMgmt';
 import {IChannel} from '../interface/IChannelMgmt';
+import {CommentCtrl} from './CommentCtrl';
 
+/**
+ * Controller - PostCtrl
+ * Application Controller to handle a post
+ * and create/remove handling of comments
+ */
 export class PostCtrl {
 
   // Management Interfaces
@@ -12,6 +18,7 @@ export class PostCtrl {
   public curUser: IUser;
   public parentChannel: IChannel;
   public cur: IPost;
+  public comments: Array<CommentCtrl>;
 
   constructor(postMgmt: IPostMgmt, chnMgmt: ICommentMgmt, parentChannel: IChannel){
     this.postMgmt = postMgmt;
@@ -19,18 +26,35 @@ export class PostCtrl {
     this.commentMgmt = chnMgmt;
     this.curUser = ConnectIngUser.GetDefault();
     this.cur = ConnectIngPost.GetDefault();
+    this.comments = [];
+    this.loadComments();
   }
 
-  public updatePost(post: IPost, text: string, callback: (post: IPost) => void): void {
+  public loadComments(): void {
+    this.commentMgmt.getCommentsAsync(this.curUser, this.cur, (comments: Array<IComment>) => {
+      if (comments === undefined) {
+        // failed
+        // nop
+      } else {
+        // successfull
+        this.comments = comments.map((value: IComment, index: number, array: Array<IComment>) => {
+          return new CommentCtrl(this.commentMgmt, this.curUser, value);
+        });
+      }
+    });
+  }
+
+  public updatePost(post: IPost, text: string) {
     this.postMgmt.updatePostAsync(this.curUser, this.cur, text, (updatedPost: IPost) => {
       if (post === ConnectIngPost.GetDefault())
       {
         // Undefined -> error in call
-        this.cur = ConnectIngPost.GetDefault();
+        // nop
       }
       else
       {
         this.cur = updatedPost;
+        this.loadComments();
       }
     });
   }
@@ -47,7 +71,7 @@ export class PostCtrl {
       {
         // Create successfull
         // Update Channel List
-        //TODO load current comments with get comments
+        this.loadComments();
       }
     });
   }
@@ -58,7 +82,7 @@ export class PostCtrl {
       {
         // remove successful
         // update channel List
-        //TODO load current comments with get comments
+        this.loadComments();
       }
       else
       {
