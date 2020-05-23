@@ -70,7 +70,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatIconModule,
     MatListModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    HammerModule
   ],
   providers: [
     {provide: ConnectIngBaseService, useClass: LinkandoService},
