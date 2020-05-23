@@ -55,7 +55,7 @@ export class CommentCtrl {
         // failed
         // nop
       }
-    }
+    });
   }
 
 

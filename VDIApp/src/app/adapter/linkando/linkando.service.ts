@@ -19,10 +19,22 @@ class CurrentPerson {
 class PersonObject {
   firstName!: string;
   lastName!: string;
+  fullName!: string;
   username!: string;
   email!: string;
   title!: string;
   salutation!: string;
+  officePhone!: number;
+  mobilePhone!: number;
+  languageId!: number;
+  timeZoneId!: string;
+  isBlocked!: boolean;
+  id!: number;
+  creationDate!: Date;
+  modifiedDate!: Date;
+  createdBy!: number;
+  ObjectTypeId!: number;
+  active!: boolean;
 }
 
 // channel
@@ -152,7 +164,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
         this.http.post<number>('https://labs.linkando.co/api/Objects/Save', userToUpdate, {
           headers: {Authorization: user.token}, responseType: 'json'
         })
-          .subscribe(updatedUserID => {
+          .subscribe(() => {
             callback(user);
           });
       });
@@ -162,7 +174,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
     this.http.post<PersonObject[]>('https://labs.linkando.co/api/Objects/FinderSearch', '{ finderCode: %27allChannelsAPI%27 }', {
       headers: {Authorization: user.token}, responseType: 'json'
     }).subscribe(data => {
-      let users!: ConnectIngUser[];
+      const users: ConnectIngUser[] = [];
       data.forEach(element => {
         this.http.get<CurrentPerson>('https://labs.linkando.co/api/Objects/GetCurrentPersonid', {
           headers: {Authorization: user.token}, responseType: 'json'
@@ -170,16 +182,26 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
           .subscribe(dataUser => {
             users.push(new ConnectIngUser(dataUser.id.toString(), element.username, element.firstName, element.lastName,
               '', '', element.title, element.email, user.token));
-            if (users.length === data.length) {
-              callback(users);
-            }
           });
       });
+      callback(users);
     });
   }
 
   // channel interface
   createChannelAsync(user: IUser, name: string, description: string, callback: (channel: IChannel) => void): void {
+    /*Beispiel
+    url. https://labs.linkando.co/api/Objects/Save
+    response = objectId
+          {
+                "name": "channel 6",
+                "ObjectTypeId": 244,
+                "attributes": {
+              "channelBeschreibung": "test",
+              "channelTyp": 880,
+          }
+          }
+    */
     callback(ConnectIngChannel.GetDefault());
   }
 
@@ -192,11 +214,12 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
         channelToUpdate = object;
         channelToUpdate.name = channel.name;
         channelToUpdate.description = channel.description;
-        // TODO channel.picture has to be saved in cms but has wrong enconding
+        // FIXME channel.picture has to be saved in cms but has wrong enconding
         // TODO channel.persons is delayed because now every user can access every channel
         this.http.post('https://labs.linkando.co/api/Objects/Save', channelToUpdate, {
           headers: {Authorization: user.token}, responseType: 'json'
         });
+        callback(channel);
       });
   }
 
@@ -211,10 +234,8 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
       const channels: ConnectIngChannel[] = [];
       data.forEach(element => {
         channels.push(new ConnectIngChannel(element.id.toString(), element.name, '', '', []));
-        if (channels.length === data.length) {
-          callback(channels);
-        }
       });
+      callback(channels);
     });
   }
 
