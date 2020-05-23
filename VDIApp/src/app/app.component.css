@@ -51,6 +51,15 @@
 
 
   /*Post */
+
+ .AddButton {
+   /* color: aqua; */
+    position: -webkit-sticky; /* safari */
+    position: sticky;
+    top: 90%;
+    left: 60%;
+  }
+
   .example-card {
     max-width: 40em;
       }
