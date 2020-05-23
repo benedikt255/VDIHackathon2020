@@ -33,7 +33,13 @@ export class ConnectIngPost implements IPost {
     title: string;
     message: string;
 
-    constructor(id: string, channelId: string, authorId: string, author: string, ts: Date, title: string, message: string) {
+    constructor(id: string,
+                channelId: string,
+                authorId: string,
+                author: string,
+                ts: Date,
+                title: string,
+                message: string) {
         this.id = id;
         this.channelId = channelId;
         this.authorId = authorId;
@@ -42,6 +48,10 @@ export class ConnectIngPost implements IPost {
         this.title = title;
         this.message = message;
     }
+
+  public static GetDefault(): IPost {
+    return new ConnectIngPost('', '', '', '', new Date(''), '', '');
+  }
 }
 
 

@@ -12,7 +12,7 @@ export interface IUser {
 }
 
 
-export class User implements IUser{
+export class ConnectIngUser implements IUser {
   readonly id: string;
   userName: string;
   firstName: string;
@@ -23,37 +23,32 @@ export class User implements IUser{
   email: string;
   token: string;
 
-constructor(userId: string,
-            userName: string,
-            firstName: string,
-            lastName: string,
-            location: string,
-            image: string,
-            jobTitle: string,
-            email: string,
-            token: string
-  ){
-  this.id = userId;
-  this.userName = userName;
-  this.firstName = firstName;
-  this.lastName = lastName;
-  this.location = location;
-  this.image = image;
-  this.jobTitle = jobTitle;
-  this.email = email;
-  this.token = token;
+  constructor(userId: string,
+              userName: string,
+              firstName: string,
+              lastName: string,
+              location: string,
+              image: string,
+              jobTitle: string,
+              email: string,
+              token: string
+  ) {
+    this.id = userId;
+    this.userName = userName;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.location = location;
+    this.image = image;
+    this.jobTitle = jobTitle;
+    this.email = email;
+    this.token = token;
+  }
+
+
+  public static GetDefault(): IUser {
+    return new ConnectIngUser('', '', '', '', '', '', '', '', '');
+  }
 }
-
-
-public static GetDefault(): IUser{
-  return new User('', '', '', '', '', '', '', '', '');
-}
-
-
-}
-
-
-
 
 
 // interface for managing users

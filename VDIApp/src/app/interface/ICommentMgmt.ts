@@ -36,7 +36,12 @@ export class ConnectIngComment implements IComment {
     creationTS: Date;
     text: string;
 
-    constructor(id: string, postId: string, authorId: string, author: string, ts: Date, text: string ){
+    constructor(id: string,
+                postId: string,
+                authorId: string,
+                author: string,
+                ts: Date,
+                text: string ){
         this.id = id;
         this.postId = postId;
         this.authorId = authorId;
@@ -44,6 +49,10 @@ export class ConnectIngComment implements IComment {
         this.creationTS = ts;
         this.text = text;
     }
+
+  public static GetDefault(): IComment {
+    return new ConnectIngComment('', '', '', '', new Date(''), '');
+  }
 }
 
 
