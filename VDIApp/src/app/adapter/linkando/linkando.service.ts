@@ -5,6 +5,7 @@ import {AuthService} from './auth/auth.service';
 import { IUserMgmt, IUser, ConnectIngUser } from '../../interface/IUserMgmt';
 import { IChannelMgmt, IChannel, ConnectIngChannel } from '../../interface/IChannelMgmt';
 import { IPostMgmt, IPost, ConnectIngPost } from '../../interface/IPostMgmt';
+import { ICommentMgmt, IComment } from '../../interface/ICommentMgmt';
 
 // helper classes
 // user
@@ -74,7 +75,7 @@ class RegisterResponse {
 @Injectable({
   providedIn: 'root'
 })
-export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
+export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICommentMgmt {
 
   public userRoleID = 243;
   // post interface
@@ -262,5 +263,31 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
       callback(posts);
       }
     );
+  }
+
+  // comment interface
+
+  // Method - CreateComment
+  // creates a new comment under a defined post
+  createCommentAsync(user: IUser, parent: IPost, text: string, callback: (comment: IComment) => void): void {
+
+  }
+
+  // Method - UpdateComment
+  // updates an existing comment text of an existing comment
+  updateCommentAsync(user: IUser, comment: IComment, callback: (comment: IComment) => void): void {
+
+  }
+
+  // Method - RemoveComment
+  // removes an existing comment
+  removeCommentAsync(user: IUser, comment: IComment, callback: (removed: boolean) => void): void {
+
+  }
+
+  // Method - GetComments
+  // returns the comments under an existing post
+  getCommentsAsync(user: IUser, parent: IPost, callback: (comments: Array<IComment>) => void): void {
+
   }
 }
