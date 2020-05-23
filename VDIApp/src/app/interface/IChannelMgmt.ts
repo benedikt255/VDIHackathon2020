@@ -17,31 +17,40 @@ export interface IChannel{
     persons: IUser[];
 }
 
+export class ConnectIngChannel implements IChannel{
+    private static default: ConnectIngChannel;
+
+    id: string;
+    name: string;
+    description: string;
+    picture: string;
+    persons: IUser[];
+
+    constructor(id: string, name: string, description: string, picture: string, persons: IUser[]) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.picture = picture;
+        this.persons = persons;
+    }
+}
+
+
 export interface IChannelMgmt{
     createChannelAsync(callback: (channel: IChannel) => void): void;
     updateChannelAsync(posts: IPost, callback: (channel: IChannel) => void): void;
     getChannelAsync(channelId: string, callback: (channel: IChannel) => void): void;
     removeChannelAsync(channelId: string, callback: (channel: IChannel) => void): void;
+    getChannelsAsync(user: IUser, callback: (channels: IChannel[]) => void): void;
 }
 
 export class MockConnectingChannelMgmt implements IChannelMgmt{
-    private user: IUser = {
-        id: '1',
-        firstName: 'Mustermann',
-        lastName: 'Max',
-        location: 'Berlin',
-        image: '',
-        jobTitle: 'Ingenieur',
-        email: 'Max.Mustermann@example.com',
-        username: 'user1',
-        token: 'Basic 12345'
-      };
     private channel: IChannel = {
         id : '1',
         name : 'GoldenEye',
         description: 'Look your feets!',
         picture: 'abc',
-        persons : [this.user],
+        persons : [],
     };
 
     createChannelAsync(callback: (channel: IChannel) => void): void {
@@ -55,6 +64,9 @@ export class MockConnectingChannelMgmt implements IChannelMgmt{
     }
     removeChannelAsync(postId: string, callback: (channel: IChannel) => void): void {
         callback(this.channel);
+    }
+    getChannelsAsync(user: IUser, callback: (channels: IChannel[]) => void){
+        callback([this.channel]);
     }
 
 }
