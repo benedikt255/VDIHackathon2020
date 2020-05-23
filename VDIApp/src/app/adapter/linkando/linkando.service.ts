@@ -75,6 +75,10 @@ class ChannelChild {
   imagePath!: string;
 }
 
+class Finder {
+  finderCode!: string;
+}
+
 class PostObject{
   name!: string;
   id!: string;
@@ -157,29 +161,35 @@ export class LinkandoService extends ConnectIngBaseService {
     let user: ConnectIngUser;
     let localId: string;
     const localToken: string = this.authSvc.getAuth();
-    this.http.get<CurrentPerson>('https://labs.linkando.co/api/Objects/GetCurrentPerson',
-      {headers: {Authorization: localToken}, responseType: 'json'})
-      .subscribe(person => {
-        localId = person.id.toString();
-        console.log(person);
-        this.http.get<PersonObject>('https://labs.linkando.co/api/Objects/Get?id=' + localId.toString(),
-          {headers: {Authorization: localToken}, responseType: 'json'})
-          .subscribe(object => {
-            user = {
-              id: localId,
-              firstName: object.firstName,
-              lastName: object.lastName,
-              location: '',
-              image: '',
-              jobTitle: object.title,
-              email: object.email,
-              userName: object.username,
-              token: localToken
-            };
-            console.log(object);
-            callback(user);
-          });
-      });
+    if (localToken !== '')
+    {
+      this.http.get<CurrentPerson>('https://labs.linkando.co/api/Objects/GetCurrentPerson',
+        {headers: {Authorization: localToken}, responseType: 'json'})
+        .subscribe(person => {
+          localId = person.id.toString();
+          console.log(person);
+          this.http.get<PersonObject>('https://labs.linkando.co/api/Objects/Get?id=' + localId.toString(),
+            {headers: {Authorization: localToken}, responseType: 'json'})
+            .subscribe(object => {
+              user = {
+                id: localId,
+                firstName: object.firstName,
+                lastName: object.lastName,
+                location: '',
+                image: '',
+                jobTitle: object.title,
+                email: object.email,
+                userName: object.username,
+                token: localToken
+              };
+              console.log(object);
+              callback(user);
+            });
+        });
+    }
+    else {
+      callback(ConnectIngUser.GetDefault());
+    }
   }
 
   disconnectUserAsync(user: ConnectIngUser, callback: (disconnected: boolean) => void): void {
@@ -232,7 +242,8 @@ export class LinkandoService extends ConnectIngBaseService {
 
   getUsersAsync(user: ConnectIngUser, callback: (users: ConnectIngUser[]) => void): void {
     console.log('getUsersAsync');
-    this.http.post<PersonObject[]>('https://labs.linkando.co/api/Objects/FinderSearch', '{ finderCode: \'allChannelsAPI\' }', {
+    const finder: Finder = { finderCode : 'allChannelsAPI' };
+    this.http.post<PersonObject[]>('https://labs.linkando.co/api/Objects/FinderSearch', finder, {
       headers: {Authorization: user.token}, responseType: 'json'
     }).subscribe(data => {
       const users: ConnectIngUser[] = [];
@@ -326,7 +337,8 @@ export class LinkandoService extends ConnectIngBaseService {
 
   getChannelsAsync(user: ConnectIngUser, callback: (channels: ConnectIngChannel[]) => void): void {
     console.log('getChannelsAsync');
-    this.http.post<Channel[]>('https://labs.linkando.co/api/Objects/FinderSearch', '{ finderCode: \'allChannelsAPI\' }', {
+    const finder: Finder = { finderCode : 'allChannelsAPI' };
+    this.http.post<Channel[]>('https://labs.linkando.co/api/Objects/FinderSearch', finder, {
       headers: {Authorization: user.token}, responseType: 'json'
     }).subscribe(data => {
       const channels: ConnectIngChannel[] = [];
