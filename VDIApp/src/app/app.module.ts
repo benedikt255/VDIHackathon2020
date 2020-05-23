@@ -2,8 +2,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatSliderModule } from '@angular/material/slider';
-import { HttpClientModule } from '@angular/common/http'
-
+import { HttpClientModule } from '@angular/common/http';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -16,6 +16,9 @@ import { CookieService } from './cookie/cookie.service';
 import { ChannelOverviewComponent } from './channel-overview/channel-overview.component';
 
 @NgModule({
+  exports:[
+    MatExpansionModule,
+  ],
   declarations: [
     AppComponent,
     LoginComponent,
