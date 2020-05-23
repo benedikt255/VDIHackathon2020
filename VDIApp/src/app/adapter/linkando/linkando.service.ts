@@ -189,6 +189,18 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
 
   // channel interface
   createChannelAsync(user: IUser, name: string, description: string, callback: (channel: IChannel) => void): void {
+    /*Beispiel
+    url. https://labs.linkando.co/api/Objects/Save
+    response = objectId
+          {
+                "name": "channel 6",
+                "ObjectTypeId": 244,
+                "attributes": {
+              "channelBeschreibung": "test",
+              "channelTyp": 880,
+          }
+          }
+    */
     callback(ConnectIngChannel.GetDefault());
   }
 
