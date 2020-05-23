@@ -106,6 +106,38 @@ export class PostComponent implements OnInit {
     });
   }
 
+
+
+
+
+
+
+  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
+
+
+
+
+// action triggered when user swipes
+swipe(action = this.SWIPE_ACTION.RIGHT) {
+  // swipe right, next avatar
+  alert("action");
+
+  if (action === this.SWIPE_ACTION.RIGHT) {
+    console.log('Swipe RIGHT');
+    alert("RIGHT");
+  }
+
+  // swipe left, previous avatar
+  if (action === this.SWIPE_ACTION.LEFT) {
+      console.log('Swipe LEFT');
+      alert("LEFT");
+  }
+
+}
+
+
+
+
 }
 
 @Component({

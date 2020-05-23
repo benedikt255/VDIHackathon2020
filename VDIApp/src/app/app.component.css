@@ -5,14 +5,14 @@
   .mediaSmall{display: none}
   }
 
-  @media screen and (max-width: 899px) and (min-width: 481px){
+  @media screen and (max-width: 49em) and (min-width: 25em){
   /* start of medium tablet styles */
   .mediaLarge{display: none}
   .mediaMedium{display: none}
   .mediaSmall{display: block}
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 24em) {
   /* start of phone styles */
   .mediaLarge{display: none}
   .mediaMedium{display: none}
@@ -61,7 +61,7 @@
   }
 
   .example-card {
-    max-width: 400px;
+    max-width: 40em;
       }
 
   .example-header-image {
@@ -87,7 +87,7 @@
   }
 
   .sidenav {
-    width: 200px;
+    width: 10em;
   }
 
   .sidenav .mat-toolbar {
