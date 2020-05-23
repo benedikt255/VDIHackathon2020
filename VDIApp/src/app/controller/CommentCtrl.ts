@@ -1,6 +1,5 @@
-import {ConnectIngComment, IComment, ICommentMgmt} from '../interface/ICommentMgmt';
-import {IUser} from '../interface/IUserMgmt';
 import {PostCtrl} from './PostCtrl';
+import { ConnectIngUser, ConnectIngComment, ConnectIngBaseService } from '../adapter/base/AbstractBaseService';
 
 
 /**
@@ -9,9 +8,9 @@ import {PostCtrl} from './PostCtrl';
  */
 export class CommentCtrl {
 
-  public currentUser: IUser;
-  public current: IComment;
-  private readonly commentMgmt: ICommentMgmt;
+  public currentUser: ConnectIngUser;
+  public current: ConnectIngComment;
+  private readonly baseService: ConnectIngBaseService;
   private readonly parent: PostCtrl;
 
   /**
@@ -20,8 +19,8 @@ export class CommentCtrl {
    * @param parent Parent Post Controller
    * @param comment Comment Object
    */
-  constructor(commentMgmt: ICommentMgmt, parent: PostCtrl, comment: IComment) {
-    this.commentMgmt = commentMgmt;
+  constructor(baseService: ConnectIngBaseService, parent: PostCtrl, comment: ConnectIngComment) {
+    this.baseService = baseService;
     this.parent = parent;
     this.currentUser = this.parent.currentUser;
     this.current = comment;
@@ -31,8 +30,8 @@ export class CommentCtrl {
    * Method - Update Comment
    * @param comment Comment Object
    */
-  public updateComment(comment: IComment) {
-    this.commentMgmt.updateCommentAsync(this.currentUser, comment, (newComment: IComment) => {
+  public updateComment(comment: ConnectIngComment) {
+    this.baseService.updateCommentAsync(this.currentUser, comment, (newComment: ConnectIngComment) => {
       if (newComment === ConnectIngComment.GetDefault()) {
         // failed
         // nop
@@ -47,7 +46,7 @@ export class CommentCtrl {
    * Method - Remove Comment
    */
   public removeComment() {
-    this.commentMgmt.removeCommentAsync(this.currentUser, this.current, (removed: boolean) => {
+    this.baseService.removeCommentAsync(this.currentUser, this.current, (removed: boolean) => {
       if (removed) {
         // successfull
         this.parent.loadComments();
