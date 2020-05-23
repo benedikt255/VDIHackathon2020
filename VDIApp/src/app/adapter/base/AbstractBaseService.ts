@@ -141,6 +141,37 @@ export abstract class ConnectIngBaseService
 {
 
     /**
+     * Current ConnectIng User
+     */
+    public currentUser: ConnectIngUser;
+
+    /**
+     * Current ConnectIng User
+     */
+    public currentChannel: ConnectIngChannel;
+
+    /**
+     * Current ConnectIng User
+     */
+    public currentPost: ConnectIngPost;
+
+    /**
+     * Current ConnectIng User
+     */
+    public currentComment: ConnectIngComment;
+
+    /**
+     * Abstract Constructor
+     */
+    public constructor(){
+      this.currentUser = ConnectIngUser.GetDefault();
+      this.currentChannel = ConnectIngChannel.GetDefault();
+      this.currentPost = ConnectIngPost.GetDefault();
+      this.currentComment = ConnectIngComment.GetDefault();
+    }
+
+
+    /**
      * 
      * @param username 
      * @param password 
@@ -303,6 +334,39 @@ export abstract class ConnectIngBaseService
 
 export class ConnectIngMockService implements ConnectIngBaseService
 {
+
+    /**
+     * Current ConnectIng User
+     */
+    public currentUser: ConnectIngUser;
+
+    /**
+     * Current ConnectIng User
+     */
+    public currentChannel: ConnectIngChannel;
+
+    /**
+     * Current ConnectIng User
+     */
+    public currentPost: ConnectIngPost;
+
+    /**
+     * Current ConnectIng User
+     */
+    public currentComment: ConnectIngComment;
+
+
+    
+    /**
+     * Abstract Constructor
+     */
+    public constructor(){
+      this.currentUser = ConnectIngUser.GetDefault();
+      this.currentChannel = ConnectIngChannel.GetDefault();
+      this.currentPost = ConnectIngPost.GetDefault();
+      this.currentComment = ConnectIngComment.GetDefault();
+    }
+
 
     private user: ConnectIngUser = {
         id: '1',
