@@ -161,7 +161,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
     this.http.post<PersonObject[]>('https://labs.linkando.co/api/Objects/FinderSearch', '{ finderCode: %27allChannelsAPI%27 }', {
       headers: {Authorization: user.token}, responseType: 'json'
     }).subscribe(data => {
-      let users!: ConnectIngUser[];
+      const users: ConnectIngUser[] = [];
       data.forEach(element => {
         this.http.get<CurrentPerson>('https://labs.linkando.co/api/Objects/GetCurrentPersonid', {
           headers: {Authorization: user.token}, responseType: 'json'
@@ -194,6 +194,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
         this.http.post('https://labs.linkando.co/api/Objects/Save', channelToUpdate, {
           headers: {Authorization: user.token}, responseType: 'json'
         });
+        callback(channel);
       });
   }
 
