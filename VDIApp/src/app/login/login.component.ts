@@ -17,7 +17,7 @@ class CurrentPerson {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['../app.component.css']
 })
 export class LoginComponent implements OnInit, DoCheck {
   private accessCode!: string;
