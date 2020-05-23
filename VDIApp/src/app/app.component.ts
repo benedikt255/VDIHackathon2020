@@ -19,7 +19,7 @@ import {animate, query, stagger, style, transition, trigger} from '@angular/anim
   ]
 })
 export class AppComponent {
-  title = 'VDIApp';
+  title = 'ConnectING';
 
   getAnimationData(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;

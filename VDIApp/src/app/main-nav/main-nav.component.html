@@ -8,6 +8,7 @@
       <a mat-list-item routerLink="/login"> Login</a>
       <a mat-list-item routerLink="/channel-overview">Channels</a>
       <a mat-list-item routerLink="/post">Post</a>
+      <a mat-list-item routerLink="/create-post">Create Post</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -20,7 +21,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>VDIApp</span>
+      <span>ConnectING</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
