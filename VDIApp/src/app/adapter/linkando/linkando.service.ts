@@ -267,7 +267,7 @@ export class LinkandoService extends ConnectIngBaseService {
    };
    const channelToUpload: ChannelObject = {
     modifiedBy : 0,
-    inheritanveAttribute: 'null',
+    inheritanceAttribute: 'null',
     name,
     parentId : 0 ,
     kind : 0,
