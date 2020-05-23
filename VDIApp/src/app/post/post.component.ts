@@ -33,6 +33,8 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
   openCommentPanel(): void {
     this.bottomSheet.open(CreateCommentComponent);
   }
