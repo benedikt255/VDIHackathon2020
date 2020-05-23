@@ -38,7 +38,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CommentComponent } from './comment/comment.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-
+import {MatAccordion} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -51,7 +51,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
      CreatePostComponent,
      PostComponent,
      CommentComponent,
-     WelcomeComponent
+     WelcomeComponent,
+     MatAccordion
   ],
   imports: [
     BrowserModule,
