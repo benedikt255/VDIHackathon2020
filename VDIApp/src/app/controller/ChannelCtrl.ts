@@ -111,7 +111,7 @@ export class ChannelCtrl{
             {
                 // successfull
                 this.posts = posts.map((value: IPost, index: number, array: IPost[]) => {
-                    return new PostCtrl(this.postMgmt, value, this.commentMgmt, this);
+                    return new PostCtrl(this.postMgmt, this.commentMgmt, value, this);
                 });
             }
         });
