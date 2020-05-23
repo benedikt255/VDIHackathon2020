@@ -7,7 +7,7 @@ import {MatIconRegistry} from '@angular/material/icon';
   templateUrl: './channel.component.html',
   styleUrls: ['../app.component.css']
 })
-export class ChannelOverviewComponent implements OnInit{
+export class ChannelComponent implements OnInit{
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
