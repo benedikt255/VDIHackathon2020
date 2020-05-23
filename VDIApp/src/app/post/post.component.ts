@@ -25,6 +25,8 @@ export class PostComponent implements OnInit {
   this.comments = [];
   this.bottomSheet = bottomSheet;
 
+
+
   this.loadComments();
   }
 
