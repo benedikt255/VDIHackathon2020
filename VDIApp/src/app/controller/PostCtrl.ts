@@ -3,6 +3,7 @@ import {ConnectIngComment, IComment, ICommentMgmt} from '../interface/ICommentMg
 import {ConnectIngUser, IUser} from '../interface/IUserMgmt';
 import {IChannel} from '../interface/IChannelMgmt';
 import {CommentCtrl} from './CommentCtrl';
+import { ChannelCtrl } from './ChannelCtrl';
 
 /**
  * Controller - PostCtrl
@@ -15,53 +16,72 @@ export class PostCtrl {
   private readonly postMgmt: IPostMgmt;
   private readonly commentMgmt: ICommentMgmt;
 
-  public curUser: IUser;
-  public parentChannel: IChannel;
-  public cur: IPost;
+  private readonly parent: ChannelCtrl;
+
+  public currentUser: IUser;
+  public current: IPost;
   public comments: Array<CommentCtrl>;
 
-  constructor(postMgmt: IPostMgmt, post: IPost, chnMgmt: ICommentMgmt, parentChannel: IChannel){
+  /**
+   * Constructor - Post Controller
+   * @param postMgmt Post Management
+   * @param commentMgmt Comment Management
+   * @param post Current Post
+   * @param parent Channel Controller of Parent
+   */
+  constructor(postMgmt: IPostMgmt, commentMgmt: ICommentMgmt, post: IPost, parent: ChannelCtrl){
     this.postMgmt = postMgmt;
-    this.parentChannel = parentChannel;
-    this.commentMgmt = chnMgmt;
-    this.curUser = ConnectIngUser.GetDefault();
-    this.cur = post;
+    this.parent = parent;
+    this.commentMgmt = commentMgmt;
+    this.currentUser = this.parent.currentUser;
+    this.current = post;
     this.comments = [];
     this.loadComments();
   }
 
+  /**
+   * Method - Load Comments of Post
+   */
   public loadComments(): void {
-    this.commentMgmt.getCommentsAsync(this.curUser, this.cur, (comments: Array<IComment>) => {
+    this.commentMgmt.getCommentsAsync(this.currentUser, this.current, (comments: Array<IComment>) => {
       if (comments === undefined) {
         // failed
         // nop
       } else {
         // successfull
         this.comments = comments.map((value: IComment, index: number, array: Array<IComment>) => {
-          return new CommentCtrl(this.commentMgmt, this.curUser, value);
+          return new CommentCtrl(this.commentMgmt, this.currentUser, value);
         });
       }
     });
   }
 
-  public updatePost(post: IPost, text: string) {
-    this.postMgmt.updatePostAsync(this.curUser, this.cur, text, (updatedPost: IPost) => {
-      if (post === ConnectIngPost.GetDefault())
+  /**
+   * Method - Update the Post
+   * @param post Update Object
+   */
+  public updatePost(post: IPost) {
+    this.postMgmt.updatePostAsync(this.currentUser, post, (updatedPost: IPost) => {
+      if (updatedPost === ConnectIngPost.GetDefault())
       {
         // Undefined -> error in call
         // nop
       }
       else
       {
-        this.cur = updatedPost;
+        this.current = updatedPost;
         this.loadComments();
       }
     });
   }
 
+  /**
+   * Method - Create a new Comment
+   * @param text Comment Text
+   */
   public createComment(text: string)
   {
-    this.commentMgmt.createCommentAsync(this.curUser, this.cur, text,  (comment: IComment) => {
+    this.commentMgmt.createCommentAsync(this.currentUser, this.current, text,  (comment: IComment) => {
       if (comment === ConnectIngComment.GetDefault())
       {
         // Create failed
@@ -76,12 +96,15 @@ export class PostCtrl {
     });
   }
 
-  public removePost(post: IPost) {
-    this.postMgmt.removePostAsync(this.CurrentUser, post, (removed: boolean) => {
+  /**
+   * Method - Remove the current Post
+   */
+  public removePost() {
+    this.postMgmt.removePostAsync(this.currentUser, this.current, (removed: boolean) => {
       if (removed)
       {
         // successfull
-        this.loadPosts();
+        this.parent.loadPosts();
       }
       else
       {
