@@ -1,18 +1,16 @@
+<h2>Edit or delete comment</h2>
+<br>
+
 <mat-card class="example-card">
-    <mat-card-header>
-      <div class="example-header-image" mat-card-avatar></div>
-      <mat-card-title>Create comment</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
+    <mat-form-field class="inputFormFull">
+      <mat-label>Comment title</mat-label>
+      <input matInput placeholder="TitleOfComment" value="Title">
+    </mat-form-field>
+
+    <br>
+  
+    <mat-form-field class="inputFormFull">
+      <mat-label>Leave a comment</mat-label>
+      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
   </mat-card>
