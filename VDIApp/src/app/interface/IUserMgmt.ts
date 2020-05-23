@@ -105,7 +105,7 @@ export class MockUserMgmt implements IUserMgmt {
         jobTitle: 'Ingenieurin',
         email: 'melanie.musterfrau@example.com',
         userName: 'user2',
-        token: 'Advanced 12345'
+        token: ''  // todo: der darf nicht zurückkommen
     },
     {
       id: '3',
@@ -116,7 +116,7 @@ export class MockUserMgmt implements IUserMgmt {
       jobTitle: 'Ingenieurende',
       email: 'max-sophie.mustermensch@example.com',
       userName: 'user3',
-      token: 'Divers 12345'
+      token: '' // todo: der darf nicht zurückkommen
   }
     ]);
   }
