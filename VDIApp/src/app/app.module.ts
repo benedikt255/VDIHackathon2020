@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { StaticPageComponent } from './static-page/static-page.component';
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './adapter/linkando/auth/auth.service';
 import { CookieService } from './cookie/cookie.service';
 import { ChannelOverviewComponent } from './channel-overview/channel-overview.component';
 

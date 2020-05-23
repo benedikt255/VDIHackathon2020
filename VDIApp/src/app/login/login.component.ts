@@ -1,7 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../adapter/linkando/auth/auth.service';
 import { environment } from '../../environments/environment';
 
 class CurrentPerson {

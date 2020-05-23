@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from './../../auth/auth.service';
+import { AuthService } from './auth/auth.service';
 import { IUserMgmt, IUser, ConnectIngUser } from './../../interface/IUserMgmt';
-import { IChannelMgmt } from './../../interface/IChannelMgmt';
+import { IChannelMgmt, IChannel, ConnectIngChannel } from './../../interface/IChannelMgmt';
 import { IPostMgmt } from './../../interface/IPostMgmt';
 import { ICommentMgmt } from './../../interface/ICommentMgmt';
 import { stringify } from 'querystring';
@@ -31,7 +31,7 @@ class PersonObject {
 @Injectable({
   providedIn: 'root'
 })
-export class LinkandoService implements IUserMgmt {
+export class LinkandoService implements IUserMgmt, IChannelMgmt {
 
   constructor(private authSvc: AuthService, private http: HttpClient) { }
 
@@ -82,4 +82,16 @@ export class LinkandoService implements IUserMgmt {
   getUsersAsync(user: IUser, callback: (users: IUser[]) => void): void {
     callback([]);
   }
+
+  createChannelAsync(user: IUser, name: string, description: string, callback: (channel: IChannel) => void): void {
+    callback(ConnectIngChannel.GetDefault());
+  }
+  updateChannelAsync(user: IUser, channel: IChannel, callback: (channel: IChannel) => void): void {
+
+  }
+
+  removeChannelAsync(user: IUser, channel: IChannel, callback: (removed: boolean) => void): void {
+    callback(false);
+  }
+  getChannelsAsync(user: IUser, callback: (channels: IChannel[]) => void): void;
 }
