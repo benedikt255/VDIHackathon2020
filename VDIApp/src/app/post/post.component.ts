@@ -23,6 +23,8 @@ export class PostComponent implements OnInit {
   this.current =  this.baseService.currentPost;
   this.comments = [];
 
+
+
   this.loadComments();
   }
 

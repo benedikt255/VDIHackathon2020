@@ -1,6 +1,9 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
+import 'hammerjs';
+import { HammerModule } from '@angular/platform-browser';
+
 import {AuthService} from './adapter/linkando/auth/auth.service';
 import {CookieService} from './cookie/cookie.service';
 
