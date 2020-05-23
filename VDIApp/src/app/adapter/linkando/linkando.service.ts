@@ -409,13 +409,38 @@ export class LinkandoService extends ConnectIngBaseService {
   // Method - CreateComment
   // creates a new comment under a defined post
   createCommentAsync(user: ConnectIngUser, parent: ConnectIngPost, text: string, callback: (comment: ConnectIngComment) => void): void {
-
+    this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
+    { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversations => {
+      const post: ConversationPost = { conversationId : conversations[0], text };
+      this.http.post<ConversationPost>('https://labs.linkando.co/api/Conversations/CreateConversationPost', post,
+      { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(comment => {
+        const commRet: ConnectIngComment = new ConnectIngComment(comment.postId.toString(), parent.id,
+        comment.person.id.toString(), comment.person.name, comment.postDate, comment.text );
+        callback(commRet);
+      });
+    } );
   }
 
   // Method - UpdateComment
   // updates an existing comment text of an existing comment
   updateCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (comment: ConnectIngComment) => void): void {
-
+    this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + comment.postId,
+    { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversations => {
+      this.http.get<Conversation>('https://labs.linkando.co/api/Conversations/GetConversation?conversationId='
+      + conversations[0].toString() + '&count=100&offset=0',
+      { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversation => {
+        let remote = conversation.posts.find(x => x.postId.toString() === comment.id);
+        if (remote !== undefined) {
+          remote.text = comment.text;
+          this.http.post<ConversationPost>('https://labs.linkando.co/api/Conversations/EditConversationPost', remote,
+          { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(post => {
+            comment.text = post.text;
+            callback(comment);
+          });
+        }
+      }
+    );
+  });
   }
 
   // Method - RemoveComment
