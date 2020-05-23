@@ -1,7 +1,7 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './../adapter/linkando/auth/auth.service'; // bypass für den linkando login,
-// für die Seirenvariante brauchen wir da noch was schöneres
+// für die Serienvariante brauchen wir da noch was schöneres
 import { environment } from './../../environments/environment'; // umgebungsvariablen, hauptsächlich link auf Pfad
 import { ConnectIngBaseService, ConnectIngUser } from '../adapter/base/AbstractBaseService';
 
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   public isDisconnected = true;
   public isConnected = false;
   public isDisconnecting = false;
-  public userName: string; 
+  public userName: string;
   public userPassword: string;
 
   constructor(baseService: ConnectIngBaseService, router: Router, private route: ActivatedRoute, private authSvc: AuthService) {
