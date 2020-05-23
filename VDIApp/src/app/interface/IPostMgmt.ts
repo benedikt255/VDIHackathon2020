@@ -70,7 +70,7 @@ export interface IPostMgmt
 
     // Method - UpdateComment
     // updates an existing post title or message of an existing post
-    updatePostAsync(user: IUser, post: IPost, text: string, callback: (post: IPost) => void): void;
+    updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void;
 
     // Method - RemoveComment
     // removes an existing post
@@ -105,8 +105,7 @@ export class MockPostMgmt implements IPostMgmt {
     callback( false);
   }
 
-  updatePostAsync(user: IUser, post: IPost, text: string, callback: (post: IPost) => void): void {
-    this.post.message += ' - SUJ';
+  updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void {
     callback(this.post);
   }
 }
