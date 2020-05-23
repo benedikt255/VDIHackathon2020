@@ -7,7 +7,11 @@ import { ICommentMgmt } from '../interface/ICommentMgmt';
 
 
 
-
+/**
+ * Controller - ConnectIngCtrl
+ * Application Controller to handle the user management
+ * and create/remove handling of channels
+ */
 export class ConnectIngCtrl {
 
     // Management Interfaces
@@ -17,22 +21,30 @@ export class ConnectIngCtrl {
     private readonly commentMgmt: ICommentMgmt;
 
     // Connection State Properties
-    public IsConnecting = false;
-    public IsDisconnected = true;
-    public IsConnected = false;
-    public IsDisconnecting = false;
+    public isConnecting = false;
+    public isDisconnected = true;
+    public isConnected = false;
+    public isDisconnecting = false;
 
-    public CurrentUser: IUser;
-    public Channels: Array<ChannelCtrl>;
+    public currentUser: IUser;
+    public channels: Array<ChannelCtrl>;
 
+
+    /**
+     * Constructor - ConnectIng Controller
+     * @param userMgmt User Management
+     * @param chnMgmt Channel Management
+     * @param postMgmt Post Management
+     * @param commentMgmt Comment Management
+     */
 constructor(userMgmt: IUserMgmt, chnMgmt: IChannelMgmt, postMgmt: IPostMgmt, commentMgmt: ICommentMgmt){
     this.userMgmt = userMgmt;
     this.chnMgmt = chnMgmt;
     this.postMgmt = postMgmt;
     this.commentMgmt = commentMgmt;
 
-    this.CurrentUser = ConnectIngUser.GetDefault();
-    this.Channels = [];
+    this.currentUser = ConnectIngUser.GetDefault();
+    this.channels = [];
 
     this.setDisconnected();
 }
@@ -41,7 +53,11 @@ constructor(userMgmt: IUserMgmt, chnMgmt: IChannelMgmt, postMgmt: IPostMgmt, com
 
 
 
-
+/**
+ * Method - ConnectUser
+ * @param userName Username of the User
+ * @param userPwd Password of the User
+ */
 public connectUser(userName: string, userPwd: string): void{
 
     this.userMgmt.connectUserAsync(userName, userPwd, (user: IUser) => {
@@ -49,12 +65,12 @@ public connectUser(userName: string, userPwd: string): void{
         {
             // Connecting failed
             this.setDisconnected();
-            this.CurrentUser = ConnectIngUser.GetDefault();
+            this.currentUser = ConnectIngUser.GetDefault();
         }
         else
         {
             // Connecting successfull
-            this.CurrentUser = user;
+            this.currentUser = user;
             this.setConnected();
             // Auto Load of Channels after successful connecting
             this.loadChannels();
@@ -62,14 +78,17 @@ public connectUser(userName: string, userPwd: string): void{
     });
 }
 
+/**
+ * Method - DisconnectUser
+ */
 public disconnectUser()
 {
-    this.userMgmt.disconnectUserAsync(this.CurrentUser, (disconnected: boolean) =>{
+    this.userMgmt.disconnectUserAsync(this.currentUser, (disconnected: boolean) =>{
         if (disconnected)
         {
             // disconnection successfull
-            this.CurrentUser = ConnectIngUser.GetDefault();
-            this.Channels = [];
+            this.currentUser = ConnectIngUser.GetDefault();
+            this.channels = [];
             this.setDisconnected();
         }
         else
@@ -80,25 +99,33 @@ public disconnectUser()
     });
 }
 
+/**
+ * Method - LoadChannels
+ */
 public loadChannels(): void{
-    this.chnMgmt.getChannelsAsync(this.CurrentUser, (channels: IChannel[]) => {
+    this.chnMgmt.getChannelsAsync(this.currentUser, (channels: IChannel[]) => {
         if (channels === undefined)
         {
             // Undefined -> error in call
-            this.Channels = [];
+            this.channels = [];
         }
         else
         {
-            this.Channels = channels.map((value: IChannel, index: number, array: IChannel[]) => {
-                return new ChannelCtrl(this.chnMgmt, this.postMgmt, this.commentMgmt, this.CurrentUser, value);
+            this.channels = channels.map((value: IChannel, index: number, array: IChannel[]) => {
+                return new ChannelCtrl(this.chnMgmt, this.postMgmt, this.commentMgmt, this, value);
             });
         }
     });
 }
 
+/**
+ * Method - CreateChannel
+ * @param name Name of the new Channel
+ * @param desc Description of the new Channel
+ */
 public createChannel(name: string, desc: string)
 {
-    this.chnMgmt.createChannelAsync(this.CurrentUser, name, desc, (channel: IChannel) => {
+    this.chnMgmt.createChannelAsync(this.currentUser, name, desc, (channel: IChannel) => {
         if (channel === ConnectIngChannel.GetDefault())
         {
             // Create failed
@@ -113,59 +140,45 @@ public createChannel(name: string, desc: string)
     });
 }
 
-public removeChannel(channel: IChannel)
-{
-    this.chnMgmt.removeChannelAsync(this.CurrentUser, channel, (removed: boolean) => {
-        if (removed)
-        {
-            // remove successful
-            // update channel List
-            this.loadChannels();
-        }
-        else
-        {
-            // remove failed
-            // nop
-        }
-    });
-}
 
-
-
-
-
-
-
-
-
-
-
+/**
+ * Method - SetDisconnected State
+ */
 private setDisconnected(): void{
-    this.IsConnected = false;
-    this.IsConnecting = false;
-    this.IsDisconnected = true;
-    this.IsDisconnecting = false;
+    this.isConnected = false;
+    this.isConnecting = false;
+    this.isDisconnected = true;
+    this.isDisconnecting = false;
 }
 
+/**
+ * Method - SetConnecting State
+ */
 private setConnecting(): void{
-    this.IsConnected = false;
-    this.IsConnecting = true;
-    this.IsDisconnected = false;
-    this.IsDisconnecting = false;
+    this.isConnected = false;
+    this.isConnecting = true;
+    this.isDisconnected = false;
+    this.isDisconnecting = false;
 }
 
+/**
+ * Method - SetConnected State
+ */
 private setConnected(): void{
-    this.IsConnected = true;
-    this.IsConnecting = false;
-    this.IsDisconnected = false;
-    this.IsDisconnecting = false;
+    this.isConnected = true;
+    this.isConnecting = false;
+    this.isDisconnected = false;
+    this.isDisconnecting = false;
 }
 
+/**
+ * Method - SetDisconnecting State
+ */
 private setDisconnecting(): void{
-    this.IsConnected = false;
-    this.IsConnecting = false;
-    this.IsDisconnected = false;
-    this.IsDisconnecting = true;
+    this.isConnected = false;
+    this.isConnecting = false;
+    this.isDisconnected = false;
+    this.isDisconnecting = true;
 }
 
 

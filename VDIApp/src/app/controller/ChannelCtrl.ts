@@ -3,6 +3,7 @@ import { IPostMgmt, IPost, ConnectIngPost} from '../interface/IPostMgmt';
 import { IUser } from '../interface/IUserMgmt';
 import { ICommentMgmt } from '../interface/ICommentMgmt';
 import { PostCtrl } from './PostCtrl';
+import { ConnectIngCtrl } from './ConnectIngCtrl';
 
 
 /**
@@ -17,28 +18,86 @@ export class ChannelCtrl{
     private readonly postMgmt: IPostMgmt;
     private readonly commentMgmt: ICommentMgmt;
 
-    public CurrentUser: IUser;
-    public Current: IChannel;
-    public Posts: Array<PostCtrl>;
+    private readonly parent: ConnectIngCtrl;
+
+    public currentUser: IUser;
+    public current: IChannel;
+    public posts: Array<PostCtrl>;
 
 
-    constructor(chnMgmt: IChannelMgmt, postMgmt: IPostMgmt, commentMgmt: ICommentMgmt, user: IUser, channel: IChannel)
+    constructor(
+        chnMgmt: IChannelMgmt,
+        postMgmt: IPostMgmt,
+        commentMgmt: ICommentMgmt,
+        parent: ConnectIngCtrl,
+        channel: IChannel
+        )
     {
         this.chnMgmt = chnMgmt;
         this.postMgmt = postMgmt;
         this.commentMgmt = commentMgmt;
 
-        this.CurrentUser = user;
-        this.Current = channel;
-        this.Posts = [];
+        this.parent = parent;
+
+        this.currentUser = this.parent.currentUser;
+        this.current = channel;
+        this.posts = [];
 
         this.loadPosts();
     }
 
 
+    /**
+     * Method - UpdateChannel
+     * change the title and message of a channel object
+     * @param channel Channel Object
+     */
+    public updateChannel(channel: IChannel)
+    {
+        this.chnMgmt.updateChannelAsync(this.currentUser, channel, (newChannel: IChannel) => {
+            if (newChannel === ConnectIngChannel.GetDefault())
+            {
+                // failed
+                // nop
+            }
+            else
+            {
+                this.current = newChannel;
+                this.loadPosts();
+            }
+        });
+    }
 
+    /**
+     * Method - RemoveChannel
+     * removes the current channel object
+     * @param channel Channel Object
+     */
+    public removeChannel()
+    {
+        this.chnMgmt.removeChannelAsync(this.currentUser, this.current, (removed: boolean) => {
+            if (removed)
+            {
+                // remove successful
+                // update channel List
+                this.parent.loadChannels();
+            }
+            else
+            {
+                // remove failed
+                // nop
+            }
+        });
+    }
+
+
+
+
+    /**
+     * Method - Load the List of the Posts
+     */
     public loadPosts(): void {
-        this.postMgmt.getPostsAsync(this.CurrentUser, this.Current, (posts: IPost[]) =>{
+        this.postMgmt.getPostsAsync(this.currentUser, this.current, (posts: IPost[]) =>{
             if (posts === undefined)
             {
                 // failed
@@ -47,16 +106,21 @@ export class ChannelCtrl{
             else
             {
                 // successfull
-                this.Posts = posts.map((value: IPost, index: number, array: IPost[]) => {
-                    return new PostCtrl(this.postMgmt, this.commentMgmt, this.CurrentUser, value);
+                this.posts = posts.map((value: IPost, index: number, array: IPost[]) => {
+                    return new PostCtrl(this.postMgmt, value, this.commentMgmt, this.current);
                 });
             }
         });
     }
 
+    /**
+     * Method - Create a new Post
+     * @param title Title of a Post
+     * @param message Message of a Post
+     */
     public createPost(title: string, message: string)
     {
-        this.postMgmt.createPostAsync(this.CurrentUser, this.Current, title, message, (post: IPost) => {
+        this.postMgmt.createPostAsync(this.currentUser, this.current, title, message, (post: IPost) => {
             if (post === ConnectIngPost.GetDefault())
             {
                 // failed
@@ -70,37 +134,8 @@ export class ChannelCtrl{
         });
     }
 
-    public removePost(post: IPost)
-    {
-        this.postMgmt.removePostAsync(this.CurrentUser, post, (removed: boolean) => {
-            if (removed)
-            {
-                // successfull
-                this.loadPosts();
-            }
-            else
-            {
-                // failed
-                // nop
-            }
-        });
-    }
 
-    public updateChannel(channel: IChannel)
-    {
-        this.chnMgmt.updateChannelAsync(this.CurrentUser, channel, (newChannel: IChannel)=>{
-            if (newChannel === ConnectIngChannel.GetDefault())
-            {
-                // failed
-                // nop
-            }
-            else
-            {
-                this.Current = newChannel;
-                this.loadPosts();
-            }
-        });
-    }
+
 
 
 }
