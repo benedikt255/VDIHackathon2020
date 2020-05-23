@@ -1,5 +1,8 @@
 import { IUserMgmt, IUser, ConnectIngUser } from '../interface/IUserMgmt';
 import { IChannelMgmt, IChannel, ConnectIngChannel } from '../interface/IChannelMgmt';
+import { ChannelCtrl } from './ChannelCtrl';
+import { IPostMgmt } from '../interface/IPostMgmt';
+import { ICommentMgmt } from '../interface/ICommentMgmt';
 
 
 
@@ -10,20 +13,25 @@ export class ConnectIngCtrl {
     // Management Interfaces
     private readonly userMgmt: IUserMgmt;
     private readonly chnMgmt: IChannelMgmt;
+    private readonly postMgmt: IPostMgmt;
+    private readonly commentMgmt: ICommentMgmt;
 
-// Connection State Properties
-public IsConnecting = false;
-public IsDisconnected = true;
-public IsConnected = false;
-public IsDisconnecting = false;
+    // Connection State Properties
+    public IsConnecting = false;
+    public IsDisconnected = true;
+    public IsConnected = false;
+    public IsDisconnecting = false;
 
-public curUser: IUser;
-public Channels: Array<IChannel>;
+    public CurrentUser: IUser;
+    public Channels: Array<ChannelCtrl>;
 
-constructor(userMgmt: IUserMgmt, chnMgmt: IChannelMgmt){
+constructor(userMgmt: IUserMgmt, chnMgmt: IChannelMgmt, postMgmt: IPostMgmt, commentMgmt: ICommentMgmt){
     this.userMgmt = userMgmt;
     this.chnMgmt = chnMgmt;
-    this.curUser = ConnectIngUser.GetDefault();
+    this.postMgmt = postMgmt;
+    this.commentMgmt = commentMgmt;
+
+    this.CurrentUser = ConnectIngUser.GetDefault();
     this.Channels = [];
 
     this.setDisconnected();
@@ -41,26 +49,26 @@ public connectUser(userName: string, userPwd: string): void{
         {
             // Connecting failed
             this.setDisconnected();
-            this.curUser = ConnectIngUser.GetDefault();
+            this.CurrentUser = ConnectIngUser.GetDefault();
         }
         else
         {
             // Connecting successfull
-            this.curUser = user;
+            this.CurrentUser = user;
             this.setConnected();
             // Auto Load of Channels after successful connecting
-            this.updateChannels();
+            this.loadChannels();
         }
     });
 }
 
 public disconnectUser()
 {
-    this.userMgmt.disconnectUserAsync(this.curUser, (disconnected: boolean) =>{
+    this.userMgmt.disconnectUserAsync(this.CurrentUser, (disconnected: boolean) =>{
         if (disconnected)
         {
             // disconnection successfull
-            this.curUser = ConnectIngUser.GetDefault();
+            this.CurrentUser = ConnectIngUser.GetDefault();
             this.Channels = [];
             this.setDisconnected();
         }
@@ -72,8 +80,8 @@ public disconnectUser()
     });
 }
 
-public updateChannels(): void{
-    this.chnMgmt.getChannelsAsync(this.curUser, (channels: IChannel[]) => {
+public loadChannels(): void{
+    this.chnMgmt.getChannelsAsync(this.CurrentUser, (channels: IChannel[]) => {
         if (channels === undefined)
         {
             // Undefined -> error in call
@@ -81,14 +89,16 @@ public updateChannels(): void{
         }
         else
         {
-            this.Channels = channels;
+            this.Channels = channels.map((value: IChannel, index: number, array: IChannel[]) => {
+                return new ChannelCtrl(this.chnMgmt, this.postMgmt, this.commentMgmt, this.CurrentUser, value);
+            });
         }
     });
 }
 
 public createChannel(name: string, desc: string)
 {
-    this.chnMgmt.createChannelAsync(this.curUser, name, desc, (channel: IChannel) => {
+    this.chnMgmt.createChannelAsync(this.CurrentUser, name, desc, (channel: IChannel) => {
         if (channel === ConnectIngChannel.GetDefault())
         {
             // Create failed
@@ -98,19 +108,19 @@ public createChannel(name: string, desc: string)
         {
             // Create successfull
             // Update Channel List
-            this.updateChannels();
+            this.loadChannels();
         }
     });
 }
 
 public removeChannel(channel: IChannel)
 {
-    this.chnMgmt.removeChannelAsync(this.curUser, channel, (removed: boolean) => {
+    this.chnMgmt.removeChannelAsync(this.CurrentUser, channel, (removed: boolean) => {
         if (removed)
         {
             // remove successful
             // update channel List
-            this.updateChannels();
+            this.loadChannels();
         }
         else
         {
