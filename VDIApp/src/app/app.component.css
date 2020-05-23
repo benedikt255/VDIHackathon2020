@@ -3,6 +3,14 @@
 }
 
 
+  /* Login Screen */
+  .login-content{
+    align-content: center;
+  }
+
+
+
+
   /*Post */
   .example-card {
     max-width: 400px;

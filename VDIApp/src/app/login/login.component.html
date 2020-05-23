@@ -1,23 +1,22 @@
-<div class="card">
-  <h2>VDI ConnectING</h2>
+<div class="login-content" >
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>1</mat-grid-tile>
+    <mat-grid-tile>2</mat-grid-tile>
+    <mat-grid-tile>3</mat-grid-tile>
+    <mat-grid-tile>4</mat-grid-tile>
+  </mat-grid-list>
 
-  <!-- <img src="../../assets/images/VDI.png"></img>-->
 
 
-  <img alt="Wilkommen bei ConnectING" hight=auto; src="../../assets/images/VDI.png" width=200vw;>
-
-
-  <br><br>
-
-  <!--  <p *ngIf="this.name != ''">Hallo {{name}}</p>
-   <a *ngIf="this.name == ''" href="https://identity.linkando.co/oauth/auth?redirect_uri={{authURI}}">LogIn</a>
- -->
-
-  <button (click)="onclick()" color="primary" mat-flat-button>Login</button>
+  <img alt="ConnectIngLogo" src="../../assets/images/VDI.png" width="200">
 
   <br><br>
 
-  <button (click)="onclick()" color="primary" mat-flat-button>Register</button>
+  <button (click)="Connect()" color="primary" mat-flat-button>Anmelden</button>
+
+  <br><br>
+
+  <button (click)="Register()" color="primary" mat-flat-button>Registrieren</button>
 
 
 </div>

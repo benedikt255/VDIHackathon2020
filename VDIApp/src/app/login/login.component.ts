@@ -1,70 +1,50 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {AuthService} from '../adapter/linkando/auth/auth.service';
-import {environment} from '../../environments/environment';
+import { ConnectIngCtrl } from '../controller/ConnectIngCtrl';
+import { Router } from '@angular/router';
 
-class CurrentPerson {
-  href!: string;
-  id!: number;
-  name!: string;
-  imagePath!: string;
-}
+// Beispiel für Integration eines Service mit Interface in Angular
+// https://medium.com/hackernoon/creating-interfaces-for-angular-services-1bb41fbbe47c
+
 
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['../app.component.css']
+  templateUrl: 'login.component.html',
+  styleUrls: ['../app.component.css'],
+  providers: [ConnectIngCtrl]
 })
-export class LoginComponent implements OnInit, DoCheck {
-  authURI = encodeURIComponent(environment.authURI); // use URI from environment, so we can debug on localhost but deploy on github/linkando
-  name: string;
-  private accessCode!: string;
-  private oldCode!: string;
-  private oldAuth!: boolean;
+export class LoginComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private authSvc: AuthService, private http: HttpClient) {
-    this.route.queryParams.subscribe(params => {
-      this.accessCode = params.code;
-      console.log(this.accessCode);
-    });
-    this.name = '';
-    this.checkAuthAndGetName();
-  }
+  private coreCtrl: ConnectIngCtrl;
+  private router: Router;
 
+  public userName: string;
+  public userPassword: string;
 
-  //Button on login
-  onclick() {
-    //<a *ngIf="this.name == ''" href="https://identity.linkando.co/oauth/auth?redirect_uri={{authURI}}">LogIn</a>
-  }
-
-  // better find a suitable OnChange event for this
-  ngDoCheck() {
-    if ((this.accessCode !== this.oldCode) || (this.oldAuth !== (this.authSvc.getAuth() !== ''))) {
-      this.checkAuthAndGetName();
-    }
-    this.oldCode = this.accessCode;
+  constructor(coreCtrl: ConnectIngCtrl, router: Router) {
+    this.router = router;
+    this.coreCtrl = coreCtrl;
+    this.userName = 'Please insert your Username';
+    this.userPassword = 'Please insert your Password';
   }
 
   ngOnInit(): void {
   }
 
-  private checkAuthAndGetName() {
-    if (this.authSvc.getAuth() === '') {
-      console.log(this.accessCode);
-      if (this.accessCode !== undefined) {
-        this.authSvc.requestAuthWithAccessCode(this.accessCode);
-        this.accessCode = '';
+  public Connect(): void
+  {
+    this.coreCtrl.connectUser(
+      this.userName,
+      this.userPassword,
+      () => {
+        this.router.navigateByUrl('welcome');
       }
-    }
-    this.http.get<CurrentPerson>('https://labs.linkando.co/api/Objects/GetCurrentPerson',
-      {headers: {Authorization: this.authSvc.getAuth()}, responseType: 'json'})
-      .subscribe(person => {
-        this.name = person.name;
-        console.log(person);
-      });
-    this.oldAuth = this.authSvc.getAuth() !== '';
+      );
   }
+
+  public Register(): void{
+    this.router.navigateByUrl('welcome');
+  }
+
 
 }
