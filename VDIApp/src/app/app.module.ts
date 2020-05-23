@@ -38,8 +38,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CommentComponent } from './comment/comment.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import {MatAccordion} from '@angular/material/expansion';
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
    declarations: [
@@ -51,8 +50,7 @@ import {MatAccordion} from '@angular/material/expansion';
      CreatePostComponent,
      PostComponent,
      CommentComponent,
-     WelcomeComponent,
-     MatAccordion
+     WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +68,8 @@ import {MatAccordion} from '@angular/material/expansion';
     MatToolbarModule,
     MatIconModule,
     MatListModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTabsModule
   ],
   providers: [
     {provide: ConnectIngBaseService, useClass: ConnectIngMockService},

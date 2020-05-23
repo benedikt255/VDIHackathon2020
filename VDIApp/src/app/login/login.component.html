@@ -1,28 +1,20 @@
-
-
-
-
 <div class="login-content" >
-
-  <mat-grid-list cols="2" rowHeight="2:1">
-    <mat-grid-tile>1</mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
-  </mat-grid-list>
-
-
-  <img alt="ConnectIngLogo" src="../../assets/images/VDI.png" width="200" />
-
-  <br><br>
-
-  <button (click)="Connect()" color="primary" mat-flat-button>Anmelden</button>
-
-  <br><br>
-
-  <button (click)="Register()" color="primary" mat-flat-button>Registrieren</button>
-
-
+  <mat-tab-group>
+    <mat-tab label="Anmelden">
+      <div style="align-self: center;" >
+        <img alt="ConnectIngLogo" src="../../assets/images/VDI.png" width="200" alignment="center" />
+        <br>
+        <button (click)="Connect()" color="primary" mat-flat-button>Anmelden</button>  
+      </div> 
+    </mat-tab>
+    <mat-tab label="Registrieren">
+      <div style="align-content: center;" >
+        <img alt="ConnectIngLogo" src="../../assets/images/VDI.png" width="200" alignment="center" />
+        <br>
+        <button (click)="Register()" color="primary" mat-flat-button >Registrieren</button>
+      </div> 
+    </mat-tab>
+  </mat-tab-group>
 </div>
 
 
