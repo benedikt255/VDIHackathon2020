@@ -36,6 +36,8 @@ import {MatListModule} from '@angular/material/list';
 import {MainNavComponent} from './main-nav/main-nav.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { CommentComponent } from './comment/comment.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 
@@ -48,6 +50,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
      ChannelOverviewComponent,
      CreatePostComponent,
      PostComponent,
+     CommentComponent,
+     WelcomeComponent
   ],
   imports: [
     BrowserModule,

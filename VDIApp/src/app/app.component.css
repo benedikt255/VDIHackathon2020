@@ -52,6 +52,47 @@
     z-index: 1;
   }
 
+
+ /*channel - by Matthias Walter, NEUE Version*/
+.main{
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
+
+  justify-content: center;
+  align-items: center;
+  display: flex;
+            
+}
+
+.mat-card {
+  transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  /*display:block;
+  position:relative;*/
+  padding:16px;
+  border-radius:8px;
+ }
+
+.post {
+    max-width: 400px;
+    background-color: #008FD3;
+    
+  }
+
+ .btns{
+   padding: 0px;
+ }
+
+ .divide{
+  margin-top: 12px;
+  margin-bottom: 12px;
+ }
+ 
+.btnright{
+    margin-right: 5px;
+    text-align: right;
+}
+
   .spacer {
     flex: 1 1 auto;
   }
@@ -63,16 +104,20 @@
 
   }
 
-  /*channel - by Matthias Walter*/
 
 
 
 
-  .content{
+  /*channel - by Matthias Walter, alte Version*/
+  /*Kann gelöscht werden, sobal alte Channels nicht mehr aktiv sind*/
+
+ .content{
     padding: 5px;
+
     margin: 0;
 
 }
+
 .box {
   background-color:#008FD3;
   margin: 20px;
@@ -84,10 +129,7 @@
   margin: 5px;
   padding: 5px;
   border-radius: 5px;
-}
-.btnright{
-    margin-right: 5px;
-    text-align: right;
+
 }
 .mat-card-subtitle{
   margin-bottom: 8px;
