@@ -33,11 +33,15 @@ export class ConnectIngChannel implements IChannel{
         this.picture = picture;
         this.persons = persons;
     }
+
+    public static GetDefault(): ConnectIngChannel{
+        return new ConnectIngChannel('', '', '', '', []);
+      }
 }
 
 
 export interface IChannelMgmt{
-    createChannelAsync(callback: (channel: IChannel) => void): void;
+    createChannelAsync(user: IUser, callback: (channel: IChannel) => void): void;
     updateChannelAsync(posts: IPost, callback: (channel: IChannel) => void): void;
     getChannelAsync(channelId: string, callback: (channel: IChannel) => void): void;
     removeChannelAsync(channelId: string, callback: (channel: IChannel) => void): void;
@@ -53,7 +57,7 @@ export class MockConnectingChannelMgmt implements IChannelMgmt{
         persons : [],
     };
 
-    createChannelAsync(callback: (channel: IChannel) => void): void {
+    createChannelAsync(user: IUser, callback: (channel: IChannel) => void): void {
         callback(this.channel);
     }
     updateChannelAsync(posts: IPost, callback: (channel: IChannel) => void): void {
