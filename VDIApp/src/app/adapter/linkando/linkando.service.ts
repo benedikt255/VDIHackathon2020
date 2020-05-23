@@ -532,9 +532,9 @@ export class LinkandoService extends ConnectIngBaseService {
       + conversations[0].toString() + '&count=100&offset=0',
       { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversation => {
         // tslint:disable-next-line: prefer-const
-        let comments!: ConnectIngComment[];
+        let comments: ConnectIngComment[] = [];
         conversation.posts.forEach(element => {
-          comments.push(new ConnectIngComment(element.postId.toString(), element.conversationId.toString(),
+          comments.push(new ConnectIngComment(element.postId.toString(), parent.id.toString(),
             element.person.id.toString(), element.person.name, element.postDate, element.text));
         });
         callback(comments);
