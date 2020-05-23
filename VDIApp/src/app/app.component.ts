@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
+import {Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
 
 
 @Component({
@@ -9,17 +9,18 @@ import { trigger, state, style, animate, transition, query, stagger } from '@ang
   styleUrls: ['./app.component.css'],
   animations: [
     trigger('logoAni', [
-        transition('* => *', [
-            query(':enter', style({ opacity: 0 }), { optional: true }),
-            query(':enter', stagger('100ms', [
-                animate('1s', style({ opacity: 1 }))
-            ]), { optional: true })
-        ])
+      transition('* => *', [
+        query(':enter', style({opacity: 0}), {optional: true}),
+        query(':enter', stagger('100ms', [
+          animate('1s', style({opacity: 1}))
+        ]), {optional: true})
+      ])
     ])
-]
+  ]
 })
 export class AppComponent {
   title = 'VDIApp';
+
   getAnimationData(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }

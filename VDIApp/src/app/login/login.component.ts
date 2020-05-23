@@ -1,8 +1,8 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../adapter/linkando/auth/auth.service';
-import { environment } from '../../environments/environment';
+import {Component, DoCheck, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {AuthService} from '../adapter/linkando/auth/auth.service';
+import {environment} from '../../environments/environment';
 
 class CurrentPerson {
   href!: string;
@@ -12,19 +12,18 @@ class CurrentPerson {
 }
 
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['../app.component.css']
 })
 export class LoginComponent implements OnInit, DoCheck {
+  authURI = encodeURIComponent(environment.authURI); // use URI from environment, so we can debug on localhost but deploy on github/linkando
+  name: string;
   private accessCode!: string;
   private oldCode!: string;
   private oldAuth!: boolean;
-  authURI = encodeURIComponent(environment.authURI); // use URI from environment, so we can debug on localhost but deploy on github/linkando
-  name: string;
+
   constructor(private route: ActivatedRoute, private authSvc: AuthService, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
       this.accessCode = params.code;
@@ -36,7 +35,7 @@ export class LoginComponent implements OnInit, DoCheck {
 
 
   //Button on login
-  onclick(){
+  onclick() {
     //<a *ngIf="this.name == ''" href="https://identity.linkando.co/oauth/auth?redirect_uri={{authURI}}">LogIn</a>
   }
 
@@ -48,6 +47,9 @@ export class LoginComponent implements OnInit, DoCheck {
     this.oldCode = this.accessCode;
   }
 
+  ngOnInit(): void {
+  }
+
   private checkAuthAndGetName() {
     if (this.authSvc.getAuth() === '') {
       console.log(this.accessCode);
@@ -57,14 +59,12 @@ export class LoginComponent implements OnInit, DoCheck {
       }
     }
     this.http.get<CurrentPerson>('https://labs.linkando.co/api/Objects/GetCurrentPerson',
-      { headers: { Authorization: this.authSvc.getAuth() } , responseType: 'json' })
-      .subscribe(person => { this.name = person.name; console.log(person); } );
+      {headers: {Authorization: this.authSvc.getAuth()}, responseType: 'json'})
+      .subscribe(person => {
+        this.name = person.name;
+        console.log(person);
+      });
     this.oldAuth = this.authSvc.getAuth() !== '';
-  }
-
-
-
-  ngOnInit(): void {
   }
 
 }
