@@ -3,6 +3,32 @@
 }
 
 
+  /* Login Screen */
+  .login-content{
+    align-content: center;
+  }
+
+
+  /* Welcome Page */
+  .example-action-buttons {
+    padding-bottom: 20px;
+  }
+  
+  .example-headers-align .mat-expansion-panel-header-title,
+  .example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+  }
+  
+  .example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .example-headers-align .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+
   /*Post */
   .example-card {
     max-width: 400px;
@@ -43,6 +69,51 @@
     top: 0;
     z-index: 1;
   }
+<<<<<<< HEAD
+=======
+
+
+ /*channel - by Matthias Walter, NEUE Version*/
+.main{
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
+
+  justify-content: center;
+  align-items: center;
+  display: flex;
+            
+}
+
+.mat-card {
+  transition:box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  /*display:block;
+  position:relative;*/
+  padding:16px;
+  border-radius:8px;
+ }
+
+.post {
+    max-width: 400px;
+    background-color: #008FD3;
+    
+  }
+
+ .btns{
+   padding: 0px;
+ }
+
+ .divide{
+  margin-top: 12px;
+  margin-bottom: 12px;
+ }
+ 
+.btnright{
+    margin-right: 5px;
+    text-align: right;
+}
+
+>>>>>>> 6bfce04bd6a0d929d69afa70f8f3aad6d9da7550
   .spacer {
     flex: 1 1 auto;
   }
@@ -51,5 +122,41 @@
     margin: 0 10px;
     color: white;
     text-decoration: none;
+<<<<<<< HEAD
     
   }
+=======
+
+  }
+
+
+
+
+
+  /*channel - by Matthias Walter, alte Version*/
+  /*Kann gelöscht werden, sobal alte Channels nicht mehr aktiv sind*/
+
+ .content{
+    padding: 5px;
+
+    margin: 0;
+
+}
+
+.box {
+  background-color:#008FD3;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.box2 {
+  background-color: lightgrey;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+
+}
+.mat-card-subtitle{
+  margin-bottom: 8px;
+}
+>>>>>>> 6bfce04bd6a0d929d69afa70f8f3aad6d9da7550

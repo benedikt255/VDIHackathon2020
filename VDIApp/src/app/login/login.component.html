@@ -1,24 +1,20 @@
-<div class="card">
-  <h2>VDI ConnectING</h2>
-
-  <!-- <img src="../../assets/images/VDI.png"></img>-->
-
-
-  <img alt="Wilkommen bei ConnectING" hight=auto; src="../../assets/images/VDI.png" width=200vw;>
-
-
-  <br><br>
-
-  <!--  <p *ngIf="this.name != ''">Hallo {{name}}</p>
-   <a *ngIf="this.name == ''" href="https://identity.linkando.co/oauth/auth?redirect_uri={{authURI}}">LogIn</a>
- -->
-
-  <button (click)="onclick()" color="primary" mat-flat-button>Login</button>
-
-  <br><br>
-
-  <button (click)="onclick()" color="primary" mat-flat-button>Register</button>
-
-
+<div class="login-content" >
+  <mat-tab-group>
+    <mat-tab label="Anmelden">
+      <div style="align-self: center;" >
+        <img alt="ConnectIngLogo" src="../../assets/images/VDI.png" width="200" alignment="center" />
+        <br>
+        <button (click)="Connect()" color="primary" mat-flat-button>Anmelden</button>  
+      </div> 
+    </mat-tab>
+    <mat-tab label="Registrieren">
+      <div style="align-content: center;" >
+        <img alt="ConnectIngLogo" src="../../assets/images/VDI.png" width="200" alignment="center" />
+        <br>
+        <button (click)="Register()" color="primary" mat-flat-button >Registrieren</button>
+      </div> 
+    </mat-tab>
+  </mat-tab-group>
 </div>
+
 

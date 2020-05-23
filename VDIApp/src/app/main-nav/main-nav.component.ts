@@ -9,6 +9,8 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['../app.component.css']
 })
 export class MainNavComponent {
+  PlusActive = false;
+
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

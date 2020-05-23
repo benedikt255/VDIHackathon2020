@@ -1,22 +1,24 @@
-import {ConnectIngPost, IPost, IPostMgmt} from '../interface/IPostMgmt';
-import {ConnectIngComment, IComment, ICommentMgmt} from '../interface/ICommentMgmt';
-import {IUser} from '../interface/IUserMgmt';
+
 import {CommentCtrl} from './CommentCtrl';
 import {ChannelCtrl} from './ChannelCtrl';
+import { ConnectIngBaseService, ConnectIngPost, ConnectIngUser, ConnectIngComment } from '../adapter/base/AbstractBaseService';
+import { Injectable } from '@angular/core';
 
 /**
  * Controller - PostCtrl
  * Application Controller to handle a post
  * and create/remove handling of comments
  */
+@Injectable({
+  providedIn: 'root'
+})
 export class PostCtrl {
 
-  public currentUser: IUser;
-  public current: IPost;
+  public currentUser: ConnectIngUser;
+  public current: ConnectIngPost;
   public comments: Array<CommentCtrl>;
   // Management Interfaces
-  private readonly postMgmt: IPostMgmt;
-  private readonly commentMgmt: ICommentMgmt;
+  private readonly baseService: ConnectIngBaseService;
   private readonly parent: ChannelCtrl;
 
   /**
@@ -26,10 +28,9 @@ export class PostCtrl {
    * @param post Current Post
    * @param parent Channel Controller of Parent
    */
-  constructor(postMgmt: IPostMgmt, commentMgmt: ICommentMgmt, post: IPost, parent: ChannelCtrl) {
-    this.postMgmt = postMgmt;
+  constructor(baseService: ConnectIngBaseService, post: ConnectIngPost, parent: ChannelCtrl) {
+    this.baseService = baseService;
     this.parent = parent;
-    this.commentMgmt = commentMgmt;
     this.currentUser = this.parent.currentUser;
     this.current = post;
     this.comments = [];
@@ -40,14 +41,14 @@ export class PostCtrl {
    * Method - Load Comments of Post
    */
   public loadComments(): void {
-    this.commentMgmt.getCommentsAsync(this.currentUser, this.current, (comments: Array<IComment>) => {
+    this.baseService.getCommentsAsync(this.currentUser, this.current, (comments: Array<ConnectIngComment>) => {
       if (comments === undefined) {
         // failed
         // nop
       } else {
         // successfull
-        this.comments = comments.map((value: IComment, index: number, array: Array<IComment>) => {
-          return new CommentCtrl(this.commentMgmt, this, value);
+        this.comments = comments.map((value: ConnectIngComment, index: number, array: Array<ConnectIngComment>) => {
+          return new CommentCtrl(this.baseService, this, value);
         });
       }
     });
@@ -57,8 +58,8 @@ export class PostCtrl {
    * Method - Update the Post
    * @param post Update Object
    */
-  public updatePost(post: IPost) {
-    this.postMgmt.updatePostAsync(this.currentUser, post, (updatedPost: IPost) => {
+  public updatePost(post: ConnectIngPost) {
+    this.baseService.updatePostAsync(this.currentUser, post, (updatedPost: ConnectIngPost) => {
       if (updatedPost === ConnectIngPost.GetDefault()) {
         // Undefined -> error in call
         // nop
@@ -74,7 +75,7 @@ export class PostCtrl {
    * @param text Comment Text
    */
   public createComment(text: string) {
-    this.commentMgmt.createCommentAsync(this.currentUser, this.current, text, (comment: IComment) => {
+    this.baseService.createCommentAsync(this.currentUser, this.current, text, (comment: ConnectIngComment) => {
       if (comment === ConnectIngComment.GetDefault()) {
         // Create failed
         // nop
@@ -90,7 +91,7 @@ export class PostCtrl {
    * Method - Remove the current Post
    */
   public removePost() {
-    this.postMgmt.removePostAsync(this.currentUser, this.current, (removed: boolean) => {
+    this.baseService.removePostAsync(this.currentUser, this.current, (removed: boolean) => {
       if (removed) {
         // successfull
         this.parent.loadPosts();
