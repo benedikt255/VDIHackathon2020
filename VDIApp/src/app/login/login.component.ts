@@ -1,9 +1,9 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
-import { ConnectIngCtrl } from '../controller/ConnectIngCtrl';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './../adapter/linkando/auth/auth.service'; // bypass für den linkando login,
 // für die Seirenvariante brauchen wir da noch was schöneres
 import { environment } from './../../environments/environment'; // umgebungsvariablen, hauptsächlich link auf Pfad
+import { ConnectIngBaseService, ConnectIngUser } from '../adapter/base/AbstractBaseService';
 
 // Beispiel für Integration eines Service mit Interface in Angular
 // https://medium.com/hackernoon/creating-interfaces-for-angular-services-1bb41fbbe47c
@@ -13,24 +13,28 @@ import { environment } from './../../environments/environment'; // umgebungsvari
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
-  styleUrls: ['../app.component.css'],
-  providers: [ConnectIngCtrl]
+  styleUrls: ['../app.component.css']
 })
 export class LoginComponent implements OnInit {
   // helper für linkandologin
   private accessCode = '';
 
-  private coreCtrl: ConnectIngCtrl;
+  private baseService: ConnectIngBaseService;
   private router: Router;
 
-  public userName: string;
+  public isConnecting = false;
+  public isDisconnected = true;
+  public isConnected = false;
+  public isDisconnecting = false;
+  public userName: string; 
   public userPassword: string;
 
-  constructor(coreCtrl: ConnectIngCtrl, router: Router, private route: ActivatedRoute, private authSvc: AuthService) {
+  constructor(baseService: ConnectIngBaseService, router: Router, private route: ActivatedRoute, private authSvc: AuthService) {
     this.router = router;
-    this.coreCtrl = coreCtrl;
+    this.baseService = baseService;
     this.userName = 'Please insert your Username';
     this.userPassword = 'Please insert your Password';
+
     // helper für linkado login, subscribe code param
     this.route.queryParams.subscribe(params => {
       this.accessCode = params['code'];
@@ -50,11 +54,14 @@ export class LoginComponent implements OnInit {
   {
     if (this.authSvc.getAuth() !== '')
     {
-      this.coreCtrl.connectUser(
+      this.setConnecting();
+      this.baseService.connectUserAsync(
       this.userName,
       this.userPassword,
-      () => {
-
+      (user: ConnectIngUser) => {
+        if (user === ConnectIngUser.GetDefault()) { return; }
+        this.baseService.currentUser = user;
+        this.setConnected();
         this.router.navigateByUrl('welcome');
       }
       );
@@ -66,8 +73,52 @@ export class LoginComponent implements OnInit {
   }
 
   public Register(): void{
-    this.router.navigateByUrl('welcome');
+    throw Error('Not implemented yet');
   }
+
+
+
+
+  /**
+   * Method - SetDisconnected State
+   */
+  private setDisconnected(): void {
+    this.isConnected = false;
+    this.isConnecting = false;
+    this.isDisconnected = true;
+    this.isDisconnecting = false;
+  }
+
+  /**
+   * Method - SetConnecting State
+   */
+  private setConnecting(): void {
+    this.isConnected = false;
+    this.isConnecting = true;
+    this.isDisconnected = false;
+    this.isDisconnecting = false;
+  }
+
+  /**
+   * Method - SetConnected State
+   */
+  private setConnected(): void {
+    this.isConnected = true;
+    this.isConnecting = false;
+    this.isDisconnected = false;
+    this.isDisconnecting = false;
+  }
+
+  /**
+   * Method - SetDisconnecting State
+   */
+  private setDisconnecting(): void {
+    this.isConnected = false;
+    this.isConnecting = false;
+    this.isDisconnected = false;
+    this.isDisconnecting = true;
+  }
+
 
 
 }
