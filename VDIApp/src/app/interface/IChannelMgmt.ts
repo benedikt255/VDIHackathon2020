@@ -11,6 +11,7 @@ enum enumConnectIngChannelTypes {
 export interface IChannel {
   readonly id: string;
   name: string;
+  // TODO type: enumConnectIngChannelTypes
   description: string;
   picture: string;
   persons: IUser[];
