@@ -1,38 +1,75 @@
-<div class="main">
-  <div class = "overview"> 
-    <p>{{current.name}}</p>
+<div class="content">
+
+
+  <div class="main"><!--Kanalinfo-->
+    <mat-card class="post1"> 
+      <p class = "otxt">{{current.name}}</p>
+    </mat-card>
   </div>
 
-  <br>
+
+  
+  <!-- Original von Adreas 
+    <div class = "overview"> 
+      <p>{{current.name}}</p>
+    </div>-->
 
 
-  <mat-list-item *ngFor="let post of posts">
-    <mat-card mat-line class="post" (click)="GoTo(post.id)">
-      <mat-card-header>
-        <div class="example-header-image" mat-card-avatar></div>
-        <mat-card-title>{{post.title}}</mat-card-title>
-        <mat-card-subtitle>{{post.author}}</mat-card-subtitle>
-      </mat-card-header>
-  
-      <mat-card-content>
-        <p>{{post.message}}</p>
-      </mat-card-content>
-  
-      <div class="btnright">
-        <mat-card-actions class="btns">
-          <button mat-raised-button color="primary">LIKE</button>
-          <button mat-raised-button color="primary">SHARE</button>
-        </mat-card-actions>
-      </div>
-    </mat-card>
-  </mat-list-item>
+
+    <div class="main"><!--Beitrag-->
+    <mat-list-item class="adjustWidth"  *ngFor="let post of posts">
+      <mat-card class="post2" mat-line (click)="GoTo(post.id)">
+        <mat-card-header>
+          <div class="example-header-image" mat-card-avatar></div>
+          <mat-card-title>{{post.title}}</mat-card-title>
+          <mat-card-subtitle>{{post.author}}</mat-card-subtitle>
+        </mat-card-header>
+    
+        <mat-card-content>
+          <p>{{post.message}}</p>
+        </mat-card-content>
+    
+        <div class="btnright">
+          <mat-card-actions class="btns">
+            <button mat-raised-button color="primary">LIKE</button>
+            <button mat-raised-button color="primary">SHARE</button>
+          </mat-card-actions>
+        </div>
+      </mat-card>
+    </mat-list-item>
+
+  </div>
+
+<!--Hier ein statischer Beitrag zum Vergelich-->
+<div class ="divide"></div>
+
+<div class="main"><!--Beitrag ohne Bild-->
+  <mat-card class="post">
+    <mat-card-header>
+      <div class="example-header-image" mat-card-avatar></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>Dies ist ein statischer (!!!) Beitrag. Dieser dient dazu, den dynamisch generierten Beitrag zu vergleichen.</p>
+    </mat-card-content>
+
+    <div class="btnright">
+      <mat-card-actions class="btns">
+
+        <button mat-raised-button color="primary">LIKE</button>
+        
+        <button mat-raised-button color="primary">SHARE</button>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</div>
 
 
 
 
 </div>
-
-
 
 
 

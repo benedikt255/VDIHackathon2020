@@ -20,3 +20,4 @@
 # System Files
 .DS_Store
 Thumbs.db
+VDIApp/src/app/app.component.css

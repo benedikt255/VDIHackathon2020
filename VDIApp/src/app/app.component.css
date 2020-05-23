@@ -104,33 +104,21 @@
 
  /*channel - by Matthias Walter, NEUE Version*/
 
-.overview{
-  padding: 5px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: orange;
-  border-radius:8px;
-  max-width: 400px;
-  width: 80vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-
-
-
-
-
-}
-
-
-
-.otxt{
-  margin:0px;
-  font-weight: 500;
-  font-size: 20px;
-}
-
+ .content{
+  width: 100%;
+  max-width:400px;
+  margin-left: auto;
+  margin-right: auto;
+ /*background-color: rgb(200, 200, 200);*/
+ }
+ 
+ 
+ 
+ .otxt{
+   margin:0px;
+   font-weight: 500;
+   font-size: 20px;
+ }
 .menueright{
   margin-right: 5px;
   text-align: right;
@@ -140,11 +128,9 @@
   padding: 5px;
   margin-left: auto;
   margin-right: auto;
-
   justify-content: center;
   align-items: center;
-  display: flex;
-
+  display: flex;     
 }
 
 .mat-card {
@@ -155,11 +141,31 @@
   border-radius:8px;
  }
 
-.post {
-    max-width: 400px;
-    background-color: #008FD3;
 
-  }
+
+ .post {
+  background-color: #008FD3;
+  width:100%; 
+}
+
+.post1 {
+  background-color: #FFA500;
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+.post2 {
+  background-color: #008FD3;
+  border-radius:8px;
+}
+
+.adjustWidth{
+  width: 100%;
+  border-radius:40px;
+}
+
 
  .btns{
    padding: 0px;
