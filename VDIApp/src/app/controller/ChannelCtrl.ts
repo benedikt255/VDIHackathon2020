@@ -1,6 +1,7 @@
 import {PostCtrl} from './PostCtrl';
 import {ConnectIngCtrl} from './ConnectIngCtrl';
 import { ConnectIngBaseService, ConnectIngUser, ConnectIngChannel, ConnectIngPost } from '../adapter/base/AbstractBaseService';
+import { Injectable } from '@angular/core';
 
 
 /**
@@ -8,6 +9,9 @@ import { ConnectIngBaseService, ConnectIngUser, ConnectIngChannel, ConnectIngPos
  * Application Controller to handle a channel
  * and create/remove handling of posts
  */
+@Injectable({
+  providedIn: 'root'
+})
 export class ChannelCtrl {
 
   public currentUser: ConnectIngUser;

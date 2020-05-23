@@ -1,5 +1,6 @@
 import {ChannelCtrl} from './ChannelCtrl';
 import { ConnectIngBaseService, ConnectIngUser, ConnectIngChannel } from '../adapter/base/AbstractBaseService';
+import { Injectable } from '@angular/core';
 
 
 /**
@@ -7,6 +8,9 @@ import { ConnectIngBaseService, ConnectIngUser, ConnectIngChannel } from '../ada
  * Application Controller to handle the user management
  * and create/remove handling of channels
  */
+@Injectable({
+  providedIn: 'root'
+})
 export class ConnectIngCtrl {
 
   // Connection State Properties

@@ -10,7 +10,7 @@ import { ChannelCtrl } from './controller/ChannelCtrl';
 import { PostCtrl } from './controller/PostCtrl';
 import { CommentCtrl } from './controller/CommentCtrl';
 
-
+/* ./channel/channel.component */
 
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
@@ -21,7 +21,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {StaticPageComponent} from './static-page/static-page.component';
 
-import {ChannelOverviewComponent} from './channel-overview/channel-overview.component';
+import {ChannelComponent} from './channel/channel.component';
 import {MatButtonModule} from '@angular/material/button';
 
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -35,8 +35,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MainNavComponent} from './main-nav/main-nav.component';
 import {MatSliderModule} from '@angular/material/slider';
-
-
+import {MatGridListModule} from '@angular/material/grid-list';
+import { CommentComponent } from './comment/comment.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import {MatAccordion} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -45,9 +47,12 @@ import {MatSliderModule} from '@angular/material/slider';
      MainNavComponent,
      LoginComponent,
      StaticPageComponent,
-     ChannelOverviewComponent,
+     ChannelComponent,
      CreatePostComponent,
      PostComponent,
+     CommentComponent,
+     WelcomeComponent,
+     MatAccordion
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule
   ],
   providers: [
     {provide: ConnectIngBaseService, useClass: ConnectIngMockService},

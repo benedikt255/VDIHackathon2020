@@ -134,5 +134,8 @@
       }
     }
   },
-  "defaultProject": "VDIApp"
+  "defaultProject": "VDIApp",
+  "cli": {
+    "analytics": false
+  }
 }
