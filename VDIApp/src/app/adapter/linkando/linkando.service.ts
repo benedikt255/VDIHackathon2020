@@ -132,11 +132,11 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
   // post interface
   // Method - CreateComment
   // creates a new post under a defined channel
-  createPostAsync(user: IUser, parent: IChannel, title: string, message: string, callback: (post: IPost) => void): void;
+  createPostAsync(user: IUser, parent: IChannel, title: string, message: string, callback: (post: IPost) => void): void{}
 
   // Method - UpdateComment
   // updates an existing post title or message of an existing post
-  updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void;
+  updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void{}
 
   // Method - RemoveComment
   // removes an existing post
