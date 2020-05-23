@@ -44,15 +44,25 @@
     z-index: 1;
   }
 
+  .spacer {
+    flex: 1 1 auto;
+  }
+  mat-toolbar a {
+    display: inline-block;
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+
+  }
 
   /*channel - by Matthias Walter*/
 
-  
+
 
 
   .content{
     padding: 5px;
-    margin: 0;              
+    margin: 0;
 
 }
 .box {
@@ -60,7 +70,7 @@
   margin: 20px;
   padding: 20px;
   border-radius: 10px;
-} 
+}
 .box2 {
   background-color: lightgrey;
   margin: 5px;
