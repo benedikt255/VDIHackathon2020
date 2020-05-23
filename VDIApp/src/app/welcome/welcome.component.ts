@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
 
 @Component({
   selector: 'app-welcome',
@@ -13,4 +14,3 @@ export class WelcomeComponent implements OnInit {
   }
 
 }
- 
