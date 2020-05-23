@@ -47,11 +47,12 @@ class ChannelObject {
   parentId!: number;
   kind!: number;
   description!: string;
+  inheritanceAttribute!: string;
   labelTags!: string[];
   id!: number;
   creationDate!: Date;
   modifiedDate!: Date;
-  createdBy!: number;
+  createdBy!: string;
   ObjectTypeId!: number;
   active!: boolean;
   templateId!: number;
@@ -61,7 +62,7 @@ class ChannelObject {
 class ChannelAttributes {
   channelBeschreibung!: string;
   channelTags!: string[];
-  channelTyp!: number;
+  channelTyp!: string;
   channelAddress!: string;
   // tslint:disable-next-line:variable-name
   linked_from_245_otaga_4352_to_244!: number[]; // API function has to match
@@ -256,7 +257,36 @@ export class LinkandoService extends ConnectIngBaseService {
           }
           }
     */
-    callback(ConnectIngChannel.GetDefault());
+   const channelAttributes: ChannelAttributes = {
+      channelBeschreibung: description,
+      channelTags: [],
+      channelTyp: 'null',
+      channelAddress: 'null',
+      // tslint:disable-next-line:variable-name
+      linked_from_245_otaga_4352_to_244!: [], // API function has to match
+   };
+   const channelToUpload: ChannelObject = {
+    modifiedBy : 0,
+    inheritanveAttribute: 'null',
+    name,
+    parentId : 0 ,
+    kind : 0,
+    description: 'null',
+    labelTags: [],
+    id: 0,
+    creationDate: new Date(),
+    modifiedDate: new Date(),
+    createdBy: user.id,
+    ObjectTypeId: 244,
+    active: true,
+    templateId: 0,
+    attributes: channelAttributes,
+    };
+   this.http.post<number>('https://labs.linkando.co/api/Objects/Save', channelToUpload, {
+        headers: {Authorization: user.token}, responseType: 'json'
+      }).subscribe(Id => {
+          callback(new ConnectIngChannel(Id.toString(), name, description, '', []));
+      });
   }
 
   updateChannelAsync(user: ConnectIngUser, channel: ConnectIngChannel, callback: (channel: ConnectIngChannel) => void): void {
@@ -278,7 +308,11 @@ export class LinkandoService extends ConnectIngBaseService {
   }
 
   removeChannelAsync(user: ConnectIngUser, channel: ConnectIngChannel, callback: (removed: boolean) => void): void {
-    callback(false);
+    this.http.delete('https://labs.linkando.co/api/Objects/Delete?id=' + channel.id, {
+      headers: {Authorization: user.token}, responseType: 'json'
+    }).subscribe(() => {
+        callback(true);
+    });
   }
 
   getChannelsAsync(user: ConnectIngUser, callback: (channels: ConnectIngChannel[]) => void): void {
