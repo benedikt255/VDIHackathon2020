@@ -467,7 +467,7 @@ export class LinkandoService extends ConnectIngBaseService {
       this.http.get<Conversation>('https://labs.linkando.co/api/Conversations/GetConversation?conversationId='
       + conversations[0].toString() + '&count=100&offset=0',
       { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversation => {
-        let remote = conversation.posts.find(x => x.postId.toString() === comment.id);
+        const remote = conversation.posts.find(x => x.postId.toString() === comment.id);
         if (remote !== undefined) {
           remote.text = comment.text;
           this.http.post<ConversationPost>('https://labs.linkando.co/api/Conversations/EditConversationPost', remote,
