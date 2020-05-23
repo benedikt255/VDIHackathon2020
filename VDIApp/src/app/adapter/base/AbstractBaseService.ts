@@ -139,7 +139,7 @@ export class ConnectIngComment {
 /**
  * AbstractBaseService for ConnectING
  */
-export abstract class AbstractBaseService
+export abstract class ConnectIngBaseService
 {
 
     /**
@@ -303,7 +303,7 @@ export abstract class AbstractBaseService
 
 
 
-export class ConnectIngMockService implements AbstractBaseService
+export class ConnectIngMockService implements ConnectIngBaseService
 {
 
     private user: ConnectIngUser = {
