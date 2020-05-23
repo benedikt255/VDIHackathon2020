@@ -1,12 +1,23 @@
 .mat-form-field + .mat-form-field {
-    margin-left: 8px;
-  }
+  margin-left: 8px;
+}
 
   .example-card {
     max-width: 400px;
-  }
+      }
   
   .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
+  }
+
+
+  .inputForm {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .inputFormFull {
+    width: 100%;
   }

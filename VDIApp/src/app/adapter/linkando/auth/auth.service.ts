@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { CookieService } from '../../../cookie/cookie.service';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {CookieService} from '../../../cookie/cookie.service';
 
 
 class AuthData {
@@ -19,13 +18,13 @@ class AuthData {
 
 export class AuthService {
 
-  constructor(private cookieService: CookieService, private http: HttpClient) { }
+  constructor(private cookieService: CookieService, private http: HttpClient) {
+  }
 
   getAuth(): string {
     if (this.cookieService.get('authToken') !== '') {
       return 'Basic ' + this.cookieService.get('authToken');
-    }
-    else {
+    } else {
       return '';
     }
   }
@@ -33,7 +32,9 @@ export class AuthService {
   requestAuthWithAccessCode(accessCode: string) {
     this.http.post<AuthData>('https://identity.linkando.co/oauth/token?code=' + accessCode, '', {
       responseType: 'json'
-    }).subscribe(data => { this.cookieService.setWithExpiryInDays('authToken', data.access_token, 30); } );
+    }).subscribe(data => {
+      this.cookieService.setWithExpiryInDays('authToken', data.access_token, 30);
+    });
 
   }
 

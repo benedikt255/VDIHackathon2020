@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ChannelOverviewComponent } from './channel-overview.component';
+import {ChannelOverviewComponent} from './channel-overview.component';
 
 describe('ChannelOverviewComponent', () => {
   let component: ChannelOverviewComponent;
@@ -8,9 +8,9 @@ describe('ChannelOverviewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChannelOverviewComponent ]
+      declarations: [ChannelOverviewComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
