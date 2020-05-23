@@ -71,7 +71,7 @@ export interface ICommentMgmt
 
     // Method - UpdateComment
     // updates an existing comment text of an existing comment
-    updateCommentAsync(user: IUser, comment: IComment, text: string, callback: (comment: IComment) => void): void;
+    updateCommentAsync(user: IUser, comment: IComment, callback: (comment: IComment) => void): void;
 
     // Method - RemoveComment
     // removes an existing comment
@@ -105,7 +105,7 @@ export class MockCommentMgmt implements ICommentMgmt {
     callback(false);
   }
 
-  updateCommentAsync(user: IUser, comment: IComment, text: string, callback: (comment: IComment) => void): void {
+  updateCommentAsync(user: IUser, comment: IComment, callback: (comment: IComment) => void): void {
     callback(this.comment);
   }
 }
