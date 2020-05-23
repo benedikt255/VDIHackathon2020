@@ -2,10 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth/auth.service';
 
-import { IUserMgmt, IUser, ConnectIngUser } from '../../interface/IUserMgmt';
-import { IChannelMgmt, IChannel, ConnectIngChannel } from '../../interface/IChannelMgmt';
-import { IPostMgmt, IPost, ConnectIngPost } from '../../interface/IPostMgmt';
-import { ICommentMgmt, IComment, ConnectIngComment } from '../../interface/ICommentMgmt';
+import { ConnectIngBaseService, ConnectIngComment, ConnectIngUser, ConnectIngChannel, ConnectIngPost } from '../base/AbstractBaseService';
 
 // helper classes
 // user
@@ -422,7 +419,9 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
   // Method - RemoveComment
   // removes an existing comment
   removeCommentAsync(user: IUser, comment: IComment, callback: (removed: boolean) => void): void {
-
+    this.http.delete('https://labs.linkando.co/api/Conversations/DeleteConversationPost?postId=' + comment.id,
+      { headers: { Authorization: user.token } });
+    callback(true);
   }
 
   // Method - GetComments
@@ -433,7 +432,8 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
       this.http.get<Conversation>('https://labs.linkando.co/api/Conversations/GetConversation?conversationId='
       + conversations[0].toString() + '&count=100&offset=0',
       { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversation => {
-        const comments!: ConnectIngComment[];
+        // tslint:disable-next-line: prefer-const
+        let comments!: ConnectIngComment[];
         conversation.posts.forEach(element => {
           comments.push(new ConnectIngComment(element.postId.toString(), element.conversationId.toString(),
             element.person.id.toString(), element.person.name, element.postDate, element.text));
@@ -441,5 +441,6 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
         callback(comments);
       }
     );
+  });
   }
 }

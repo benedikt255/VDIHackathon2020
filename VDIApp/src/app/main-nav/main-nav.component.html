@@ -21,9 +21,8 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>ConnectING</span>
-      <span class="spacer"></span>
-      <a href="#"><mat-icon aria-label="Side nav toggle icon">add</mat-icon></a>
+      <span>ConnectING </span>
+      <a *ngIf=PlusActive>  href="#"><mat-icon aria-label="Side nav toggle icon">add</mat-icon></a>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
