@@ -18,10 +18,10 @@ export interface IChannel{
 }
 
 export interface IChannelMgmt{
-    createChannel(): IChannel;
-    updateChannel(posts: IPost): IChannel;
-    getChannel(channelId: string): IChannel;
-    removeChannel(channelId: string): IChannel;
+    createChannelAsync(callback: (channel: IChannel) => void): void;
+    updateChannelAsync(posts: IPost, callback: (channel: IChannel) => void): void;
+    getChannelAsync(channelId: string, callback: (channel: IChannel) => void): void;
+    removeChannelAsync(channelId: string, callback: (channel: IChannel) => void): void;
 }
 
 export class MockConnectingChannelMgmt implements IChannelMgmt{
@@ -44,17 +44,17 @@ export class MockConnectingChannelMgmt implements IChannelMgmt{
         persons : [this.user],
     };
 
-    createChannel(): IChannel {
-       return this.channel;
+    createChannelAsync(callback: (channel: IChannel) => void): void {
+        callback(this.channel);
     }
-    updateChannel(posts: IPost): IChannel {
-        return this.channel;
+    updateChannelAsync(posts: IPost, callback: (channel: IChannel) => void): void {
+        callback(this.channel);
     }
-    getChannel(channelId: string): IChannel {
-        return this.channel;
+    getChannelAsync(channelId: string, callback: (channel: IChannel) => void): void{
+        callback(this.channel);
     }
-    removeChannel(postId: string): IChannel {
-        return this.channel;
+    removeChannelAsync(postId: string, callback: (channel: IChannel) => void): void {
+        callback(this.channel);
     }
 
 }
