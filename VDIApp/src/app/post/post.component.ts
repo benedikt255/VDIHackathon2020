@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { ConnectIngComment, ConnectIngPost, ConnectIngUser, ConnectIngBaseService } from '../adapter/base/AbstractBaseService';
 import { Router } from '@angular/router';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-post',
@@ -16,12 +17,13 @@ export class PostComponent implements OnInit {
   public current: ConnectIngPost;
   public comments: ConnectIngComment[];
 
-  constructor(baseService: ConnectIngBaseService, router: Router) {
+  constructor(baseService: ConnectIngBaseService, router: Router, private bottomSheet: MatBottomSheet) {
   this.baseService = baseService;
   this.router = router;
   this.currentUser = this.baseService.currentUser;
   this.current =  this.baseService.currentPost;
   this.comments = [];
+  this.bottomSheet = bottomSheet;
 
   this.loadComments();
   }
@@ -29,7 +31,9 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  openCommentPanel(): void {
+    this.bottomSheet.open(CreateCommentComponent);
+  }
 
 
   public GoTo(comment: string): void
@@ -134,4 +138,18 @@ swipe(action = this.SWIPE_ACTION.RIGHT) {
 
 
 
+}
+
+@Component({
+  selector: 'app-create-comment',
+  templateUrl: './create-comment.component.html',
+  styleUrls: ['../app.component.css'],
+})
+export class CreateCommentComponent {
+  constructor(private bottomSheetRef: MatBottomSheetRef<CreateCommentComponent>) {}
+
+  openLink(event: MouseEvent): void {
+    this.bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
 }
