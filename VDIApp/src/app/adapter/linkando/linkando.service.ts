@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './../../auth/auth.service';
-import { IUserMgmt, IUser } from './../../interface/IUserMgmt';
+import { IUserMgmt, IUser, ConnectIngUser } from './../../interface/IUserMgmt';
 import { IChannelMgmt } from './../../interface/IChannelMgmt';
 import { IPostMgmt } from './../../interface/IPostMgmt';
 import { ICommentMgmt } from './../../interface/ICommentMgmt';
@@ -70,16 +70,16 @@ export class LinkandoService implements IUserMgmt {
   }
 
   registerUserAsync(user: IUser, password: string, callback: (registered: boolean) => void): void {
-
+    callback(false);
   }
   unregisterUserAsync(user: IUser, callback: (unregistered: boolean) => void): void {
-
+    callback(false);
   }
 
   updateUserAsync(user: IUser, callback: (user: IUser) => void): void{
-
+    callback(ConnectIngUser.GetDefault());
   }
   getUsersAsync(user: IUser, callback: (users: IUser[]) => void): void {
-
+    callback([]);
   }
 }
