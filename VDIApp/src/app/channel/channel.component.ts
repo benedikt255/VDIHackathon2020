@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { ConnectIngBaseService, ConnectIngUser, ConnectIngChannel, ConnectIngPost } from '../adapter/base/AbstractBaseService';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-channel',
@@ -17,12 +18,13 @@ export class ChannelComponent implements OnInit{
   public posts: ConnectIngPost[];
 
 
-  constructor(baseService: ConnectIngBaseService, router: Router) {
+  constructor(baseService: ConnectIngBaseService, router: Router, private bottomSheet: MatBottomSheet) {
     this.baseService = baseService;
     this.router = router;
     this.currentUser = this.baseService.currentUser;
     this.current =  this.baseService.currentChannel;
     this.posts = [];
+    this.bottomSheet = bottomSheet;
 
     this.loadPosts();
   }
@@ -31,6 +33,9 @@ export class ChannelComponent implements OnInit{
 
   }
 
+  openPostPanel(): void {
+    this.bottomSheet.open(CreatePostComponent);
+  }
 
   public GoTo(post: string): void
   {
@@ -118,3 +123,16 @@ export class ChannelComponent implements OnInit{
 }
 
 
+@Component({
+  selector: 'app-create-post',
+  templateUrl: './create-post.component.html',
+  styleUrls: ['../app.component.css'],
+})
+export class CreatePostComponent {
+  constructor(private bottomSheetRef: MatBottomSheetRef<CreatePostComponent>) {}
+
+  openLink(event: MouseEvent): void {
+    this.bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
+}

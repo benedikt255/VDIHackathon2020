@@ -2,15 +2,15 @@
 
 
   <div class="main"><!--Kanalinfo-->
-    <mat-card class="post1"> 
+    <mat-card class="post1">
       <p class = "otxt">{{current.name}}</p>
     </mat-card>
   </div>
 
 
-  
-  <!-- Original von Adreas 
-    <div class = "overview"> 
+
+  <!-- Original von Adreas
+    <div class = "overview">
       <p>{{current.name}}</p>
     </div>-->
 
@@ -24,11 +24,11 @@
           <mat-card-title>{{post.title}}</mat-card-title>
           <mat-card-subtitle>{{post.author}}</mat-card-subtitle>
         </mat-card-header>
-    
+
         <mat-card-content>
           <p>{{post.message}}</p>
         </mat-card-content>
-    
+
         <div class="btnright">
           <mat-card-actions class="btns">
             <button mat-raised-button color="primary">LIKE</button>
@@ -43,11 +43,11 @@
           <mat-card-title>{{post.title}}</mat-card-title>
           <mat-card-subtitle>{{post.author}}</mat-card-subtitle>
         </mat-card-header>
-    
+
         <mat-card-content>
           <p>{{post.message}}</p>
         </mat-card-content>
-    
+
         <div class="btnright">
           <mat-card-actions class="btns">
             <button mat-raised-button color="primary">LIKE</button>
@@ -77,7 +77,7 @@
       <mat-card-actions class="btns">
 
         <button mat-raised-button color="primary">LIKE</button>
-        
+
         <button mat-raised-button color="primary">SHARE</button>
       </mat-card-actions>
     </div>
@@ -89,5 +89,6 @@
 
 </div>
 
+<button mat-fab color="primary" class="AddButton" (click)="openPostPanel()"><mat-icon aria-label="Side nav toggle icon">add</mat-icon></button>
 
 
