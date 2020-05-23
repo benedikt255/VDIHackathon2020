@@ -17,13 +17,13 @@ export class PostComponent implements OnInit {
   public current: ConnectIngPost;
   public comments: ConnectIngComment[];
 
-  constructor(baseService: ConnectIngBaseService, router: Router, private _bottomSheet: MatBottomSheet) {
+  constructor(baseService: ConnectIngBaseService, router: Router, private bottomSheet: MatBottomSheet) {
   this.baseService = baseService;
   this.router = router;
   this.currentUser = this.baseService.currentUser;
   this.current =  this.baseService.currentPost;
   this.comments = [];
-  this._bottomSheet = _bottomSheet;
+  this.bottomSheet = bottomSheet;
 
   this.loadComments();
   }
@@ -31,8 +31,8 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openBottomSheet(): void {
-    this._bottomSheet.open(CreateCommentComponent);
+  openCommentPanel(): void {
+    this.bottomSheet.open(CreateCommentComponent);
   }
 
 
