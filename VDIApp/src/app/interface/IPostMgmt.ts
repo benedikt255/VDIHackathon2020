@@ -1,24 +1,24 @@
-import { IChannel } from './IChannelMgmt';
-import { IUser } from './IUserMgmt';
+import {IChannel} from './IChannelMgmt';
+import {IUser} from './IUserMgmt';
 
 
 // Interface - IPost
 // It represents an elementary post under a channel
 export interface IPost {
-    // Post Identifier
-    readonly id: string;
-    // Channel Identifier
-    readonly channelId: string;
-    // Author Identifier
-    readonly authorId: string;
-    // Author Display Name
-    readonly author: string;
-    // Post Creation Timestamp
-    readonly creationTS: Date;
-    // Post Title
-    readonly title: string;
-    // Post Text
-    message: string;
+  // Post Identifier
+  readonly id: string;
+  // Channel Identifier
+  readonly channelId: string;
+  // Author Identifier
+  readonly authorId: string;
+  // Author Display Name
+  readonly author: string;
+  // Post Creation Timestamp
+  readonly creationTS: Date;
+  // Post Title
+  readonly title: string;
+  // Post Text
+  message: string;
 }
 
 
@@ -58,30 +58,30 @@ export class ConnectIngPost implements IPost {
 // Interface - Post Management
 // represents the ConnectING Facade for Posts, which shall be implemented
 // by the backend infrastructure adapter (i.e. Linkando, AWS, Azure, CAS)
-export interface IPostMgmt
-{
-    // Property - Offline Mode
-    // true, if offline mode is active
-    offlineMode: boolean;
+export interface IPostMgmt {
+  // Property - Offline Mode
+  // true, if offline mode is active
+  offlineMode: boolean;
 
-    // Method - CreateComment
-    // creates a new post under a defined channel
-    createPostAsync(user: IUser, parent: IChannel, title: string, message: string, callback: (post: IPost) => void): void;
+  // Method - CreateComment
+  // creates a new post under a defined channel
+  createPostAsync(user: IUser, parent: IChannel, title: string, message: string, callback: (post: IPost) => void): void;
 
-    // Method - UpdateComment
-    // updates an existing post title or message of an existing post
-    updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void;
+  // Method - UpdateComment
+  // updates an existing post title or message of an existing post
+  updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void;
 
-    // Method - RemoveComment
-    // removes an existing post
-    removePostAsync(user: IUser, post: IPost, callback: (removed: boolean) => void): void;
+  // Method - RemoveComment
+  // removes an existing post
+  removePostAsync(user: IUser, post: IPost, callback: (removed: boolean) => void): void;
 
-    // Method - GetPosts
-    // returns the posts under an existing channel
-    getPostsAsync(user: IUser, parent: IChannel, callback: (posts: Array<IPost>) => void): void;
+  // Method - GetPosts
+  // returns the posts under an existing channel
+  getPostsAsync(user: IUser, parent: IChannel, callback: (posts: Array<IPost>) => void): void;
 }
 
 export class MockPostMgmt implements IPostMgmt {
+  offlineMode = false;
   private post: IPost = {
     id: '1',
     channelId: '1',
@@ -91,7 +91,6 @@ export class MockPostMgmt implements IPostMgmt {
     title: 'Test',
     message: 'Dies ist ein Test.',
   };
-  offlineMode = false;
 
   createPostAsync(user: IUser, parent: IChannel, title: string, message: string, callback: (post: IPost) => void): void {
     callback(this.post);
@@ -102,7 +101,7 @@ export class MockPostMgmt implements IPostMgmt {
   }
 
   removePostAsync(user: IUser, post: IPost, callback: (removed: boolean) => void): void {
-    callback( false);
+    callback(false);
   }
 
   updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void {
