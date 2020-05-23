@@ -1,4 +1,3 @@
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { IUser } from './IUserMgmt';
 import { IPost } from './IPostMgmt';
 
@@ -29,7 +28,7 @@ export interface IComment
 
 // Class - Comment
 // represents the elementary comment object
-export class Comment implements IComment {
+export class ConnectIngComment implements IComment {
     id: string;
     postId: string;
     authorId: string;
@@ -59,19 +58,19 @@ export interface ICommentMgmt
 
     // Method - CreateComment
     // creates a new comment under a defined post
-    createCommentAsync(user: IUser, parent: IPost, text: string): IComment;
+    createCommentAsync(user: IUser, parent: IPost, text: string, callback: (comment: IComment) => void): void;
 
     // Method - UpdateComment
     // updates an existing comment text of an existing comment
-    updateCommentAsync(user: IUser, comment: IComment, text: string): IComment;
+    updateCommentAsync(user: IUser, comment: IComment, text: string, callback: (comment: IComment) => void): void;
 
     // Method - RemoveComment
     // removes an existing comment
-    removeCommentAsync(user: IUser, comment: IComment): boolean;
+    removeCommentAsync(user: IUser, comment: IComment, callback: (removed: boolean) => void): void;
 
     // Method - GetComments
     // returns the comments under an existing post
-    getCommentsAsync(user: IUser, parent: IPost): Array<IComment>;
+    getCommentsAsync(user: IUser, parent: IPost, callback: (comments: Array<IComment>) => void): void;
 }
 
 export class MockCommentMgmt implements ICommentMgmt {
@@ -85,20 +84,20 @@ export class MockCommentMgmt implements ICommentMgmt {
   };
   offlineMode = false;
 
-  createCommentAsync(user: IUser, parent: IPost, text: string): IComment {
-    return this.comment;
+  createCommentAsync(user: IUser, parent: IPost, text: string, callback: (comment: IComment) => void): void {
+    callback(this.comment);
   }
 
-  getCommentsAsync(user: IUser, parent: IPost): Array<IComment> {
-    return [this.comment];
+  getCommentsAsync(user: IUser, parent: IPost, callback: (comments: Array<IComment>) => void): void {
+    callback([this.comment]);
   }
 
-  removeCommentAsync(user: IUser, comment: IComment): boolean {
-    return false;
+  removeCommentAsync(user: IUser, comment: IComment, callback: (removed: boolean) => void): void {
+    callback(false);
   }
 
-  updateCommentAsync(user: IUser, comment: IComment, text: string): IComment {
-    return this.comment;
+  updateCommentAsync(user: IUser, comment: IComment, text: string, callback: (comment: IComment) => void): void {
+    callback(this.comment);
   }
 }
 
