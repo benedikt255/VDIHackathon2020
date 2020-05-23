@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-create-post',
@@ -7,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatePostComponent implements OnInit {
 
-  constructor() { }
   panelOpenState = false;
+
+  constructor() {
+  }
+
   ngOnInit(): void {
   }
 }
