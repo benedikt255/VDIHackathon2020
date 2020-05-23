@@ -12,33 +12,45 @@ import {AuthService} from './adapter/linkando/auth/auth.service';
 import {CookieService} from './cookie/cookie.service';
 import {ChannelOverviewComponent} from './channel-overview/channel-overview.component';
 import {MatButtonModule} from '@angular/material/button';
+
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
-import {MatSliderModule} from '@angular/material/slider';
 import {CreatePostComponent} from './create-post/create-post.component';
 import {PostComponent} from './post/post.component';
 import {MatCardModule} from '@angular/material/card';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {MainNavComponent} from './main-nav/main-nav.component';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    StaticPageComponent,
-    ChannelOverviewComponent,
-    CreatePostComponent,
-    PostComponent
+   declarations: [
+     AppComponent,
+     MainNavComponent,
+     LoginComponent,
+     StaticPageComponent,
+     ChannelOverviewComponent,
+     CreatePostComponent,
+     PostComponent,
   ],
   imports: [
-    MatButtonModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSliderModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MatCardModule,
+    MatButtonModule,
     MatExpansionModule,
     MatSelectModule,
-    MatCardModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [
     AuthService,

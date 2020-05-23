@@ -15,7 +15,7 @@ class CurrentPerson {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['../app.component.css']
 })
 export class LoginComponent implements OnInit, DoCheck {
   authURI = encodeURIComponent(environment.authURI); // use URI from environment, so we can debug on localhost but deploy on github/linkando

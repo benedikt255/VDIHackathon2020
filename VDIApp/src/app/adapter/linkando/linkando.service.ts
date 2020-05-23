@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth/auth.service';
 
-import {ConnectIngUser, IUser, IUserMgmt} from '../../interface/IUserMgmt';
-import {ConnectIngChannel, IChannel, IChannelMgmt} from '../../interface/IChannelMgmt';
-import {IPost, IPostMgmt} from '../../interface/IPostMgmt';
+import { IUserMgmt, IUser, ConnectIngUser } from '../../interface/IUserMgmt';
+import { IChannelMgmt, IChannel, ConnectIngChannel } from '../../interface/IChannelMgmt';
+import { IPostMgmt, IPost, ConnectIngPost } from '../../interface/IPostMgmt';
 
 // helper classes
 // user
@@ -55,6 +55,13 @@ class ChannelAttributes {
   channelAddress!: string;
   // tslint:disable-next-line:variable-name
   linked_from_245_otaga_4352_to_244!: number[]; // API function has to match
+}
+
+
+class ChannelChild {
+  id!: number;
+  name!: string;
+  imagePath!: string;
 }
 
 class RegisterResponse {
@@ -200,7 +207,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
     this.http.post<Channel[]>('https://labs.linkando.co/api/Objects/FinderSearch', '{ finderCode: %27allChannelsAPI%27 }', {
       headers: {Authorization: user.token}, responseType: 'json'
     }).subscribe(data => {
-      let channels!: ConnectIngChannel[];
+      const channels: ConnectIngChannel[] = [];
       data.forEach(element => {
         channels.push(new ConnectIngChannel(element.id.toString(), element.name, '', '', []));
         if (channels.length === data.length) {
@@ -218,7 +225,20 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
 
   // Method - UpdateComment
   // updates an existing post title or message of an existing post
-  updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void {
+  updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void{
+    // ObjectType ID = 245
+    /*
+      "name": "Some other post",
+      "parentId": 9510,
+      "id": 0,
+      "creationDate": "2020-05-23T07:22:55.902Z",
+      "modifiedDate": "2020-05-23T07:22:55.902Z",
+      "createdBy": 0,
+      "ObjectTypeId": 245,
+      "active": true,
+      "templateId": 0,
+      "attributes": {}
+    */
   }
 
   // Method - RemoveComment
@@ -233,10 +253,14 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
   // Method - GetPosts
   // returns the posts under an existing channel
   getPostsAsync(user: IUser, parent: IChannel, callback: (posts: Array<IPost>) => void): void {
-    this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
-      {headers: {Authorization: user.token}, responseType: 'json'})
-      .subscribe(convId => {
-        }
-      );
+    this.http.get<ChannelChild[]>('https://labs.linkando.co/api/Objects/GetChildren?objectId=' + parent.id,
+    { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(children => {
+      const posts: ConnectIngPost[] = [];
+      children.forEach(element => {
+        posts.push( new ConnectIngPost(element.id.toString(), parent.id, '', '', new Date(''), element.name, ''));
+      });
+      callback(posts);
+      }
+    );
   }
 }
