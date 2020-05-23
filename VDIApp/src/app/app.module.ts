@@ -35,7 +35,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MainNavComponent} from './main-nav/main-nav.component';
 import {MatSliderModule} from '@angular/material/slider';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -64,7 +64,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule
   ],
   providers: [
     {provide: ConnectIngBaseService, useClass: ConnectIngMockService},
