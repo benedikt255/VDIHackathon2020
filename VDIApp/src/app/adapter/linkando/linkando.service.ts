@@ -337,9 +337,6 @@ export class LinkandoService extends ConnectIngBaseService {
 
   getChannelsAsync(user: ConnectIngUser, callback: (channels: ConnectIngChannel[]) => void): void {
     console.log('getChannelsAsync');
-    if(user.token==''){
-      waits(1000);
-    }
     const finder: Finder = { finderCode : 'allChannelsAPI' };
     this.http.post<Channel[]>('https://labs.linkando.co/api/Objects/FinderSearch', finder, {
       headers: {Authorization: user.token}, responseType: 'json'
