@@ -320,7 +320,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
     dropdownRelatedChannel : parent.id,
     };
    const postToUpload: PostObject = {
-      id : "0",
+      id : '0',
       name : title,
       parentId : parent.id,
       ObjectTypeId : '245',
