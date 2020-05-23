@@ -275,7 +275,7 @@ export class LinkandoService extends ConnectIngBaseService {
           }
           }
     */
-   const channelAttributes: ChannelAttributes = {
+    const channelAttributes: ChannelAttributes = {
       channelBeschreibung: description,
       channelTags: [],
       channelTyp: 'null',
@@ -283,7 +283,7 @@ export class LinkandoService extends ConnectIngBaseService {
       // tslint:disable-next-line:variable-name
       linked_from_245_otaga_4352_to_244!: [], // API function has to match
    };
-   const channelToUpload: ChannelObject = {
+    const channelToUpload: ChannelObject = {
     modifiedBy : 0,
     inheritanceAttribute: 'null',
     name,
@@ -300,7 +300,7 @@ export class LinkandoService extends ConnectIngBaseService {
     templateId: 0,
     attributes: channelAttributes,
     };
-   this.http.post<number>('https://labs.linkando.co/api/Objects/Save', channelToUpload, {
+    this.http.post<number>('https://labs.linkando.co/api/Objects/Save', channelToUpload, {
         headers: {Authorization: user.token}, responseType: 'json'
       }).subscribe(Id => {
           callback(new ConnectIngChannel(Id.toString(), name, description, '', []));
@@ -354,7 +354,7 @@ export class LinkandoService extends ConnectIngBaseService {
   // creates a new post under a defined channel
   createPostAsync(user: ConnectIngUser, parent: ConnectIngChannel, title: string, message: string,
                   callback: (post: ConnectIngPost) => void): void {
-                    console.log('createPostAsync');
+    console.log('createPostAsync');
     /*Beipsiel JSON
       Reponse : ObjectId
           {
@@ -369,13 +369,13 @@ export class LinkandoService extends ConnectIngBaseService {
               }
           }
     */
-   const attributes: PostAttributes = {
+    const attributes: PostAttributes = {
     postBeschreibung : message,
     postTags : [],
     postType : '',
     dropdownRelatedChannel : parent.id,
     };
-   const postToUpload: PostObject = {
+    const postToUpload: PostObject = {
       id : '0',
       name : title,
       parentId : parent.id,
@@ -383,7 +383,7 @@ export class LinkandoService extends ConnectIngBaseService {
       inheritanceAttribute : 'DropDownRelatedChannel',
       attributes,
    };
-   this.http.post<number>('https://labs.linkando.co/api/Objects/Save', postToUpload, {
+    this.http.post<number>('https://labs.linkando.co/api/Objects/Save', postToUpload, {
      headers: {Authorization: user.token}, responseType: 'json'
    }).subscribe((Id) => {
     const post: ConnectIngPost = new ConnectIngPost(
@@ -419,8 +419,8 @@ export class LinkandoService extends ConnectIngBaseService {
             }
       }
     */
-   let postToUpdate: PostObject;
-   this.http.get<PostObject>('https://labs.linkando.co/api/Objects/Get?id=' + post.id, {
+    let postToUpdate: PostObject;
+    this.http.get<PostObject>('https://labs.linkando.co/api/Objects/Get?id=' + post.id, {
      headers: {Authorization: user.token}, responseType: 'json'
    })
      .subscribe(currentPost => {
@@ -524,6 +524,7 @@ export class LinkandoService extends ConnectIngBaseService {
     console.log('getCommentsAsync');
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
     { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversations => {
+      console.log(conversations);
       this.http.get<Conversation>('https://labs.linkando.co/api/Conversations/GetConversation?conversationId='
       + conversations[0].toString() + '&count=100&offset=0',
       { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversation => {
