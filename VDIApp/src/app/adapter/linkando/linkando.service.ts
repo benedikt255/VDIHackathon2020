@@ -5,7 +5,7 @@ import {AuthService} from './auth/auth.service';
 import { IUserMgmt, IUser, ConnectIngUser } from '../../interface/IUserMgmt';
 import { IChannelMgmt, IChannel, ConnectIngChannel } from '../../interface/IChannelMgmt';
 import { IPostMgmt, IPost, ConnectIngPost } from '../../interface/IPostMgmt';
-import { ICommentMgmt, IComment } from '../../interface/ICommentMgmt';
+import { ICommentMgmt, IComment, ConnectIngComment } from '../../interface/ICommentMgmt';
 
 // helper classes
 // user
@@ -77,10 +77,65 @@ class ChannelChild {
   imagePath!: string;
 }
 
+class PostObject{
+  name!: string;
+  id!: string;
+  parentId!: string;
+  ObjectTypeId!: string;
+  attributes!: PostAttributes;
+}
+
+class PostAttributes{
+  postBeschreibung!: string;
+  postTags!: string[];
+  postType!: string;
+  dropdownRelatedChannel: String;
+}
+
 class RegisterResponse {
   isSuccess!: boolean;
   message!: string;
   location!: string;
+}
+
+// Comment
+class Conversation {
+  conversationId!: number;
+  posts!: ConversationPost[];
+  description!: string;
+  header!: string;
+  isPostAllowed!: boolean;
+  includeVotes!: boolean;
+  isNotificationEnabled!: boolean;
+  isCallAllowed!: boolean;
+  isClosed!: boolean;
+  currentPerson!: CurrentPerson;
+  isOwner!: boolean;
+  totalPostsCount!: number;
+}
+
+class ConversationPost {
+  conversationId!: number;
+  limitedAccess!: boolean;
+  isVotePost!: boolean;
+  isCallRecord!: boolean;
+  postId!: number;
+  isArchiveProcessing!: boolean;
+  previewText!: string;
+  deletedByPersonName!: string;
+  deletionDate!: Date;
+  deletionReason!: string;
+  postVotesCount!: number;
+  isVotedFor!: boolean;
+  text!: string;
+  isOwn!: boolean;
+  postDate!: Date;
+  person!: CurrentPerson;
+  editedDate!: Date;
+  isNotification!: boolean;
+  attachments!: [];
+  isEditAllowed!: boolean;
+  referencedMessageId!: number;
 }
 
 // adapter class
@@ -243,25 +298,44 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
   // Method - CreateComment
   // creates a new post under a defined channel
   createPostAsync(user: IUser, parent: IChannel, title: string, message: string, callback: (post: IPost) => void): void {
+    /*Beipsiel JSON
+      Reponse : ObjectId
+          {
+            "name": "2 post",
+            "parentId": 9510,
+            "ObjectTypeId": 245, -- sollte matchen
+            "attributes": {
+                "postBeschreibung": "test",
+                "postTags": [],
+                "postType": 888,
+                "dropdownRelatedChannel": 9510 -- mit der hier!
+              }
+          }
+    */
   }
 
   // Method - UpdateComment
   // updates an existing post title or message of an existing post
   updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void{
     // ObjectType ID = 245
-    /*
-      "name": "Some other post",
-      "parentId": 9510,
-      "id": 0,
-      "creationDate": "2020-05-23T07:22:55.902Z",
-      "modifiedDate": "2020-05-23T07:22:55.902Z",
-      "createdBy": 0,
-      "ObjectTypeId": 245,
-      "active": true,
-      "templateId": 0,
-      "attributes": {}
+    /* Beispiel JSON
+      Response: ObjectId
+      {
+            "name": "2 post",
+            "id" : "9534", -- ID die der Post braucht
+            "parentId": 9510,
+            "ObjectTypeId": 245,
+            "attributes": {
+              "postBeschreibung": "test test",
+              "postTags": [],
+              "postType": 888,
+              "dropdownRelatedChannel": 9510
+            }
+      }
     */
   }
+
+
 
   // Method - RemoveComment
   // removes an existing post
@@ -309,6 +383,18 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
   // Method - GetComments
   // returns the comments under an existing post
   getCommentsAsync(user: IUser, parent: IPost, callback: (comments: Array<IComment>) => void): void {
-
+    this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
+    { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversations => {
+      this.http.get<Conversation>('https://labs.linkando.co/api/Conversations/GetConversation?conversationId='
+      + conversations[0].toString() + '&count=100&offset=0',
+      { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversation => {
+        const comments!: ConnectIngComment[];
+        conversation.posts.forEach(element => {
+          comments.push(new ConnectIngComment(element.postId.toString(), element.conversationId.toString(),
+            element.person.id.toString(), element.person.name, element.postDate, element.text));
+        });
+        callback(comments);
+      }
+    );
   }
 }
