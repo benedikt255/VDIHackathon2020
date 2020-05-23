@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
-import { IUserMgmt, IUser, ConnectIngUser } from './../../interface/IUserMgmt';
-import { IChannelMgmt, IChannel, ConnectIngChannel } from './../../interface/IChannelMgmt';
-import { IPostMgmt, IPost } from './../../interface/IPostMgmt';
-import { ICommentMgmt } from './../../interface/ICommentMgmt';
 
+import { IUserMgmt, IUser, ConnectIngUser } from '../../interface/IUserMgmt';
+import { IChannelMgmt, IChannel, ConnectIngChannel } from '../../interface/IChannelMgmt';
+import { IPostMgmt, IPost } from '../../interface/IPostMgmt';
 
 // helper classes
 // user
@@ -112,12 +111,8 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
         FirstName: user.firstName,
         LastName: user.lastName,
       };
-    const body = {
-      email: user.email,
-      personType: this.userRoleID,
-      fields: additionalRegistrationInformation,
-    };
-    this.http.post('https://labs.linkando.co/api/People/Register', body, { responseType: 'json' })
+    this.http.post('https://labs.linkando.co/api/People/Register?email=' + user.email + '&personType=' + this.userRoleID,
+      additionalRegistrationInformation, { responseType: 'json' })
       .subscribe( object => {
         console.log(object);
         callback(object.isSuccess);
@@ -141,7 +136,20 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
   }
 
   updateChannelAsync(user: IUser, channel: IChannel, callback: (channel: IChannel) => void): void {
-
+    let channelToUpdate: ChannelObject;
+    this.http.get('https://labs.linkando.co/api/Objects/Get?id=' + channel.id, {
+      headers: {Authorization: user.token}, responseType: 'json'
+    })
+      .subscribe(object => {
+        channelToUpdate = object;
+        channelToUpdate.name = channel.name;
+        channelToUpdate.description = channel.description;
+        channelToUpdate.picture = channel.picture;
+        channelToUpdate.persons = channel.persons;
+        this.http.post('https://labs.linkando.co/api/Objects/Save', channelToUpdate, {
+          headers: {Authorization: user.token}, responseType: 'json'
+        });
+      });
   }
 
   removeChannelAsync(user: IUser, channel: IChannel, callback: (removed: boolean) => void): void {
