@@ -185,7 +185,21 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
 
   // Method - UpdateComment
   // updates an existing post title or message of an existing post
-  updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void{}
+  updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void{
+    // ObjectType ID = 245
+    /*
+      "name": "Some other post",
+      "parentId": 9510,
+      "id": 0,
+      "creationDate": "2020-05-23T07:22:55.902Z",
+      "modifiedDate": "2020-05-23T07:22:55.902Z",
+      "createdBy": 0,
+      "ObjectTypeId": 245,
+      "active": true,
+      "templateId": 0,
+      "attributes": {}
+    */
+  }
 
   // Method - RemoveComment
   // removes an existing post
