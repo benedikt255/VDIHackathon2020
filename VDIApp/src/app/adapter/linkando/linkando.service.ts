@@ -77,6 +77,21 @@ class ChannelChild {
   imagePath!: string;
 }
 
+class PostObject{
+  name!: string;
+  id!: string;
+  parentId!: string;
+  ObjectTypeId!: string;
+  attributes!: PostAttributes;
+}
+
+class PostAttributes{
+  postBeschreibung!: string;
+  postTags!: string[];
+  postType!: string;
+  dropdownRelatedChannel: String;
+}
+
 class RegisterResponse {
   isSuccess!: boolean;
   message!: string;
@@ -283,25 +298,44 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
   // Method - CreateComment
   // creates a new post under a defined channel
   createPostAsync(user: IUser, parent: IChannel, title: string, message: string, callback: (post: IPost) => void): void {
+    /*Beipsiel JSON
+      Reponse : ObjectId
+          {
+            "name": "2 post",
+            "parentId": 9510,
+            "ObjectTypeId": 245, -- sollte matchen
+            "attributes": {
+                "postBeschreibung": "test",
+                "postTags": [],
+                "postType": 888,
+                "dropdownRelatedChannel": 9510 -- mit der hier!
+              }
+          }
+    */
   }
 
   // Method - UpdateComment
   // updates an existing post title or message of an existing post
   updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void{
     // ObjectType ID = 245
-    /*
-      "name": "Some other post",
-      "parentId": 9510,
-      "id": 0,
-      "creationDate": "2020-05-23T07:22:55.902Z",
-      "modifiedDate": "2020-05-23T07:22:55.902Z",
-      "createdBy": 0,
-      "ObjectTypeId": 245,
-      "active": true,
-      "templateId": 0,
-      "attributes": {}
+    /* Beispiel JSON
+      Response: ObjectId
+      {
+            "name": "2 post",
+            "id" : "9534", -- ID die der Post braucht
+            "parentId": 9510,
+            "ObjectTypeId": 245,
+            "attributes": {
+              "postBeschreibung": "test test",
+              "postTags": [],
+              "postType": 888,
+              "dropdownRelatedChannel": 9510
+            }
+      }
     */
   }
+
+
 
   // Method - RemoveComment
   // removes an existing post
