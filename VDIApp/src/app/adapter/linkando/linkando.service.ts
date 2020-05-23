@@ -140,8 +140,12 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
 
   // Method - RemoveComment
   // removes an existing post
-  removePostAsync(user: IUser, post: IPost, callback: (removed: boolean) => void): void;
-
+  // TODO Bitte prüfen!!!
+  removePostAsync(user: IUser, post: IPost, callback: (removed: boolean) => void): void{
+    this.http.post<IPost[]>('https://labs.linkando.co/api/Objects/Delete?id=' + post.id, {
+      headers: { Authorization: user.token }, responseType: 'json'
+    } );
+  }
   // Method - GetPosts
   // returns the posts under an existing channel
   getPostsAsync(user: IUser, parent: IChannel, callback: (posts: Array<IPost>) => void): void {
