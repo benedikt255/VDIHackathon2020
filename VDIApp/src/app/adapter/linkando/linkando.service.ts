@@ -18,10 +18,22 @@ class CurrentPerson {
 class PersonObject {
   firstName!: string;
   lastName!: string;
+  fullName!: string;
   username!: string;
   email!: string;
   title!: string;
   salutation!: string;
+  officePhone!: number;
+  mobilePhone!: number;
+  languageId!: number;
+  timeZoneId!: string;
+  isBlocked!: boolean;
+  id!: number;
+  creationDate!: Date;
+  modifiedDate!: Date;
+  createdBy!: number;
+  ObjectTypeId!: number;
+  active!: boolean;
 }
 
 // channel
@@ -151,7 +163,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
         this.http.post<number>('https://labs.linkando.co/api/Objects/Save', userToUpdate, {
           headers: {Authorization: user.token}, responseType: 'json'
         })
-          .subscribe(updatedUserID => {
+          .subscribe(() => {
             callback(user);
           });
       });
@@ -177,6 +189,18 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
 
   // channel interface
   createChannelAsync(user: IUser, name: string, description: string, callback: (channel: IChannel) => void): void {
+    /*Beispiel
+    url. https://labs.linkando.co/api/Objects/Save
+    response = objectId
+          {
+                "name": "channel 6",
+                "ObjectTypeId": 244,
+                "attributes": {
+              "channelBeschreibung": "test",
+              "channelTyp": 880,
+          }
+          }
+    */
     callback(ConnectIngChannel.GetDefault());
   }
 
@@ -189,7 +213,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
         channelToUpdate = object;
         channelToUpdate.name = channel.name;
         channelToUpdate.description = channel.description;
-        // TODO channel.picture has to be saved in cms but has wrong enconding
+        // FIXME channel.picture has to be saved in cms but has wrong enconding
         // TODO channel.persons is delayed because now every user can access every channel
         this.http.post('https://labs.linkando.co/api/Objects/Save', channelToUpdate, {
           headers: {Authorization: user.token}, responseType: 'json'
