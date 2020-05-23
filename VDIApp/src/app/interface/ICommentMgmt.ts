@@ -1,28 +1,27 @@
-import { IUser } from './IUserMgmt';
-import { IPost } from './IPostMgmt';
+import {IUser} from './IUserMgmt';
+import {IPost} from './IPostMgmt';
 
 
 // Interface - IComment
 // It represents an elementary comment under a post
-export interface IComment
-{
-    // Comment Identifier
-    readonly id: string;
+export interface IComment {
+  // Comment Identifier
+  readonly id: string;
 
-    // Post Identifier
-    readonly postId: string;
+  // Post Identifier
+  readonly postId: string;
 
-    // Author Identifier
-    readonly authorId: string;
+  // Author Identifier
+  readonly authorId: string;
 
-    // Author Display Name
-    readonly author: string;
+  // Author Display Name
+  readonly author: string;
 
-    // Comment Creation Timestamp
-    readonly creationTS: Date;
+  // Comment Creation Timestamp
+  readonly creationTS: Date;
 
-    // Comment Text
-    text: string;
+  // Comment Text
+  text: string;
 }
 
 
@@ -59,30 +58,30 @@ export class ConnectIngComment implements IComment {
 // Interface - Comment Management
 // represents the ConnectING Facade for Comments, which shall be implemented
 // by the backend infrastructure adapter (i.e. Linkando, AWS, Azure, CAS)
-export interface ICommentMgmt
-{
-    // Property - Offline Mode
-    // true, if offline mode is active
-    offlineMode: boolean;
+export interface ICommentMgmt {
+  // Property - Offline Mode
+  // true, if offline mode is active
+  offlineMode: boolean;
 
-    // Method - CreateComment
-    // creates a new comment under a defined post
-    createCommentAsync(user: IUser, parent: IPost, text: string, callback: (comment: IComment) => void): void;
+  // Method - CreateComment
+  // creates a new comment under a defined post
+  createCommentAsync(user: IUser, parent: IPost, text: string, callback: (comment: IComment) => void): void;
 
-    // Method - UpdateComment
-    // updates an existing comment text of an existing comment
-    updateCommentAsync(user: IUser, comment: IComment, callback: (comment: IComment) => void): void;
+  // Method - UpdateComment
+  // updates an existing comment text of an existing comment
+  updateCommentAsync(user: IUser, comment: IComment, callback: (comment: IComment) => void): void;
 
-    // Method - RemoveComment
-    // removes an existing comment
-    removeCommentAsync(user: IUser, comment: IComment, callback: (removed: boolean) => void): void;
+  // Method - RemoveComment
+  // removes an existing comment
+  removeCommentAsync(user: IUser, comment: IComment, callback: (removed: boolean) => void): void;
 
-    // Method - GetComments
-    // returns the comments under an existing post
-    getCommentsAsync(user: IUser, parent: IPost, callback: (comments: Array<IComment>) => void): void;
+  // Method - GetComments
+  // returns the comments under an existing post
+  getCommentsAsync(user: IUser, parent: IPost, callback: (comments: Array<IComment>) => void): void;
 }
 
 export class MockCommentMgmt implements ICommentMgmt {
+  offlineMode = false;
   private comment: IComment = {
     id: '1',
     postId: '1',
@@ -91,7 +90,6 @@ export class MockCommentMgmt implements ICommentMgmt {
     creationTS: new Date('24.05.2020'),
     text: 'Backend Team'
   };
-  offlineMode = false;
 
   createCommentAsync(user: IUser, parent: IPost, text: string, callback: (comment: IComment) => void): void {
     callback(this.comment);

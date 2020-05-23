@@ -2,7 +2,7 @@ import {ConnectIngPost, IPost, IPostMgmt} from '../interface/IPostMgmt';
 import {ConnectIngComment, IComment, ICommentMgmt} from '../interface/ICommentMgmt';
 import {IUser} from '../interface/IUserMgmt';
 import {CommentCtrl} from './CommentCtrl';
-import { ChannelCtrl } from './ChannelCtrl';
+import {ChannelCtrl} from './ChannelCtrl';
 
 /**
  * Controller - PostCtrl
@@ -11,15 +11,13 @@ import { ChannelCtrl } from './ChannelCtrl';
  */
 export class PostCtrl {
 
-  // Management Interfaces
-  private readonly postMgmt: IPostMgmt;
-  private readonly commentMgmt: ICommentMgmt;
-
-  private readonly parent: ChannelCtrl;
-
   public currentUser: IUser;
   public current: IPost;
   public comments: Array<CommentCtrl>;
+  // Management Interfaces
+  private readonly postMgmt: IPostMgmt;
+  private readonly commentMgmt: ICommentMgmt;
+  private readonly parent: ChannelCtrl;
 
   /**
    * Constructor - Post Controller
@@ -28,7 +26,7 @@ export class PostCtrl {
    * @param post Current Post
    * @param parent Channel Controller of Parent
    */
-  constructor(postMgmt: IPostMgmt, commentMgmt: ICommentMgmt, post: IPost, parent: ChannelCtrl){
+  constructor(postMgmt: IPostMgmt, commentMgmt: ICommentMgmt, post: IPost, parent: ChannelCtrl) {
     this.postMgmt = postMgmt;
     this.parent = parent;
     this.commentMgmt = commentMgmt;
@@ -61,13 +59,10 @@ export class PostCtrl {
    */
   public updatePost(post: IPost) {
     this.postMgmt.updatePostAsync(this.currentUser, post, (updatedPost: IPost) => {
-      if (updatedPost === ConnectIngPost.GetDefault())
-      {
+      if (updatedPost === ConnectIngPost.GetDefault()) {
         // Undefined -> error in call
         // nop
-      }
-      else
-      {
+      } else {
         this.current = updatedPost;
         this.loadComments();
       }
@@ -78,16 +73,12 @@ export class PostCtrl {
    * Method - Create a new Comment
    * @param text Comment Text
    */
-  public createComment(text: string)
-  {
-    this.commentMgmt.createCommentAsync(this.currentUser, this.current, text,  (comment: IComment) => {
-      if (comment === ConnectIngComment.GetDefault())
-      {
+  public createComment(text: string) {
+    this.commentMgmt.createCommentAsync(this.currentUser, this.current, text, (comment: IComment) => {
+      if (comment === ConnectIngComment.GetDefault()) {
         // Create failed
         // nop
-      }
-      else
-      {
+      } else {
         // Create successfull
         // Update Channel List
         this.loadComments();
@@ -100,13 +91,10 @@ export class PostCtrl {
    */
   public removePost() {
     this.postMgmt.removePostAsync(this.currentUser, this.current, (removed: boolean) => {
-      if (removed)
-      {
+      if (removed) {
         // successfull
         this.parent.loadPosts();
-      }
-      else
-      {
+      } else {
         // failed
         // nop
       }
