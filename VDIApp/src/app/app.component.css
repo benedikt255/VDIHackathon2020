@@ -43,3 +43,34 @@
     top: 0;
     z-index: 1;
   }
+
+
+  /*channel - by Matthias Walter*/
+
+  
+
+
+  .content{
+    padding: 5px;
+    margin: 0;              
+
+}
+.box {
+  background-color:#008FD3;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+} 
+.box2 {
+  background-color: lightgrey;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+}
+.btnright{
+    margin-right: 5px;
+    text-align: right;
+}
+.mat-card-subtitle{
+  margin-bottom: 8px;
+}
