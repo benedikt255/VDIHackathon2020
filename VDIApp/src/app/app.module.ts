@@ -16,6 +16,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
 import {CreatePostComponent} from './create-post/create-post.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
    declarations: [
@@ -35,6 +36,7 @@ import {CreatePostComponent} from './create-post/create-post.component';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MatExpansionModule,
     MatSelectModule,
+    MatCardModule,
   ],
   providers: [
     AuthService,
