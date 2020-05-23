@@ -41,7 +41,7 @@ export class ConnectIngChannel implements IChannel{
 export interface IChannelMgmt{
     createChannelAsync(user: IUser, name: string, description: string, callback: (channel: IChannel) => void): void;
     updateChannelAsync(user: IUser, channel: IChannel, callback: (channel: IChannel) => void): void;
-    removeChannelAsync(user: IUser, channelId: string, callback: (removed: boolean) => void): void;
+    removeChannelAsync(user: IUser, channel: IChannel, callback: (removed: boolean) => void): void;
     getChannelsAsync(user: IUser, callback: (channels: IChannel[]) => void): void;
 }
 
@@ -60,7 +60,7 @@ export class MockChannelMgmt implements IChannelMgmt{
     updateChannelAsync(user: IUser, channel: IChannel, callback: (channel: IChannel) => void): void {
         callback(this.channel);
     }
-    removeChannelAsync(user: IUser, channelId: string, callback: (removed: boolean) => void): void {
+    removeChannelAsync(user: IUser, channelId: IChannel, callback: (removed: boolean) => void): void {
         callback(true);
     }
     getChannelsAsync(user: IUser, callback: (channels: IChannel[]) => void){
