@@ -169,11 +169,9 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
           .subscribe(dataUser => {
             users.push(new ConnectIngUser(dataUser.id.toString(), element.username, element.firstName, element.lastName,
               '', '', element.title, element.email, user.token));
-            if (users.length === data.length) {
-              callback(users);
-            }
           });
       });
+      callback(users);
     });
   }
 
@@ -210,10 +208,8 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
       const channels: ConnectIngChannel[] = [];
       data.forEach(element => {
         channels.push(new ConnectIngChannel(element.id.toString(), element.name, '', '', []));
-        if (channels.length === data.length) {
-          callback(channels);
-        }
       });
+      callback(channels);
     });
   }
 
