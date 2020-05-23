@@ -45,7 +45,7 @@ constructor(userId: string,
 }
 
 
-protected static GetDefault(): IUser{
+public static GetDefault(): IUser{
   return new User('', '', '', '', '', '', '', '', '');
 }
 
