@@ -29,26 +29,26 @@ export interface IComment
 // Class - Comment
 // represents the elementary comment object
 export class ConnectIngComment implements IComment {
-    id: string;
-    postId: string;
-    authorId: string;
-    author: string;
-    creationTS: Date;
-    text: string;
+  readonly id: string;
+  readonly postId: string;
+  readonly authorId: string;
+  readonly author: string;
+  readonly creationTS: Date;
+  text: string;
 
-    constructor(id: string,
-                postId: string,
-                authorId: string,
-                author: string,
-                ts: Date,
-                text: string ){
-        this.id = id;
-        this.postId = postId;
-        this.authorId = authorId;
-        this.author = author;
-        this.creationTS = ts;
-        this.text = text;
-    }
+  constructor(id: string,
+              postId: string,
+              authorId: string,
+              author: string,
+              ts: Date,
+              text: string) {
+    this.id = id;
+    this.postId = postId;
+    this.authorId = authorId;
+    this.author = author;
+    this.creationTS = ts;
+    this.text = text;
+  }
 
   public static GetDefault(): IComment {
     return new ConnectIngComment('', '', '', '', new Date(''), '');

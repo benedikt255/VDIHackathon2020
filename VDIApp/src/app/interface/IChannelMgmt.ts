@@ -18,9 +18,7 @@ export interface IChannel{
 }
 
 export class ConnectIngChannel implements IChannel{
-    private static default: ConnectIngChannel;
-
-    id: string;
+    readonly id: string;
     name: string;
     description: string;
     picture: string;
@@ -33,6 +31,10 @@ export class ConnectIngChannel implements IChannel{
         this.picture = picture;
         this.persons = persons;
     }
+
+    public static GetDefault(): IChannel {
+      return new ConnectIngChannel('', '', '', '', []);
+    }
 }
 
 
@@ -44,7 +46,7 @@ export interface IChannelMgmt{
     getChannelsAsync(user: IUser, callback: (channels: IChannel[]) => void): void;
 }
 
-export class MockConnectingChannelMgmt implements IChannelMgmt{
+export class MockChannelMgmt implements IChannelMgmt{
     private channel: IChannel = {
         id : '1',
         name : 'GoldenEye',

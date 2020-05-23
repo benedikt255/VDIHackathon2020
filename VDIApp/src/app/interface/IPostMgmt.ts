@@ -25,29 +25,29 @@ export interface IPost {
 // Class - ConnectIngPost
 // represents the elementary comment object
 export class ConnectIngPost implements IPost {
-    id: string;
-    channelId: string;
-    authorId: string;
-    author: string;
-    creationTS: Date;
-    title: string;
-    message: string;
+  readonly id: string;
+  readonly channelId: string;
+  readonly authorId: string;
+  readonly author: string;
+  readonly creationTS: Date;
+  readonly title: string;
+  message: string;
 
-    constructor(id: string,
-                channelId: string,
-                authorId: string,
-                author: string,
-                ts: Date,
-                title: string,
-                message: string) {
-        this.id = id;
-        this.channelId = channelId;
-        this.authorId = authorId;
-        this.author = author;
-        this.creationTS = ts;
-        this.title = title;
-        this.message = message;
-    }
+  constructor(id: string,
+              channelId: string,
+              authorId: string,
+              author: string,
+              ts: Date,
+              title: string,
+              message: string) {
+    this.id = id;
+    this.channelId = channelId;
+    this.authorId = authorId;
+    this.author = author;
+    this.creationTS = ts;
+    this.title = title;
+    this.message = message;
+  }
 
   public static GetDefault(): IPost {
     return new ConnectIngPost('', '', '', '', new Date(''), '', '');
