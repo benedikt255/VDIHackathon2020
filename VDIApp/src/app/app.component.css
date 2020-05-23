@@ -159,6 +159,7 @@
 .post2 {
   background-color: #008FD3;
   border-radius:8px;
+  margin-bottom: 2em;
 }
 
 .adjustWidth{
@@ -169,6 +170,7 @@
 
  .btns{
    padding: 0px;
+   margin-bottom: 4px;
  }
 
  .divide{
