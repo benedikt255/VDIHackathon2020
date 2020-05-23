@@ -49,7 +49,8 @@ import {MatTabsModule} from '@angular/material/tabs';
      PostComponent,
      CommentComponent,
      WelcomeComponent,
-     CreateCommentComponent
+     CreateCommentComponent,
+     CreatePostComponent
   ],
   imports: [
     MatBottomSheetModule,

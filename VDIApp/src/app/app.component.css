@@ -58,6 +58,7 @@
     position: sticky;
     top: 90%;
     left: 80%;
+    z-index: 1;
   }
 
   .example-card {
@@ -111,9 +112,9 @@
   margin-right: auto;
  /*background-color: rgb(200, 200, 200);*/
  }
- 
- 
- 
+
+
+
  .otxt{
    margin:0px;
    font-weight: 500;
@@ -130,7 +131,7 @@
   margin-right: auto;
   justify-content: center;
   align-items: center;
-  display: flex;     
+  display: flex;
 }
 
 .mat-card {
@@ -145,7 +146,7 @@
 
  .post {
   background-color: #008FD3;
-  width:100%; 
+  width:100%;
 }
 
 .post1 {
