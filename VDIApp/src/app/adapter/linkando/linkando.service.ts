@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
-import { IUserMgmt, IUser, ConnectIngUser } from './../../interface/IUserMgmt';
-import { IChannelMgmt, IChannel, ConnectIngChannel } from './../../interface/IChannelMgmt';
-import { IPostMgmt } from './../../interface/IPostMgmt';
-import { ICommentMgmt } from './../../interface/ICommentMgmt';
+import { IUserMgmt, IUser, ConnectIngUser } from '../../interface/IUserMgmt';
+import { IChannelMgmt, IChannel, ConnectIngChannel } from '../../interface/IChannelMgmt';
 
 // helper classes
 // user
@@ -37,6 +35,8 @@ class Channel {
   providedIn: 'root'
 })
 export class LinkandoService implements IUserMgmt, IChannelMgmt {
+
+  public static userRoleID = 243;
 
   constructor(private authSvc: AuthService, private http: HttpClient) { }
 
@@ -75,8 +75,19 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
   }
 
   registerUserAsync(user: IUser, password: string, callback: (registered: boolean) => void): void {
-    callback(false);
+    const additionalRegistrationInformation =
+      {
+        FirstName: user.firstName,
+        LastName: user.lastName,
+      };
+    this.http.post('https://labs.linkando.co/api/People/Register',
+      user.email, userRoleID, additionalRegistrationInformation, true, 'de-DE')
+      .subscribe( object => {
+        console.log(object);
+        callback(object.isSuccess);
+      });
   }
+
   unregisterUserAsync(user: IUser, callback: (unregistered: boolean) => void): void {
     callback(false);
   }
