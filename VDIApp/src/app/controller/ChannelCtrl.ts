@@ -24,7 +24,14 @@ export class ChannelCtrl{
     public current: IChannel;
     public posts: Array<PostCtrl>;
 
-
+    /**
+     * Constructor - Channel Controller
+     * @param chnMgmt Channel Management
+     * @param postMgmt Post Management
+     * @param commentMgmt Comment Management
+     * @param parent ConnectIng Controller
+     * @param channel Current Channel
+     */
     constructor(
         chnMgmt: IChannelMgmt,
         postMgmt: IPostMgmt,
@@ -107,7 +114,7 @@ export class ChannelCtrl{
             {
                 // successfull
                 this.posts = posts.map((value: IPost, index: number, array: IPost[]) => {
-                    return new PostCtrl(this.postMgmt, value, this.commentMgmt, this.current);
+                    return new PostCtrl(this.postMgmt, value, this.commentMgmt, this);
                 });
             }
         });
