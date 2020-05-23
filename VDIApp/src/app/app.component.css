@@ -1,3 +1,24 @@
+@media screen and (min-width: 50em) {
+  /* start of large tablet styles */
+  .mediaLarge{display: block}
+  .mediaMedium{display: none}
+  .mediaSmall{display: none}
+  }
+
+  @media screen and (max-width: 899px) and (min-width: 481px){
+  /* start of medium tablet styles */
+  .mediaLarge{display: none}
+  .mediaMedium{display: none}
+  .mediaSmall{display: block}
+  }
+
+  @media screen and (max-width: 480px) {
+  /* start of phone styles */
+  .mediaLarge{display: none}
+  .mediaMedium{display: none}
+  .mediaSmall{display: block}
+  }
+
 .mat-form-field + .mat-form-field {
   margin-left: 8px;
 }
@@ -13,17 +34,17 @@
   .example-action-buttons {
     padding-bottom: 20px;
   }
-  
+
   .example-headers-align .mat-expansion-panel-header-title,
   .example-headers-align .mat-expansion-panel-header-description {
     flex-basis: 0;
   }
-  
+
   .example-headers-align .mat-expansion-panel-header-description {
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .example-headers-align .mat-form-field + .mat-form-field {
     margin-left: 8px;
   }
@@ -89,7 +110,7 @@
 
 
 
-  
+
 
 }
 
@@ -114,7 +135,7 @@
   justify-content: center;
   align-items: center;
   display: flex;
-            
+
 }
 
 .mat-card {
@@ -128,7 +149,7 @@
 .post {
     max-width: 400px;
     background-color: #008FD3;
-    
+
   }
 
  .btns{
@@ -139,7 +160,7 @@
   margin-top: 12px;
   margin-bottom: 12px;
  }
- 
+
 .btnright{
     margin-right: 5px;
     text-align: right;
@@ -156,7 +177,7 @@
     text-decoration: none;
   }
 
-    
+
 
 
 
