@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
 import { IUserMgmt, IUser, ConnectIngUser } from '../../interface/IUserMgmt';
 import { IChannelMgmt, IChannel, ConnectIngChannel } from '../../interface/IChannelMgmt';
+import {IPost} from '../../interface/IPostMgmt';
 
 // helper classes
 // user
@@ -113,7 +114,6 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
   }
 
   updateChannelAsync(user: IUser, channel: IChannel, callback: (channel: IChannel) => void): void {
-
   }
 
   removeChannelAsync(user: IUser, channel: IChannel, callback: (removed: boolean) => void): void {
