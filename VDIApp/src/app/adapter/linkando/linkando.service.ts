@@ -337,6 +337,9 @@ export class LinkandoService extends ConnectIngBaseService {
 
   getChannelsAsync(user: ConnectIngUser, callback: (channels: ConnectIngChannel[]) => void): void {
     console.log('getChannelsAsync');
+    if(user.token==''){
+      waits(1000);
+    }
     const finder: Finder = { finderCode : 'allChannelsAPI' };
     this.http.post<Channel[]>('https://labs.linkando.co/api/Objects/FinderSearch', finder, {
       headers: {Authorization: user.token}, responseType: 'json'
@@ -453,6 +456,7 @@ export class LinkandoService extends ConnectIngBaseService {
   // returns the posts under an existing channel
   getPostsAsync(user: ConnectIngUser, parent: ConnectIngChannel, callback: (posts: Array<ConnectIngPost>) => void): void {
     console.log('getPostsAsync');
+    console.log(user.token);
     this.http.get<ChannelChild[]>('https://labs.linkando.co/api/Objects/GetChildren?objectId=' + parent.id,
     { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(children => {
       const posts: ConnectIngPost[] = [];
@@ -522,6 +526,8 @@ export class LinkandoService extends ConnectIngBaseService {
   // returns the comments under an existing post
   getCommentsAsync(user: ConnectIngUser, parent: ConnectIngPost, callback: (comments: Array<ConnectIngComment>) => void): void {
     console.log('getCommentsAsync');
+    console.log(user.token);
+    console.log(parent.id);
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
     { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversations => {
       console.log(conversations);
