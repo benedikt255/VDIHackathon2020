@@ -55,7 +55,7 @@ export class LinkandoService implements IUserMgmt {
             image: '',
             jobTitle: object.title,
             email: object.email,
-            username: object.username,
+            userName: object.username,
             token: localToken
           };
             console.log(object);
@@ -77,7 +77,7 @@ export class LinkandoService implements IUserMgmt {
   }
 
   updateUserAsync(user: IUser, callback: (user: IUser) => void): void{
-    
+
   }
   getUsersAsync(user: IUser, callback: (users: IUser[]) => void): void {
 
