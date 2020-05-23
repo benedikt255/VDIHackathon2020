@@ -71,6 +71,7 @@
   }
 
 
+
  /*channel - by Matthias Walter, NEUE Version*/
 
 .overview{
@@ -144,6 +145,7 @@
     text-align: right;
 }
 
+
   .spacer {
     flex: 1 1 auto;
   }
@@ -152,8 +154,10 @@
     margin: 0 10px;
     color: white;
     text-decoration: none;
-
   }
+
+    
+
 
 
 

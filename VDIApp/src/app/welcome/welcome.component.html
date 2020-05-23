@@ -1,31 +1,12 @@
 <div class="content">
 
-  <div class="box">
-      <div class = "box2">
-          <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Cooler Hund</mat-card-title>
-          <mat-card-subtitle>VDI-Maskottchen</mat-card-subtitle>
-        </mat-card-header>
-      </div>
-
-      <div class = "box2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-          <div class="btnright">
-              
-              <button mat-raised-button color="primary">Expand</button></div>
-          </div>
-      
-      <div class = "box2">Beitragsart</div>
-
-
-          <div class="btnright">
-              <mat-card-actions>              
-                  <button mat-raised-button color="primary">LIKE</button>
-                  <button mat-raised-button color="primary">SHARE</button>
-              </mat-card-actions>
-          </div>
-      </div> <!--div dlass"box"-->
-
-      <mat-icon svgIcon="thumbs-up" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
+  <mat-list>
+    <div mat-subheader>ConnectING Channels</div>
+    <mat-list-item *ngFor="let channel of Channels">
+      <mat-icon mat-list-icon>home</mat-icon>
+      <div mat-line>{{channel.current.name}}</div>
+      <div mat-line> {{channel.current.description}} </div>
+    </mat-list-item>
+  </mat-list>
 
 </div>
