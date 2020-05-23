@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
 import { IUserMgmt, IUser, ConnectIngUser } from './../../interface/IUserMgmt';
 import { IChannelMgmt, IChannel, ConnectIngChannel } from './../../interface/IChannelMgmt';
-import { IPostMgmt } from './../../interface/IPostMgmt';
+import { IPostMgmt, IPost } from './../../interface/IPostMgmt';
 import { ICommentMgmt } from './../../interface/ICommentMgmt';
 
 // helper classes
@@ -31,6 +31,31 @@ class Channel {
   imagePath!: string;
 }
 
+class ChannelObject {
+  modifiedBy!: number;
+  name!: string;
+  parentId!: number;
+  kind!: number;
+  description!: string;
+  labelTags!: string[];
+  id!: number;
+  creationDate!: Date;
+  modifiedDate!: Date;
+  createdBy!: number;
+  ObjectTypeId!: number;
+  active!: boolean;
+  templateId!: number;
+  attributes!: ChannelAttributes;
+}
+
+class ChannelAttributes {
+  channelBeschreibung!: string;
+  channelTags!: string[];
+  channelTyp!: number;
+  channelAddress!: string;
+  // tslint:disable-next-line:variable-name
+  linked_from_245_otaga_4352_to_244!: number[]; // API function has to match
+}
 
 // adapter class
 @Injectable({
@@ -105,7 +130,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
     callback(false);
   }
   getChannelsAsync(user: IUser, callback: (channels: IChannel[]) => void): void {
-    this.http.post<Channel[]>('https://labs.linkando.co/api/Objects/FinderSearch', '', {
+    this.http.post<Channel[]>('https://labs.linkando.co/api/Objects/FinderSearch', '{ finderCode: %27allChannelsAPI%27 }', {
       headers: { Authorization: user.token }, responseType: 'json'
     }).subscribe(data => {
       let channels!: ConnectIngChannel[];
@@ -130,8 +155,10 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
   // Method - GetPosts
   // returns the posts under an existing channel
   getPostsAsync(user: IUser, parent: IChannel, callback: (posts: Array<IPost>) => void): void {
-  /*  this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetCurrentPerson',
+    this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
       { headers: { Authorization: user.token } , responseType: 'json' })
-      .subscribe(person => {*/
+      .subscribe(convId => {
+      }
+    );
   }
 }
