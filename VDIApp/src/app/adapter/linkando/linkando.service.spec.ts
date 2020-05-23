@@ -1,5 +1,9 @@
 import {TestBed} from '@angular/core/testing';
-
+import {  ConnectIngBaseService,
+          ConnectIngComment,
+          ConnectIngUser,
+          ConnectIngChannel,
+          ConnectIngPost } from '../base/AbstractBaseService';
 import {LinkandoService} from './linkando.service';
 
 describe('LinkandoService', () => {
