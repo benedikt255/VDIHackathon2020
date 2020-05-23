@@ -36,7 +36,7 @@ class Channel {
 })
 export class LinkandoService implements IUserMgmt, IChannelMgmt {
 
-  public static userRoleID = 243;
+  public userRoleID = 243;
 
   constructor(private authSvc: AuthService, private http: HttpClient) { }
 
@@ -84,8 +84,12 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
         FirstName: user.firstName,
         LastName: user.lastName,
       };
-    this.http.post('https://labs.linkando.co/api/People/Register',
-      user.email, userRoleID, additionalRegistrationInformation, true, 'de-DE')
+    const body = {
+      email: user.email,
+      personType: this.userRoleID,
+      fields: additionalRegistrationInformation,
+    };
+    this.http.post('https://labs.linkando.co/api/People/Register', body, { responseType: 'json' })
       .subscribe( object => {
         console.log(object);
         callback(object.isSuccess);
