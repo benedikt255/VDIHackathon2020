@@ -2,12 +2,16 @@
 import {CommentCtrl} from './CommentCtrl';
 import {ChannelCtrl} from './ChannelCtrl';
 import { ConnectIngBaseService, ConnectIngPost, ConnectIngUser, ConnectIngComment } from '../adapter/base/AbstractBaseService';
+import { Injectable } from '@angular/core';
 
 /**
  * Controller - PostCtrl
  * Application Controller to handle a post
  * and create/remove handling of comments
  */
+@Injectable({
+  providedIn: 'root'
+})
 export class PostCtrl {
 
   public currentUser: ConnectIngUser;

@@ -1,11 +1,15 @@
 import {PostCtrl} from './PostCtrl';
 import { ConnectIngUser, ConnectIngComment, ConnectIngBaseService } from '../adapter/base/AbstractBaseService';
+import { Injectable } from '@angular/core';
 
 
 /**
  * Controller - CommentCtrl
  * Application Controller to handle a comment
  */
+@Injectable({
+  providedIn: 'root'
+})
 export class CommentCtrl {
 
   public currentUser: ConnectIngUser;
