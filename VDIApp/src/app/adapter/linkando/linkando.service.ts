@@ -57,6 +57,12 @@ class ChannelAttributes {
   linked_from_245_otaga_4352_to_244!: number[]; // API function has to match
 }
 
+class RegisterResponse {
+  isSuccess!: boolean;
+  message!: string;
+  location!: string;
+}
+
 // adapter class
 @Injectable({
   providedIn: 'root'
@@ -111,7 +117,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
         FirstName: user.firstName,
         LastName: user.lastName,
       };
-    this.http.post('https://labs.linkando.co/api/People/Register?email=' + user.email + '&personType=' + this.userRoleID,
+    this.http.post<RegisterResponse>('https://labs.linkando.co/api/People/Register?email=' + user.email + '&personType=' + this.userRoleID,
       additionalRegistrationInformation, { responseType: 'json' })
       .subscribe( object => {
         console.log(object);
@@ -137,15 +143,15 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
 
   updateChannelAsync(user: IUser, channel: IChannel, callback: (channel: IChannel) => void): void {
     let channelToUpdate: ChannelObject;
-    this.http.get('https://labs.linkando.co/api/Objects/Get?id=' + channel.id, {
+    this.http.get<ChannelObject>('https://labs.linkando.co/api/Objects/Get?id=' + channel.id, {
       headers: {Authorization: user.token}, responseType: 'json'
     })
       .subscribe(object => {
         channelToUpdate = object;
         channelToUpdate.name = channel.name;
         channelToUpdate.description = channel.description;
-        channelToUpdate.picture = channel.picture;
-        channelToUpdate.persons = channel.persons;
+        // TODO channel.picture has to be saved in cms but has wrong enconding
+        // TODO channel.persons is delayed because now every user can access every channel
         this.http.post('https://labs.linkando.co/api/Objects/Save', channelToUpdate, {
           headers: {Authorization: user.token}, responseType: 'json'
         });
