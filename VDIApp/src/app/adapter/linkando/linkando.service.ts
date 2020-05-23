@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
 import { IUserMgmt, IUser, ConnectIngUser } from '../../interface/IUserMgmt';
 import { IChannelMgmt, IChannel, ConnectIngChannel } from '../../interface/IChannelMgmt';
+import { IPost } from 'src/app/interface/IPostMgmt';
 
 // helper classes
 // user
@@ -36,7 +37,7 @@ class Channel {
 })
 export class LinkandoService implements IUserMgmt, IChannelMgmt {
 
-  public static userRoleID = 243;
+  public userRoleID = 243;
 
   constructor(private authSvc: AuthService, private http: HttpClient) { }
 
@@ -84,8 +85,12 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
         FirstName: user.firstName,
         LastName: user.lastName,
       };
-    this.http.post('https://labs.linkando.co/api/People/Register',
-      user.email, userRoleID, additionalRegistrationInformation, true, 'de-DE')
+    const body = {
+      email: user.email,
+      personType: this.userRoleID,
+      fields: additionalRegistrationInformation,
+    };
+    this.http.post('https://labs.linkando.co/api/People/Register', body, { responseType: 'json' })
       .subscribe( object => {
         console.log(object);
         callback(object.isSuccess);
@@ -128,16 +133,20 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt {
   // post interface
   // Method - CreateComment
   // creates a new post under a defined channel
-  createPostAsync(user: IUser, parent: IChannel, title: string, message: string, callback: (post: IPost) => void): void;
+  createPostAsync(user: IUser, parent: IChannel, title: string, message: string, callback: (post: IPost) => void): void{}
 
   // Method - UpdateComment
   // updates an existing post title or message of an existing post
-  updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void;
+  updatePostAsync(user: IUser, post: IPost, callback: (post: IPost) => void): void{}
 
   // Method - RemoveComment
   // removes an existing post
-  removePostAsync(user: IUser, post: IPost, callback: (removed: boolean) => void): void;
-
+  // TODO Bitte prüfen!!!
+  removePostAsync(user: IUser, post: IPost, callback: (removed: boolean) => void): void{
+    this.http.post<IPost[]>('https://labs.linkando.co/api/Objects/Delete?id=' + post.id, {
+      headers: { Authorization: user.token }, responseType: 'json'
+    } );
+  }
   // Method - GetPosts
   // returns the posts under an existing channel
   getPostsAsync(user: IUser, parent: IChannel, callback: (posts: Array<IPost>) => void): void {
