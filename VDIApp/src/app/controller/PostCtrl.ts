@@ -20,12 +20,12 @@ export class PostCtrl {
   public cur: IPost;
   public comments: Array<CommentCtrl>;
 
-  constructor(postMgmt: IPostMgmt, chnMgmt: ICommentMgmt, parentChannel: IChannel){
+  constructor(postMgmt: IPostMgmt, post: IPost, chnMgmt: ICommentMgmt, parentChannel: IChannel){
     this.postMgmt = postMgmt;
     this.parentChannel = parentChannel;
     this.commentMgmt = chnMgmt;
     this.curUser = ConnectIngUser.GetDefault();
-    this.cur = ConnectIngPost.GetDefault();
+    this.cur = post;
     this.comments = [];
     this.loadComments();
   }
@@ -76,17 +76,16 @@ export class PostCtrl {
     });
   }
 
-  public removeComment(comment: IComment) {
-    this.commentMgmt.removeCommentAsync(this.curUser, comment, (removed: boolean) => {
+  public removePost(post: IPost) {
+    this.postMgmt.removePostAsync(this.CurrentUser, post, (removed: boolean) => {
       if (removed)
       {
-        // remove successful
-        // update channel List
-        this.loadComments();
+        // successfull
+        this.loadPosts();
       }
       else
       {
-        // remove failed
+        // failed
         // nop
       }
     });
