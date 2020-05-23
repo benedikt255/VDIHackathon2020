@@ -5,10 +5,6 @@ import {AuthService} from './adapter/linkando/auth/auth.service';
 import {CookieService} from './cookie/cookie.service';
 
 import { ConnectIngBaseService, ConnectIngMockService } from './adapter/base/AbstractBaseService';
-import { ConnectIngCtrl } from './controller/ConnectIngCtrl';
-import { ChannelCtrl } from './controller/ChannelCtrl';
-import { PostCtrl } from './controller/PostCtrl';
-import { CommentCtrl } from './controller/CommentCtrl';
 
 /* ./channel/channel.component */
 
@@ -73,10 +69,6 @@ import {MatTabsModule} from '@angular/material/tabs';
   ],
   providers: [
     {provide: ConnectIngBaseService, useClass: ConnectIngMockService},
-    ConnectIngCtrl,
-    ChannelCtrl,
-    PostCtrl,
-    CommentCtrl,
     AuthService,
     CookieService
   ],
