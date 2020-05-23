@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 //Screen 1
 import {LoginComponent} from './login/login.component';
 //Screen 2
-import {ChannelOverviewComponent} from './channel-overview/channel-overview.component';
+import {ChannelComponent} from './channel/channel.component';
 //Screen 3
 import {PostComponent} from './post/post.component';
 //Screen 4
@@ -13,7 +13,7 @@ import { CommentComponent } from './comment/comment.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'channel-overview', component: ChannelOverviewComponent},
+  {path: 'channel', component: ChannelComponent},
   {path: 'post', component: PostComponent},
   {path: 'create-post', component: CreatePostComponent},
   {path: 'welcome', component: WelcomeComponent},

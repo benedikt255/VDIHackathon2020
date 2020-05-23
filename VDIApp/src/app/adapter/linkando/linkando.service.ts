@@ -47,11 +47,12 @@ class ChannelObject {
   parentId!: number;
   kind!: number;
   description!: string;
+  inheritanceAttribute!: string;
   labelTags!: string[];
   id!: number;
   creationDate!: Date;
   modifiedDate!: Date;
-  createdBy!: number;
+  createdBy!: string;
   ObjectTypeId!: number;
   active!: boolean;
   templateId!: number;
@@ -61,7 +62,7 @@ class ChannelObject {
 class ChannelAttributes {
   channelBeschreibung!: string;
   channelTags!: string[];
-  channelTyp!: number;
+  channelTyp!: string;
   channelAddress!: string;
   // tslint:disable-next-line:variable-name
   linked_from_245_otaga_4352_to_244!: number[]; // API function has to match
@@ -256,7 +257,36 @@ export class LinkandoService extends ConnectIngBaseService {
           }
           }
     */
-    callback(ConnectIngChannel.GetDefault());
+   const channelAttributes: ChannelAttributes = {
+      channelBeschreibung: description,
+      channelTags: [],
+      channelTyp: 'null',
+      channelAddress: 'null',
+      // tslint:disable-next-line:variable-name
+      linked_from_245_otaga_4352_to_244!: [], // API function has to match
+   };
+   const channelToUpload: ChannelObject = {
+    modifiedBy : 0,
+    inheritanceAttribute: 'null',
+    name,
+    parentId : 0 ,
+    kind : 0,
+    description: 'null',
+    labelTags: [],
+    id: 0,
+    creationDate: new Date(),
+    modifiedDate: new Date(),
+    createdBy: user.id,
+    ObjectTypeId: 244,
+    active: true,
+    templateId: 0,
+    attributes: channelAttributes,
+    };
+   this.http.post<number>('https://labs.linkando.co/api/Objects/Save', channelToUpload, {
+        headers: {Authorization: user.token}, responseType: 'json'
+      }).subscribe(Id => {
+          callback(new ConnectIngChannel(Id.toString(), name, description, '', []));
+      });
   }
 
   updateChannelAsync(user: ConnectIngUser, channel: ConnectIngChannel, callback: (channel: ConnectIngChannel) => void): void {
@@ -278,7 +308,11 @@ export class LinkandoService extends ConnectIngBaseService {
   }
 
   removeChannelAsync(user: ConnectIngUser, channel: ConnectIngChannel, callback: (removed: boolean) => void): void {
-    callback(false);
+    this.http.delete('https://labs.linkando.co/api/Objects/Delete?id=' + channel.id, {
+      headers: {Authorization: user.token}, responseType: 'json'
+    }).subscribe(() => {
+        callback(true);
+    });
   }
 
   getChannelsAsync(user: ConnectIngUser, callback: (channels: ConnectIngChannel[]) => void): void {
@@ -409,13 +443,38 @@ export class LinkandoService extends ConnectIngBaseService {
   // Method - CreateComment
   // creates a new comment under a defined post
   createCommentAsync(user: ConnectIngUser, parent: ConnectIngPost, text: string, callback: (comment: ConnectIngComment) => void): void {
-
+    this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
+    { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversations => {
+      const post: ConversationPost = { conversationId : conversations[0], text };
+      this.http.post<ConversationPost>('https://labs.linkando.co/api/Conversations/CreateConversationPost', post,
+      { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(comment => {
+        const commRet: ConnectIngComment = new ConnectIngComment(comment.postId.toString(), parent.id,
+        comment.person.id.toString(), comment.person.name, comment.postDate, comment.text );
+        callback(commRet);
+      });
+    } );
   }
 
   // Method - UpdateComment
   // updates an existing comment text of an existing comment
   updateCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (comment: ConnectIngComment) => void): void {
-
+    this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + comment.postId,
+    { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversations => {
+      this.http.get<Conversation>('https://labs.linkando.co/api/Conversations/GetConversation?conversationId='
+      + conversations[0].toString() + '&count=100&offset=0',
+      { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversation => {
+        let remote = conversation.posts.find(x => x.postId.toString() === comment.id);
+        if (remote !== undefined) {
+          remote.text = comment.text;
+          this.http.post<ConversationPost>('https://labs.linkando.co/api/Conversations/EditConversationPost', remote,
+          { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(post => {
+            comment.text = post.text;
+            callback(comment);
+          });
+        }
+      }
+    );
+  });
   }
 
   // Method - RemoveComment

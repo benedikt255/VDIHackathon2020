@@ -3,11 +3,11 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material/icon';
 
 @Component({
-  selector: 'app-channel-overview',
-  templateUrl: './channel-overview.component.html',
+  selector: 'app-channel',
+  templateUrl: './channel.component.html',
   styleUrls: ['../app.component.css']
 })
-export class ChannelOverviewComponent implements OnInit{
+export class ChannelComponent implements OnInit{
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(

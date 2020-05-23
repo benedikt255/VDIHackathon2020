@@ -10,7 +10,7 @@ import { ChannelCtrl } from './controller/ChannelCtrl';
 import { PostCtrl } from './controller/PostCtrl';
 import { CommentCtrl } from './controller/CommentCtrl';
 
-
+/* ./channel/channel.component */
 
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
@@ -21,7 +21,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {StaticPageComponent} from './static-page/static-page.component';
 
-import {ChannelOverviewComponent} from './channel-overview/channel-overview.component';
+import {ChannelComponent} from './channel/channel.component';
 import {MatButtonModule} from '@angular/material/button';
 
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -46,7 +46,7 @@ import {MatTabsModule} from '@angular/material/tabs';
      MainNavComponent,
      LoginComponent,
      StaticPageComponent,
-     ChannelOverviewComponent,
+     ChannelComponent,
      CreatePostComponent,
      PostComponent,
      CommentComponent,
