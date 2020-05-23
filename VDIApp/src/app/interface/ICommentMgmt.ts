@@ -59,19 +59,19 @@ export interface ICommentMgmt
 
     // Method - CreateComment
     // creates a new comment under a defined post
-    createComment(user: IUser, parent: IPost, text: string): IComment;
+    createCommentAsync(user: IUser, parent: IPost, text: string): IComment;
 
     // Method - UpdateComment
     // updates an existing comment text of an existing comment
-    updateComment(user: IUser, comment: IComment, text: string): IComment;
+    updateCommentAsync(user: IUser, comment: IComment, text: string): IComment;
 
     // Method - RemoveComment
     // removes an existing comment
-    removeComment(user: IUser, comment: IComment): boolean;
+    removeCommentAsync(user: IUser, comment: IComment): boolean;
 
     // Method - GetComments
     // returns the comments under an existing post
-    getComments(user: IUser, parent: IPost): Array<IComment>;
+    getCommentsAsync(user: IUser, parent: IPost): Array<IComment>;
 }
 
 export class MockCommentMgmt implements ICommentMgmt {
@@ -85,19 +85,19 @@ export class MockCommentMgmt implements ICommentMgmt {
   };
   offlineMode = false;
 
-  createComment(user: IUser, parent: IPost, text: string): IComment {
+  createCommentAsync(user: IUser, parent: IPost, text: string): IComment {
     return this.comment;
   }
 
-  getComments(user: IUser, parent: IPost): Array<IComment> {
+  getCommentsAsync(user: IUser, parent: IPost): Array<IComment> {
     return [this.comment];
   }
 
-  removeComment(user: IUser, comment: IComment): boolean {
+  removeCommentAsync(user: IUser, comment: IComment): boolean {
     return false;
   }
 
-  updateComment(user: IUser, comment: IComment, text: string): IComment {
+  updateCommentAsync(user: IUser, comment: IComment, text: string): IComment {
     return this.comment;
   }
 }

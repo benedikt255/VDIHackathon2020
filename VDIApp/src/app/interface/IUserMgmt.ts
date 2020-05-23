@@ -26,34 +26,39 @@ export interface IUserMgmt {
 // mock class for UI tests
 export class MockUserMgmt implements IUserMgmt {
   private user: IUser = {
-      id: '1',
-      lastName: 'Mustermann',
-      firstName: 'Max',
-      location: 'Berlin',
-      image: '',
-      jobTitle: 'Ingenieur',
-      email: 'Max.Mustermann@example.com',
-      username: 'user1',
-      token: 'Basic 12345'
+    id: '1',
+    lastName: 'Mustermann',
+    firstName: 'Max',
+    location: 'Berlin',
+    image: '',
+    jobTitle: 'Ingenieur',
+    email: 'Max.Mustermann@example.com',
+    username: 'user1',
+    token: 'Basic 12345'
   };
 
-  connectUserAsync(username: string, password: string, callback: (user: IUser) => void): void{
+  connectUserAsync(username: string, password: string, callback: (user: IUser) => void): void {
     callback(this.user);
   }
+
   disconnectUserAsync(user: IUser, callback: (disconnected: boolean) => void): void {
     callback(true);
   }
-  registerUserAsync(user: IUser, password: string, callback: (registered: boolean) => void): void{
+
+  registerUserAsync(user: IUser, password: string, callback: (registered: boolean) => void): void {
     callback(true);
   }
-  unregisterUserAsync(user: IUser, callback: (unregistered: boolean) => void): void{
+
+  unregisterUserAsync(user: IUser, callback: (unregistered: boolean) => void): void {
     callback(true);
   }
-  updateUserAsync(user: IUser, callback: (user: IUser) => void): void{
+
+  updateUserAsync(user: IUser, callback: (user: IUser) => void): void {
     this.user = user;
     callback(this.user);
   }
-  getUsersAsync(user: IUser, callback: (users: IUser[]) => void): void{
+
+  getUsersAsync(user: IUser, callback: (users: IUser[]) => void): void {
     callback([
       this.user,
       {
@@ -66,19 +71,18 @@ export class MockUserMgmt implements IUserMgmt {
         email: 'melanie.musterfrau@example.com',
         username: 'user2',
         token: 'Advanced 12345'
-    },
-    {
-      id: '3',
-      lastName: 'Mustermensch',
-      firstName: 'Max-Sophie',
-      location: 'Köln',
-      image: '',
-      jobTitle: 'Ingenieurende',
-      email: 'max-sophie.mustermensch@example.com',
-      username: 'user3',
-      token: 'Divers 12345'
-  }
+      },
+      {
+        id: '3',
+        lastName: 'Mustermensch',
+        firstName: 'Max-Sophie',
+        location: 'Köln',
+        image: '',
+        jobTitle: 'Ingenieurende',
+        email: 'max-sophie.mustermensch@example.com',
+        username: 'user3',
+        token: 'Divers 12345'
+      }
     ]);
   }
-
 }
