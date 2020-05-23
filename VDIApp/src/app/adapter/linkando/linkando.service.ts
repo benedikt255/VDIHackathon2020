@@ -83,13 +83,14 @@ class PostObject{
   parentId!: string;
   ObjectTypeId!: string;
   attributes!: PostAttributes;
+  inheritanceAttribute!: string;
 }
 
 class PostAttributes{
   postBeschreibung!: string;
   postTags!: string[];
   postType!: string;
-  dropdownRelatedChannel: String;
+  dropdownRelatedChannel!: String;
 }
 
 class RegisterResponse {
@@ -312,6 +313,34 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
               }
           }
     */
+   const attributes: PostAttributes = {
+    postBeschreibung : message,
+    postTags : [],
+    postType : '',
+    dropdownRelatedChannel : parent.id,
+    };
+   const postToUpload: PostObject = {
+      id : '0',
+      name : title,
+      parentId : parent.id,
+      ObjectTypeId : '245',
+      inheritanceAttribute : 'DropDownRelatedChannel',
+      attributes,
+   };
+   this.http.post<number>('https://labs.linkando.co/api/Objects/Save', postToUpload, {
+     headers: {Authorization: user.token}, responseType: 'json'
+   }).subscribe((Id) => {
+    const post: ConnectIngPost = new ConnectIngPost(
+      Id.toString(),
+      parent.id,
+      user.id,
+      user.userName,
+      new Date(),
+      postToUpload.name,
+      postToUpload.attributes.postBeschreibung
+    );
+    callback(post);
+   });
   }
 
   // Method - UpdateComment
@@ -333,6 +362,22 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt, ICom
             }
       }
     */
+   let postToUpdate: PostObject;
+   this.http.get<PostObject>('https://labs.linkando.co/api/Objects/Get?id=' + post.id, {
+     headers: {Authorization: user.token}, responseType: 'json'
+   })
+     .subscribe(currentPost => {
+      postToUpdate = currentPost;
+      postToUpdate.name = post.title;
+      postToUpdate.parentId = post.channelId;
+      postToUpdate.attributes.postBeschreibung = post.message;
+      this.http.post<number>('https://labs.linkando.co/api/Objects/Save', postToUpdate, {
+         headers: {Authorization: user.token}, responseType: 'json'
+       })
+         .subscribe(() => {
+           callback(post);
+         });
+     });
   }
 
 
