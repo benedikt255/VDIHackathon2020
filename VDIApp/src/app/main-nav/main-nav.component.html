@@ -25,7 +25,8 @@
       </button>
 
       <span>ConnectING </span>
-      <a *ngIf=PlusActive>  href="#"><mat-icon aria-label="Side nav toggle icon">add</mat-icon></a>
+      <table style="width:100%"><tr><td style="text-align:left">Left</td><td style="text-align:right"></td></tr></table>
+        <button *ngIf=PlusActive mat-raised-button color="primary"><mat-icon aria-label="Side nav toggle icon">add</mat-icon></button>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
