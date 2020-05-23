@@ -53,13 +53,15 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import {CreatePostComponent} from './create-post/create-post.component';
 
 @NgModule({
    declarations: [
-    AppComponent,
-    LoginComponent,
-    StaticPageComponent,
-    ChannelOverviewComponent
+     AppComponent,
+     LoginComponent,
+     StaticPageComponent,
+     ChannelOverviewComponent,
+     CreatePostComponent
   ],
   imports: [
     MatButtonModule,
