@@ -163,7 +163,7 @@ export class LinkandoService implements IUserMgmt, IChannelMgmt, IPostMgmt {
         this.http.post<number>('https://labs.linkando.co/api/Objects/Save', userToUpdate, {
           headers: {Authorization: user.token}, responseType: 'json'
         })
-          .subscribe(updatedUserID => {
+          .subscribe(() => {
             callback(user);
           });
       });
