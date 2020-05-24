@@ -102,11 +102,10 @@
 }
 
 .AddButton {
- /*
-  position: -webkit-sticky;
-  position: sticky;
-
-  z-index: 1;*/
+  position: fixed;
+  right: 3em;
+  bottom: 3em;
+  z-index: 2;
 }
 
 
