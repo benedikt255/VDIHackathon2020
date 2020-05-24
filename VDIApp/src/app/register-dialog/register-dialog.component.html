@@ -1,0 +1,44 @@
+<div mat-dialog-content>
+  <h1 mat-dialog-title> Login Form</h1>
+  <mat-form-field>
+    <form [formGroup]="registerData">
+      <label>
+        <input #email formControlName="email" matInput name="email" placeholder="Email" required>
+      </label>
+    </form>
+  </mat-form-field>
+  <mat-form-field>
+    <form [formGroup]="registerData">
+      <label>
+        <input #firstName formControlName="firstName" matInput name="firstName" placeholder="First Name" required>
+      </label>
+    </form>
+  </mat-form-field>
+  <mat-form-field>
+    <form [formGroup]="registerData">
+      <label>
+        <input #lastName formControlName="lastName" matInput name="lastName" placeholder="Last Name" required>
+      </label>
+    </form>
+  </mat-form-field>
+
+  <!-- Not required due to the Linkando API
+  <form [formGroup]="registerData">
+    <mat-form-field>
+      <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" #password name="password" formControlName="password" required />
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Confirm Password" [type]="'password'"  #password name="passwordConfirmation" formControlName="passwordConfirmation" required />
+      TODO: add an info field for mismatching password conformation
+      <div *ngIf="mismatch">
+    </mat-form-field>
+   </form>
+   -->
+
+</div>
+<button (click)="register()" [disabled]="loading" class="btn btn-primary" mat-button>
+  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+  Register
+</button>
+<div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
