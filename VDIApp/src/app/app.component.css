@@ -48,9 +48,9 @@
 }
 
 
-.mat-list-item:hover {
+/*.mat-list-item:hover {
   background-color: #FFA500;
-}
+}*/
 
 /* Login Screen */
 .login-content {
@@ -166,7 +166,8 @@
   margin-right: auto;
   justify-content: center;
   align-items: center;
-  display: flex;
+  /*display: flex;*/
+  display: block;
 }
 
 .mat-card {
@@ -185,11 +186,7 @@
 
 .post1 {
   background-color: #FFA500;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
+  text-align: center;
 }
 
 .post2 {
@@ -197,10 +194,22 @@
   border-radius: 8px;
   margin-bottom: 2em;
 }
+/*
+.mat-card:hover {
+  background-color: rgb(38, 255, 0);
+}
+*/
+.hov:hover{
+  background-color: grey;
+  opacity: 70%;
+  z-index: 400;
+  border-radius: 8px;
+
+}
 
 .adjustWidth {
   width: 100%;
-  border-radius: 40px;
+  border-radius: 8px;
 }
 
 
