@@ -9,7 +9,6 @@ import {CookieService} from './cookie/cookie.service';
 import {ConnectIngBaseService} from './adapter/base/AbstractBaseService';
 import {LinkandoService} from './adapter/linkando/linkando.service';
 
-
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -41,7 +40,7 @@ import {MatInputModule} from '@angular/material/input';
 import {CreateCommentComponent} from './post/create-comment.component';
 import {CreatePostComponent} from './channel/create-post.component';
 import {RegisterDialogComponent} from './register-dialog/register-dialog.component';
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [

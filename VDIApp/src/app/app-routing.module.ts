@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-//Screen 1
+// Screen 1
 import {LoginComponent} from './login/login.component';
-//Screen 2
+// Screen 2
 import {ChannelComponent} from './channel/channel.component';
-//Screen 3
+// Screen 3
 import {PostComponent} from './post/post.component';
-//Screen 4
+// Screen 4
 import {WelcomeComponent} from './welcome/welcome.component';
 import {CommentComponent} from './comment/comment.component';
 

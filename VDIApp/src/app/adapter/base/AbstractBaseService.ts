@@ -1,7 +1,7 @@
 /**
  * ConnectING Base User
  */
-import {RegisterResponse} from "../linkando/linkando.service";
+import {RegisterResponse} from '../linkando/linkando.service';
 
 
 export class ConnectIngUser {
@@ -400,8 +400,8 @@ export class ConnectIngMockService implements ConnectIngBaseService {
     callback(true);
   }
 
-  registerUserAsync(user: ConnectIngUser, password: string, callback: (registered: boolean) => void): void {
-    callback(true);
+  registerUserAsync(user: ConnectIngUser, password: string, callback: (registered: RegisterResponse) => void): void {
+    callback(new RegisterResponse());
   }
 
   unregisterUserAsync(user: ConnectIngUser, callback: (unregistered: boolean) => void): void {
@@ -459,7 +459,8 @@ export class ConnectIngMockService implements ConnectIngBaseService {
   }
 
 
-  createPostAsync(user: ConnectIngUser, parent: ConnectIngChannel, title: string, message: string, callback: (post: ConnectIngPost) => void): void {
+  createPostAsync(user: ConnectIngUser, parent: ConnectIngChannel, title: string, message: string,
+                  callback: (post: ConnectIngPost) => void): void {
     callback(this.post);
   }
 

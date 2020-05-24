@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {ConnectIngBaseService} from '../adapter/base/AbstractBaseService';
-import {RegisterResponse} from "../adapter/linkando/linkando.service";
+import {RegisterResponse} from '../adapter/linkando/linkando.service';
 
 @Component({
   selector: 'app-register-dialog',

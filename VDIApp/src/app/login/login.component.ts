@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from './../adapter/linkando/auth/auth.service'; // bypass für den linkando login,
+import {AuthService} from '../adapter/linkando/auth/auth.service'; // bypass für den linkando login,
 // für die Serienvariante brauchen wir da noch was schöneres
 import {environment} from '../../environments/environment'; // umgebungsvariablen, hauptsächlich link auf Pfad
 import {ConnectIngBaseService, ConnectIngUser} from '../adapter/base/AbstractBaseService';

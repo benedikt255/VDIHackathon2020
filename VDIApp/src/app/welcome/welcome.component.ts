@@ -55,6 +55,7 @@ export class WelcomeComponent implements OnInit {
    * Method - CreateChannel
    * @param name Name of the new Channel
    * @param desc Description of the new Channel
+   * @param callback which notifies the parent thread about the result
    */
   public createChannel(name: string, desc: string, callback: () => void) {
     this.baseService.createChannelAsync(this.currentUser, name, desc, (channel: ConnectIngChannel) => {

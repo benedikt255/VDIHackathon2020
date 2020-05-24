@@ -113,7 +113,7 @@ export class PostComponent implements OnInit {
 
   /**
    * Method to recognize swipe features
-   * @param action
+   * @param action recognized action
    */
   public swipe(action = this.SWIPE_ACTION.RIGHT) {
     if (action === this.SWIPE_ACTION.RIGHT) {
