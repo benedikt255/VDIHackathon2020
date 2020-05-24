@@ -17,6 +17,7 @@ const routes: Routes = [
   {path: 'channel', component: ChannelComponent},
   {path: 'post', component: PostComponent},
   {path: 'prompt', component: PromptComponent},
+  {path: 'welcome', component: WelcomeComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: '**', component: LoginComponent}
 ];

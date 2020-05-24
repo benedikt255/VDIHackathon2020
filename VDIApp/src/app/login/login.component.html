@@ -31,7 +31,10 @@
           <p>... ist zielgruppengerichtet</p>
         </div>
         <br>
-        <p>Zur Registrierung müssen Sie sich derzeit noch bei Linkando registrieren!</p>
+        <div *ngIf="result; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock class="alert alert-danger mt-3 mb-0"><p>Bitte beende die Registrierung über die erhaltene Einladungsmail.</p></ng-template>
+        <ng-template #elseBlock class="alert alert-danger mt-3 mb-0"><p>Zur Registrierung werden Sie zu Linkando weitergeleitet!</p></ng-template>
+
         <button (click)="Register()" class = connecting-toolbar mat-flat-button style="margin: 10px">Registrieren</button>
       </div>
     </mat-tab>
@@ -57,5 +60,6 @@
       </div>
     </mat-tab>
   </mat-tab-group>
+
 </div>
-<div *ngIf="result" class="alert alert-danger mt-3 mb-0">Bitte beende die Registrierung über die erhaltene Einladungsmail.</div>
+
