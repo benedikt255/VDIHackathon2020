@@ -10,6 +10,9 @@ import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet'
 })
 export class PostComponent implements OnInit {
 
+  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
+
+
   private baseService: ConnectIngBaseService;
   private router: Router;
 
@@ -32,6 +35,8 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
 
   openCommentPanel(): void {
     this.bottomSheet.open(CreateCommentComponent);
@@ -112,27 +117,30 @@ export class PostComponent implements OnInit {
 
 
 
+/**
+ * Method to GoBack to Channel View
+ */
+public GoBack(): void{
+  this.baseService.currentComment = ConnectIngComment.GetDefault();
+  this.baseService.currentPost = ConnectIngPost.GetDefault();
+  this.router.navigate(['/channel']);
+}
 
 
-  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
 
-
-
-// action triggered when user swipes
-swipe(action = this.SWIPE_ACTION.RIGHT) {
-  // swipe right, next avatar
-  alert("action");
-
+/**
+ * Method to recognize swipe features
+ * @param action 
+ */
+public swipe(action = this.SWIPE_ACTION.RIGHT) {
   if (action === this.SWIPE_ACTION.RIGHT) {
-    console.log('Swipe RIGHT');
-    alert("RIGHT");
+    this.GoBack();
   }
 
   // swipe left, previous avatar
   if (action === this.SWIPE_ACTION.LEFT) {
-      console.log('Swipe LEFT');
-      alert("LEFT");
+
   }
 
 }

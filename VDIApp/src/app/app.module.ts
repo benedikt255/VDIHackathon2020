@@ -8,6 +8,7 @@ import {AuthService} from './adapter/linkando/auth/auth.service';
 import {CookieService} from './cookie/cookie.service';
 
 import { ConnectIngBaseService, ConnectIngMockService } from './adapter/base/AbstractBaseService';
+import { LinkandoService } from './adapter/linkando/linkando.service';
 
 /* ./channel/channel.component */
 
@@ -60,7 +61,6 @@ import {MatTabsModule} from '@angular/material/tabs';
     BrowserAnimationsModule,
     MatSliderModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MatCardModule,
     MatButtonModule,
     MatExpansionModule,
@@ -70,10 +70,11 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatIconModule,
     MatListModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    HammerModule
   ],
   providers: [
-    {provide: ConnectIngBaseService, useClass: ConnectIngMockService},
+    {provide: ConnectIngBaseService, useClass: LinkandoService},
     AuthService,
     CookieService
   ],

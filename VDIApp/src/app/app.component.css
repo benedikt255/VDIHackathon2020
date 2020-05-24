@@ -24,6 +24,10 @@
 }
 
 
+.mat-list-item:hover {
+  background-color: #FFA500;
+}
+
   /* Login Screen */
   .login-content{
     align-content: center;

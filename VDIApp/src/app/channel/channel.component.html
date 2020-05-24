@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
 
 
   <div class="main"><!--Kanalinfo-->
@@ -36,56 +36,9 @@
           </mat-card-actions>
         </div>
       </mat-card>
-
-      <mat-card class="post2" mat-line (click)="GoTo(post.id)">
-        <mat-card-header>
-          <div class="example-header-image" mat-card-avatar></div>
-          <mat-card-title>{{post.title}}</mat-card-title>
-          <mat-card-subtitle>{{post.author}}</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>
-          <p>{{post.message}}</p>
-        </mat-card-content>
-
-        <div class="btnright">
-          <mat-card-actions class="btns">
-            <button mat-raised-button color="primary">LIKE</button>
-            <button mat-raised-button color="primary">SHARE</button>
-          </mat-card-actions>
-        </div>
-      </mat-card>
     </mat-list-item>
 
   </div>
-
-<p class ="otxt" style="text-align: center;">Hier ein statischer Beitrag zum Vergleich:</p>
-
-<div class="main"><!--Beitrag ohne Bild-->
-  <mat-card class="post">
-    <mat-card-header>
-      <div class="example-header-image" mat-card-avatar></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-    </mat-card-header>
-
-    <mat-card-content>
-      <p>Dies ist ein statischer (!!!) Beitrag. Dieser dient dazu, den dynamisch generierten Beitrag zu vergleichen.</p>
-    </mat-card-content>
-
-    <div class="btnright">
-      <mat-card-actions class="btns">
-
-        <button mat-raised-button color="primary">LIKE</button>
-
-        <button mat-raised-button color="primary">SHARE</button>
-      </mat-card-actions>
-    </div>
-  </mat-card>
-</div>
-
-
-
 
 </div>
 

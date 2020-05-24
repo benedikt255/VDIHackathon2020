@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
-import { ConnectIngBaseService, ConnectIngUser, ConnectIngChannel, ConnectIngPost } from '../adapter/base/AbstractBaseService';
+import { ConnectIngBaseService, ConnectIngUser, ConnectIngChannel, ConnectIngPost, ConnectIngComment } from '../adapter/base/AbstractBaseService';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 @Component({
@@ -9,6 +9,8 @@ import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet'
   styleUrls: ['../app.component.css']
 })
 export class ChannelComponent implements OnInit{
+
+  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
   private baseService: ConnectIngBaseService;
   private router: Router;
@@ -43,6 +45,11 @@ export class ChannelComponent implements OnInit{
       this.baseService.currentPost = this.posts.filter(value => value.id === post)[0];
       this.router.navigate(['/post']);
   }
+
+
+
+
+
 
 
   /**
@@ -118,6 +125,39 @@ export class ChannelComponent implements OnInit{
       }
     });
   }
+
+
+
+/**
+ * Method to GoBack to Channel View
+ */
+public GoBack(): void{
+  this.baseService.currentComment = ConnectIngComment.GetDefault();
+  this.baseService.currentPost = ConnectIngPost.GetDefault();
+  this.baseService.currentChannel = ConnectIngChannel.GetDefault();
+  this.router.navigate(['/welcome']);
+}
+
+
+
+
+/**
+ * Method to recognize swipe features
+ * @param action 
+ */
+public swipe(action = this.SWIPE_ACTION.RIGHT) {
+  if (action === this.SWIPE_ACTION.RIGHT) {
+    this.GoBack();
+  }
+
+  // swipe left, previous avatar
+  if (action === this.SWIPE_ACTION.LEFT) {
+
+  }
+
+}
+
+
 
 
 }
