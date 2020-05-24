@@ -176,7 +176,7 @@ export class LinkandoService extends ConnectIngBaseService {
   connectUserAsync(username: string, password: string, callback: (user: ConnectIngUser) => void): void {
     // TODO debugcode 
     console.log('connectUserAsync');
-    
+
     let user: ConnectIngUser;
     let localId: string;
     const localToken: string = this.authSvc.getAuth();
