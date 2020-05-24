@@ -102,23 +102,32 @@
 }
 
 .AddButton {
+ /*
   position: -webkit-sticky;
   position: sticky;
-  /*top: 90%;
-  left: 80%;*/
-  z-index: 1;
+
+  z-index: 1;*/
 }
 
-.post-spaces{
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
+
+/*
+.overlay {
+  position: fixed;
+  right: 3em;
+  bottom: 3em;
+  z-index: 600;
+}*/
 
 .overlay {
   position: fixed;
   right: 3em;
   bottom: 3em;
   z-index: 600;
+}
+
+.post-spaces{
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 
