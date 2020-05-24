@@ -249,8 +249,15 @@ export class LinkandoService extends ConnectIngBaseService {
     // FIXME no interface to api so this has to be done manually (e.g. via an email)
   }
 
+  /**
+   * Method to change informations of an User
+   * @param user New User Object, which contains the changes.
+   * @param callback Gives back the new represantation of the user.
+   */
   updateUserAsync(user: ConnectIngUser, callback: (user: ConnectIngUser) => void): void {
+    // TODO debug code
     console.log('updateUserAsync');
+    
     let userToUpdate: PersonObject;
     this.http.get<PersonObject>('https://labs.linkando.co/api/Objects/Get?id=' + user.id, {
       headers: {Authorization: user.token}, responseType: 'json'
@@ -270,9 +277,15 @@ export class LinkandoService extends ConnectIngBaseService {
       });
   }
 
+  /**
+   * Method to obtain all Users.
+   * @param user Current User, who requested all the Users
+   * @param callback Returns all the Users in exsistence.
+   */
   getUsersAsync(user: ConnectIngUser, callback: (users: ConnectIngUser[]) => void): void {
+    // TODO debug code
     console.log('getUsersAsync');
-    const finder: Finder = {finderCode: 'allChannelsAPI'};
+    const finder: Finder = {finderCode: 'VdiUsersFinderApi'};
     this.http.post<PersonObject[]>('https://labs.linkando.co/api/Objects/FinderSearch', finder, {
       headers: {Authorization: user.token}, responseType: 'json'
     }).subscribe(data => {
@@ -290,21 +303,18 @@ export class LinkandoService extends ConnectIngBaseService {
     });
   }
 
-  // channel interface
+  /**
+   * Creates new post under a defined channel.
+   * @param user Current user who performs the delete comment action.
+   * @param parent Channel which the post is related to.
+   * @param title Title of the comment.
+   * @param message Message which should be contained in the post.
+   * @param callback Gives back the post which you just created.
+   */
   createChannelAsync(user: ConnectIngUser, name: string, description: string, callback: (channel: ConnectIngChannel) => void): void {
+    // TODO debug code
     console.log('createChannelAsync');
-    /*Beispiel
-    url. https://labs.linkando.co/api/Objects/Save
-    response = objectId
-          {
-                "name": "channel 6",
-                "ObjectTypeId": 244,
-                "attributes": {
-              "channelBeschreibung": "test",
-              "channelTyp": 880,
-          }
-          }
-    */
+
     const channelAttributes: ChannelAttributes = {
       channelBeschreibung: description,
       channelTags: [],
@@ -356,6 +366,12 @@ export class LinkandoService extends ConnectIngBaseService {
       });
   }
 
+  /**
+   * Mehtod to delete specific Channel
+   * @param user Current user who performs the deletion
+   * @param channel Channel to be deleted.
+   * @param callback Gives back if the channel was deleted.
+   */
   removeChannelAsync(user: ConnectIngUser, channel: ConnectIngChannel, callback: (removed: boolean) => void): void {
     console.log('removeChannelAsync');
     this.http.delete('https://labs.linkando.co/api/Objects/Delete?id=' + channel.id, {
@@ -365,7 +381,11 @@ export class LinkandoService extends ConnectIngBaseService {
     });
   }
 
-  
+  /**
+   * Method to obtain all the channels.
+   * @param user Current user who requested the channels.
+   * @param callback Gives back all channels
+   */
   getChannelsAsync(user: ConnectIngUser, callback: (channels: ConnectIngChannel[]) => void): void {
     console.log('getChannelsAsync');
     const finder: Finder = {finderCode: 'allChannelsAPI'};
