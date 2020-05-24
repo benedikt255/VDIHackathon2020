@@ -140,12 +140,18 @@
 
 /*channel - by Matthias Walter, NEUE Version*/
 
+.header {
+  width: 100%;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .content {
   width: 100%;
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
-  /*background-color: rgb(200, 200, 200);*/
 }
 
 

@@ -1,14 +1,16 @@
-<div (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" class="content">
+<div (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
 
+  <div class = header>
 
-  <div class="main">
-    <!--Kanalinfo-->
-    <mat-card class="post1">
-      <p class="otxt">{{current.name}}</p>
-    </mat-card>
+    <div class="main">
+      <!--Kanalinfo-->
+      <mat-card class="post1">
+        <p class="otxt">{{current.name}}</p>
+      </mat-card>
+    </div>
   </div>
 
-
+  <div class = content>   
   <!--Beitrag-->
   <mat-list-item *ngFor="let post of posts" class="main">
     <mat-card (click)="loadPost(post.id)" class="post2" mat-line>
@@ -36,4 +38,6 @@
   <button (click)="openPostPanel()" class="AddButton  overlay" color="warn" mat-fab>
     <mat-icon aria-label="Side nav toggle icon">add</mat-icon>
   </button>
+
+  </div>
 </div>
