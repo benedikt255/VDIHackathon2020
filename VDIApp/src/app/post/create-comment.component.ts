@@ -29,9 +29,9 @@ export class CreateCommentComponent {
     this.baseService.createCommentAsync(this.baseService.currentUser, this.baseService.currentPost, text, (comment: ConnectIngComment) => {
       if (comment === ConnectIngComment.GetDefault()) {
         // Create failed
-        // nop
+        alert('Sorry, you are currently not connected.');
       } else {
-        // Create successfull
+        this.bottomSheetRef.dismiss();
         // Update Channel List
       }
     });

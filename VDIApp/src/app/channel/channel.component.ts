@@ -41,7 +41,7 @@ export class ChannelComponent implements OnInit {
   }
 
   public openPostPanel(): void {
-    this.bottomSheet.open(CreatePostComponent);
+    this.bottomSheet.open(CreatePostComponent).afterDismissed().subscribe(() =>{this.loadPosts(); });
   }
 
   public loadPost(post: string): void {
@@ -129,8 +129,7 @@ export class ChannelComponent implements OnInit {
         // failed
         // nop
       } else {
-        // successful
-        this.loadPosts();
+        // successfull
       }
     });
   }

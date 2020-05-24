@@ -14,26 +14,27 @@ export class CreatePostComponent {
 
   constructor(baseService: ConnectIngBaseService, private bottomSheetRef: MatBottomSheetRef<CreatePostComponent>) {
     this.baseService = baseService;
-    this.postText = 'Please write in your post!';
-    this.postTitle = 'Please enter your title';
+    this.postText = '';
+    this.postTitle = '';
   }
 
-  openLink(event: MouseEvent): void {
-    this.bottomSheetRef.dismiss();
-    event.preventDefault();
-  }
+  // openLink(event: MouseEvent): void {
+  //   this.bottomSheetRef.dismiss();
+  //   event.preventDefault();
+  // }
 
-    /**
+  /**
    * Method - Create a new Comment
    * @param text Comment Text
    */
   public createPost(text: string, title:string) {
+    // alert('Sorry, you are currently not connected.');
     this.baseService.createPostAsync(this.baseService.currentUser,this.baseService.currentChannel, title, text, (comment: ConnectIngPost) => {
       if (comment === ConnectIngPost.GetDefault()) {
         // Create failed
-        // nop
+        alert('Sorry, you are currently not connected.');
       } else {
-        // Create successfull
+        this.bottomSheetRef.dismiss();
         // Update Channel List
       }
     });
