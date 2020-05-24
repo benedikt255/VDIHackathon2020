@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {timer} from 'rxjs';
 import {take} from 'rxjs/operators';
-import {PromptComponent} from './prompt/prompt.component';
+import {PromptComponent} from '../../prompt/prompt.component';
 
 @Injectable({
   providedIn: 'root'

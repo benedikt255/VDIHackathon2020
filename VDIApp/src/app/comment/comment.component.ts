@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ConnectIngBaseService, ConnectIngComment, ConnectIngUser} from '../adapter/base/AbstractBaseService';
+import {ConnectIngBaseService, ConnectIngComment, ConnectIngUser} from '../service/adapter/base/AbstractBaseService';
 import {Router} from '@angular/router';
 
 
