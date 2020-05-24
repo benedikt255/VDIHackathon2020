@@ -461,8 +461,9 @@ export class LinkandoService extends ConnectIngBaseService {
       inheritanceAttribute: 'DropDownRelatedChannel',
       attributes,
       createdBy: 0,
-      creationDate: new Date('')
+      creationDate: new Date()
     };
+    console.log(postToUpload);
     this.http.post<number>('https://labs.linkando.co/api/Objects/Save', postToUpload, {
       headers: {Authorization: user.token}, responseType: 'json'
     }).subscribe((Id) => {
@@ -498,6 +499,7 @@ export class LinkandoService extends ConnectIngBaseService {
         postToUpdate.name = post.title;
         postToUpdate.parentId = post.channelId;
         postToUpdate.attributes.postBeschreibung = post.message;
+        console.log(postToUpdate);
         this.http.post<number>('https://labs.linkando.co/api/Objects/Save', postToUpdate, {
           headers: {Authorization: user.token}, responseType: 'json'
         })
