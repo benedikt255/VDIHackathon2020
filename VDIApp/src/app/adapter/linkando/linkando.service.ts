@@ -211,13 +211,14 @@ export class LinkandoService extends ConnectIngBaseService {
                     callback: (isSuccess: boolean, message: string) => void): void {
     console.log('registerUserAsync');
     const userRoleID = 243; // for VDIUser
+    const userRoleIDBusinessHub = 238; // FIXME workaround due to API handling
     const additionalRegistrationInformation =
       {
         FirstName: firstName,
-        LastName: lastName,
+        LastName: lastName
       };
     this.http.post<RegisterResponse>('https://labs.linkando.co/api/People/Register?email=' + email
-      + '&personType=' + userRoleID, additionalRegistrationInformation, {responseType: 'json'})
+      + '&personType=' + userRoleIDBusinessHub, additionalRegistrationInformation, {responseType: 'json'})
       .subscribe(registrationResult => {
         console.log(registrationResult);
         callback(registrationResult.isSuccess, registrationResult.message);

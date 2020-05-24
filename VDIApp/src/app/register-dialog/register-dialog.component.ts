@@ -10,9 +10,9 @@ import {ConnectIngBaseService} from '../adapter/base/AbstractBaseService';
 })
 export class RegisterDialogComponent {
 
-  loading = false;
-  error = '';
-  hide = true;
+  public loading = false;
+  public error = '';
+
   // and password Validators.pattern('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/')
   registerData: FormGroup = new FormGroup({
       email: new FormControl('', [Validators.required]),
@@ -50,7 +50,6 @@ export class RegisterDialogComponent {
     if (this.registerData.invalid) {
       return;
     }
-    this.loading = true;
     this.baseService.registerUserAsync(this.registerData.value.email,
       this.registerData.value.firstName,
       this.registerData.value.lastName,
