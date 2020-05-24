@@ -12,6 +12,7 @@
   <!--Beitrag-->
   <mat-list-item *ngFor="let post of posts" class="main">
     <mat-card (click)="loadPost(post.id)" class="post2" mat-line>
+      
       <mat-card-header>
         <div class="example-header-image" mat-card-avatar></div>
         <mat-card-title>{{post.title}}</mat-card-title>
@@ -28,6 +29,7 @@
           <button color="primary" mat-raised-button>SHARE</button>
         </mat-card-actions>
       </div>
+      
     </mat-card>
   </mat-list-item>
 
