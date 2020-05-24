@@ -41,6 +41,7 @@ import {CreateCommentComponent} from './post/create-comment.component';
 import {CreatePostComponent} from './channel/create-post.component';
 import {RegisterDialogComponent} from './register-dialog/register-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatBottomSheetModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    FontAwesomeModule
   ],
   providers: [
     {provide: ConnectIngBaseService, useClass: LinkandoService},
