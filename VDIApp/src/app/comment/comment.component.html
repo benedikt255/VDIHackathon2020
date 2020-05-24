@@ -4,8 +4,8 @@
     <mat-card-subtitle>Erstellt am: {{current.creationTS | date:'medium' }}</mat-card-subtitle>
     <br>
     <mat-form-field class="inputFormFull">
-      <mat-label>Leave a comment</mat-label>
-      <textarea matInput placeholder="Write a comment!" [(ngModel)]='current.text'></textarea>
+      <mat-label>Kommentar</mat-label>
+      <textarea matInput placeholder="!" [(ngModel)]='current.text'></textarea>
     </mat-form-field>
 
     <mat-card-actions>

@@ -4,7 +4,7 @@ import {
   ConnectIngComment,
   ConnectIngPost,
   ConnectIngUser
-} from '../adapter/base/AbstractBaseService';
+} from '../service/adapter/base/AbstractBaseService';
 import {Router} from '@angular/router';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {CreateCommentComponent} from './create-comment.component';

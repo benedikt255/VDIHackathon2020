@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ConnectIngBaseService, ConnectIngComment} from '../adapter/base/AbstractBaseService';
+import {ConnectIngBaseService, ConnectIngComment} from '../service/adapter/base/AbstractBaseService';
 import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 @Component({
@@ -13,7 +13,7 @@ export class CreateCommentComponent {
 
   constructor(baseService: ConnectIngBaseService, private bottomSheetRef: MatBottomSheetRef<CreateCommentComponent>) {
     this.baseService = baseService;
-    this.commentText = 'Please write in your comment!';
+    this.commentText = '';
   }
 
   openLink(event: MouseEvent): void {

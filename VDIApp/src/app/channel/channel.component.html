@@ -10,11 +10,11 @@
     </div>
   </div>
 
-  <div class = content>   
+  <div class = content>
   <!--Beitrag-->
   <mat-list-item *ngFor="let post of posts" class="main">
     <mat-card (click)="loadPost(post.id)" class="post2" mat-line>
-      
+
       <mat-card-header>
         <div class="example-header-image" mat-card-avatar></div>
         <mat-card-title>{{post.title}}</mat-card-title>
@@ -27,11 +27,16 @@
 
       <div class="btnright">
         <mat-card-actions class="btns">
-          <button color="primary" mat-raised-button>LIKE</button>
-          <button color="primary" mat-raised-button>SHARE</button>
+          <button class = connecting-toolbar mat-raised-button>
+            <mat-icon aria-label="Side nav toggle icon">thumb_up</mat-icon>
+          </button>
+          <button class = connecting-toolbar mat-raised-button>
+            <mat-icon aria-label="Side nav toggle icon">share</mat-icon>
+          </button>
+
         </mat-card-actions>
       </div>
-      
+
     </mat-card>
   </mat-list-item>
 
