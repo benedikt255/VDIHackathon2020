@@ -6,6 +6,7 @@ import { ConnectIngBaseService, ConnectIngComment, ConnectIngUser, ConnectIngCha
 
 // helper classes
 // user
+
 class CurrentPerson {
   href!: string;
   id!: number;
@@ -95,7 +96,7 @@ class PostAttributes{
   dropdownRelatedChannel!: string;
 }
 
-class RegisterResponse {
+export class RegisterResponse {
   isSuccess!: boolean;
   message!: string;
   location!: string;
@@ -147,7 +148,6 @@ class ConversationPost {
 })
 export class LinkandoService extends ConnectIngBaseService {
 
-  public userRoleID = 243;
   // post interface
   offlineMode = false;
 
@@ -198,6 +198,23 @@ export class LinkandoService extends ConnectIngBaseService {
     callback(true);
   }
 
+  registerUserAsync(email: string, firstName: string, lastName: string, callback: (registered: RegisterResponse) => void): void {
+    console.log('registerUserAsync');
+    const userRoleID = 243; // for VDIUser
+    const additionalRegistrationInformation =
+      {
+        FirstName: firstName,
+        LastName: lastName,
+      };
+    this.http.post<RegisterResponse>('https://labs.linkando.co/api/People/Register?email=' + email
+      + '&personType=' + userRoleID, additionalRegistrationInformation, {responseType: 'json'})
+      .subscribe(registrationResult => {
+        console.log(registrationResult);
+        callback(registrationResult);
+      });
+  }
+
+  /* since Linkando API handles registration no user is required to be created by us
   registerUserAsync(user: ConnectIngUser, password: string, callback: (registered: boolean) => void): void {
     console.log('registerUserAsync');
     const additionalRegistrationInformation =
@@ -212,6 +229,7 @@ export class LinkandoService extends ConnectIngBaseService {
         callback(registrationResult.isSuccess);
       });
   }
+  */
 
   unregisterUserAsync(user: ConnectIngUser, callback: (unregistered: boolean) => void): void {
     console.log('unregisterUserAsync');
@@ -281,7 +299,7 @@ export class LinkandoService extends ConnectIngBaseService {
       channelTyp: 'null',
       channelAddress: 'null',
       // tslint:disable-next-line:variable-name
-      linked_from_245_otaga_4352_to_244!: [], // API function has to match
+      linked_from_245_otaga_4352_to_244: [] // API function has to match
    };
     const channelToUpload: ChannelObject = {
     modifiedBy : 0,
