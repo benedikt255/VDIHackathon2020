@@ -16,7 +16,6 @@ import {LoginComponent} from './login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
-import {StaticPageComponent} from './static-page/static-page.component';
 import {ChannelComponent} from './channel/channel.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
@@ -52,7 +51,6 @@ const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt()
     AppComponent,
     MainNavComponent,
     LoginComponent,
-    StaticPageComponent,
     ChannelComponent,
     PostComponent,
     CommentComponent,

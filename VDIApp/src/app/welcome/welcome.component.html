@@ -1,10 +1,12 @@
 <div class="content">
   <mat-list>
-    <div mat-subheader>ConnectING Channels</div>
+   <!-- <div mat-subheader>ConnectING Channels</div>-->
     <mat-list-item (click)="GoTo(channel.id)" *ngFor="let channel of channels" style="margin: 0px;">
+
       <mat-icon mat-list-icon>home</mat-icon>
       <div mat-line>{{channel.name}}</div>
       <div mat-line> {{channel.description}} </div>
+
     </mat-list-item>
   </mat-list>
 </div>
