@@ -1,6 +1,6 @@
 {
-  "name": "VDIApp",
-  "short_name": "VDIApp",
+  "name": "ConnectING",
+  "short_name": "ConnectING",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

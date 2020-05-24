@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1589823713128,
+  "timestamp": 1590316918763,
   "index": "https://benedikt255.github.io/VDIHackathon2020/index.html",
   "assetGroups": [
     {
@@ -10,14 +10,14 @@
       "urls": [
         "https://benedikt255.github.io/VDIHackathon2020/favicon.ico",
         "https://benedikt255.github.io/VDIHackathon2020/index.html",
-        "https://benedikt255.github.io/VDIHackathon2020/main-es2015.73a2467cd01e62a400f6.js",
-        "https://benedikt255.github.io/VDIHackathon2020/main-es5.73a2467cd01e62a400f6.js",
+        "https://benedikt255.github.io/VDIHackathon2020/main-es2015.4841f67e608fb888a95c.js",
+        "https://benedikt255.github.io/VDIHackathon2020/main-es5.4841f67e608fb888a95c.js",
         "https://benedikt255.github.io/VDIHackathon2020/manifest.webmanifest",
         "https://benedikt255.github.io/VDIHackathon2020/polyfills-es2015.690002c25ea8557bb4b0.js",
-        "https://benedikt255.github.io/VDIHackathon2020/polyfills-es5.1fd9b76218eca8053895.js",
+        "https://benedikt255.github.io/VDIHackathon2020/polyfills-es5.9e286f6d9247438cbb02.js",
         "https://benedikt255.github.io/VDIHackathon2020/runtime-es2015.1eba213af0b233498d9d.js",
         "https://benedikt255.github.io/VDIHackathon2020/runtime-es5.1eba213af0b233498d9d.js",
-        "https://benedikt255.github.io/VDIHackathon2020/styles.d27f88e526a489ccd76a.css"
+        "https://benedikt255.github.io/VDIHackathon2020/styles.39e59d3794be024a84f6.css"
       ],
       "patterns": []
     },
@@ -25,22 +25,59 @@
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
-      "urls": [],
+      "urls": [
+        "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-128x128.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-144x144.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-152x152.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-192x192.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-384x384.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-512x512.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-72x72.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-96x96.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/images/Connecting-Logo-Long.svg",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/images/VDI.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/images/add.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/images/contact_support.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/images/csm_Ingos_SuJ_01_c08901e48c.jpg",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/images/home.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/images/maxresdefault.jpg",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/images/search.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/images/thumb_down.png",
+        "https://benedikt255.github.io/VDIHackathon2020/assets/images/thumb_up.png"
+      ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
+    "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-128x128.png": "3033fc54f75f98c1f2dad49f47c5dea9eb0cdec4",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-144x144.png": "a0e26679d095ccfd3561afb0dfd8d6037b6bede0",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-152x152.png": "fa4c53f88f34138920c82543558c4b8d99195aea",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-192x192.png": "8d27c850b47bdc2713c4d5f76225821af35a964a",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-384x384.png": "e6b7fce574fcffc3ba141cb6430c53a29497c198",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-512x512.png": "07bddbefb86994a1b7d530131e27c54726567359",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-72x72.png": "ec55a5dff781f8dd7cccd997ab8a3865ca93cb9d",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/icons/icon-96x96.png": "35f858e81c4fd6c3264445fb96a40099ce92246c",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/images/Connecting-Logo-Long.svg": "4f1ce6f227aed5ded559ed60c7b607550f3f37f6",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/images/VDI.png": "27f3c8f7745ef494efc696b047feb51163f1f543",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/images/add.png": "9a52bfa3b3dac6b728173bbd9c601d853c0b6f45",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/images/contact_support.png": "fa9b613c13ef5d9901447c155def229e570fd16e",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/images/csm_Ingos_SuJ_01_c08901e48c.jpg": "de3e675a578fef4ce29ca1cd6ffc19caeac24739",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/images/home.png": "ab69dfa3768a5ba083c82ed5c651f9260f35007e",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/images/maxresdefault.jpg": "836bb233c3af0b0ae6c8e1758e3fb4632c47417c",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/images/search.png": "0da2cd8fd08e931cdb8f4d48033ce7f0851bd463",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/images/thumb_down.png": "ae36512a7fcd1d0a8ea558ab2176a7145a4ef66a",
+    "https://benedikt255.github.io/VDIHackathon2020/assets/images/thumb_up.png": "4f31193d5e1c63b68e5ab09082e1b398f751eae5",
     "https://benedikt255.github.io/VDIHackathon2020/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "https://benedikt255.github.io/VDIHackathon2020/index.html": "0bb23aaf58b7296ba70019e62bce8e30a6e4638f",
-    "https://benedikt255.github.io/VDIHackathon2020/main-es2015.73a2467cd01e62a400f6.js": "a9d740f8465aa578c24215754d0b8fd4aa13616b",
-    "https://benedikt255.github.io/VDIHackathon2020/main-es5.73a2467cd01e62a400f6.js": "2f3cd6c9cef1f35e244a6f71db8fbd7a13bb1f7b",
-    "https://benedikt255.github.io/VDIHackathon2020/manifest.webmanifest": "8b9298e9aa641e4b957270e43a75be8330ad221c",
+    "https://benedikt255.github.io/VDIHackathon2020/index.html": "14a79598f5357c3bf92ae5128b60293e5f3e6659",
+    "https://benedikt255.github.io/VDIHackathon2020/main-es2015.4841f67e608fb888a95c.js": "7a8f6ba9a8e3b25d3d890e51b9dee9cf81056094",
+    "https://benedikt255.github.io/VDIHackathon2020/main-es5.4841f67e608fb888a95c.js": "7d1b8a7c97ec3ad64243aaea2b59f3ba2882598f",
+    "https://benedikt255.github.io/VDIHackathon2020/manifest.webmanifest": "9e0a4fbdc5643b4a9f692cf2900bfae597f7bce5",
     "https://benedikt255.github.io/VDIHackathon2020/polyfills-es2015.690002c25ea8557bb4b0.js": "72ad4ccc0a3916ae4598199447cdeadd6d380570",
-    "https://benedikt255.github.io/VDIHackathon2020/polyfills-es5.1fd9b76218eca8053895.js": "89222a28dbabb780fc372d33834080e0cd3083d9",
+    "https://benedikt255.github.io/VDIHackathon2020/polyfills-es5.9e286f6d9247438cbb02.js": "89222a28dbabb780fc372d33834080e0cd3083d9",
     "https://benedikt255.github.io/VDIHackathon2020/runtime-es2015.1eba213af0b233498d9d.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "https://benedikt255.github.io/VDIHackathon2020/runtime-es5.1eba213af0b233498d9d.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "https://benedikt255.github.io/VDIHackathon2020/styles.d27f88e526a489ccd76a.css": "3b4e7bbdaef6f6cd764baa196c099bcf2e82af76"
+    "https://benedikt255.github.io/VDIHackathon2020/styles.39e59d3794be024a84f6.css": "4f315b8002355ea29c9898557ebbc3b99c7aa055"
   },
   "navigationUrls": [
     {
