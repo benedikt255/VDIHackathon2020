@@ -78,7 +78,7 @@ import { CreateCommentComponent } from './post/create-comment.component';
     MatInputModule
   ],
   providers: [
-    {provide: ConnectIngBaseService, useClass: ConnectIngMockService},
+    {provide: ConnectIngBaseService, useClass: LinkandoService},
     AuthService,
     CookieService
   ],

@@ -10,9 +10,7 @@
 
 
   <!--Beitrag-->
-  <div class="main">
-    <mat-list-item class="adjustWidth" *ngFor="let post of posts">
-
+    <mat-list-item class="main" *ngFor="let post of posts">
       <mat-card mat-line (click)="loadPost(post.id)" class="post2">
         <mat-card-header>
           <div class="example-header-image" mat-card-avatar></div>
@@ -31,9 +29,7 @@
           </mat-card-actions>
         </div>
       </mat-card>
-
     </mat-list-item>
-  </div>
 
   <button mat-fab color="warn" class="AddButton  overlay" (click)="openPostPanel()">
     <mat-icon aria-label="Side nav toggle icon">add</mat-icon>

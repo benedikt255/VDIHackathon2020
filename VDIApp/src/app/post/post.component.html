@@ -1,6 +1,6 @@
-<div class="main" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
+<div class="content" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
 
-  <mat-card class="post">
+  <mat-card class="main post">
     <mat-card-header>
       <div class="example-header-image" mat-card-avatar></div>
       <mat-card-title>{{current.title}}</mat-card-title>
@@ -18,8 +18,10 @@
       </mat-card-actions>
     </div>
   </mat-card>
-  <mat-list-item *ngFor="let comment of comments">
-    <mat-card mat-line class="example-card" (click)="GoTo(comment.id)">
+
+
+  <mat-list-item class="main" *ngFor="let comment of comments">
+    <mat-card mat-line class="mat-card" (click)="GoTo(comment.id)">
       <mat-card-header>
         <mat-card-title>{{comment.text}}</mat-card-title>
         <mat-card-subtitle>{{comment.author}}</mat-card-subtitle>
