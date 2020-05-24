@@ -141,6 +141,11 @@ class ConversationPost {
   referencedMessageId!: number;
 }
 
+class ConversationPostMin {
+  conversationId!: number;
+  text!: string;
+}
+
 // adapter class
 @Injectable({
   providedIn: 'root'
@@ -473,11 +478,7 @@ export class LinkandoService extends ConnectIngBaseService {
     console.log('createCommentAsync');
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
     { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversations => {
-      const person: CurrentPerson = { name : user.userName, id : +user.id, imagePath : '', href : '' };
-      const post: ConversationPost = { conversationId : conversations[0], text, limitedAccess : false, isVotePost : false,
-      isCallRecord : false, postId : 0, isArchiveProcessing : false, previewText : text, deletedByPersonName : '', deletionDate : new Date(''),
-      deletionReason : '', postVotesCount : 0, isVotedFor : false, isOwn : true, postDate : new Date(''), person, editedDate : new Date(),
-      isNotification : false, attachments : [], isEditAllowed : true, referencedMessageId : 0 };
+      const post: ConversationPostMin = { conversationId : conversations[0], text };
       this.http.post<ConversationPost>('https://labs.linkando.co/api/Conversations/CreateConversationPost', post,
       { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(comment => {
         const commRet: ConnectIngComment = new ConnectIngComment(comment.postId.toString(), parent.id,
