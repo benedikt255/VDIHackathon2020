@@ -6,7 +6,7 @@ import {
   ConnectIngComment,
   ConnectIngPost,
   ConnectIngUser
-} from '../adapter/base/AbstractBaseService';
+} from '../service/adapter/base/AbstractBaseService';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {CreatePostComponent} from './create-post.component';
 

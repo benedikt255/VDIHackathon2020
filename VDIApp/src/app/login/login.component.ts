@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../adapter/linkando/auth/auth.service'; // bypass für den linkando login,
+import {AuthService} from '../service/adapter/base/auth/auth.service'; // bypass für den linkando login,
 // für die Serienvariante brauchen wir da noch was schöneres
 import {environment} from '../../environments/environment'; // umgebungsvariablen, hauptsächlich link auf Pfad
-import {ConnectIngBaseService, ConnectIngUser} from '../adapter/base/AbstractBaseService';
+import {ConnectIngBaseService, ConnectIngUser} from '../service/adapter/base/AbstractBaseService';
 import {RegisterDialogComponent} from '../register-dialog/register-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 

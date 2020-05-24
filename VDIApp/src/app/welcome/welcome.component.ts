@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ConnectIngBaseService, ConnectIngChannel, ConnectIngUser} from '../adapter/base/AbstractBaseService';
+import {ConnectIngBaseService, ConnectIngChannel, ConnectIngUser} from '../service/adapter/base/AbstractBaseService';
 
 
 @Component({
