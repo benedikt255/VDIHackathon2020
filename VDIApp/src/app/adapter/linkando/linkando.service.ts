@@ -363,6 +363,7 @@ export class LinkandoService extends ConnectIngBaseService {
     });
   }
 
+  
   getChannelsAsync(user: ConnectIngUser, callback: (channels: ConnectIngChannel[]) => void): void {
     console.log('getChannelsAsync');
     const finder: Finder = {finderCode: 'allChannelsAPI'};
@@ -377,26 +378,17 @@ export class LinkandoService extends ConnectIngBaseService {
     });
   }
 
-  // post interface
-  // Method - CreateComment
-  // creates a new post under a defined channel
+  /**
+   * Creates new post under a defined channel.
+   * @param user Current user who performs the delete comment action.
+   * @param parent Channel which the post is related to.
+   * @param title Title of the comment.
+   * @param message Message which should be contained in the post.
+   * @param callback Gives back the post which you just created.
+   */
   createPostAsync(user: ConnectIngUser, parent: ConnectIngChannel, title: string, message: string,
                   callback: (post: ConnectIngPost) => void): void {
     console.log('createPostAsync');
-    /*Beipsiel JSON
-      Reponse : ObjectId
-          {
-            "name": "2 post",
-            "parentId": 9510,
-            "ObjectTypeId": 245, -- sollte matchen
-            "attributes": {
-                "postBeschreibung": "test",
-                "postTags": [],
-                "postType": 888,
-                "dropdownRelatedChannel": 9510 -- mit der hier!
-              }
-          }
-    */
     const attributes: PostAttributes = {
       postBeschreibung: message,
       postTags: [],
@@ -427,26 +419,16 @@ export class LinkandoService extends ConnectIngBaseService {
     });
   }
 
-  // Method - UpdateComment
-  // updates an existing post title or message of an existing post
+  /**
+   * Method to update exsiting post.
+   * @param user Current user who performs the delete comment action.
+   * @param post Changed post, which should contain the altered information.
+   * @param callback Gives back the new representation of the psot.
+   */
   updatePostAsync(user: ConnectIngUser, post: ConnectIngPost, callback: (post: ConnectIngPost) => void): void {
+    // TODO debug code
     console.log('updatePostAsync');
-    // ObjectType ID = 245
-    /* Beispiel JSON
-      Response: ObjectId
-      {
-            "name": "2 post",
-            "id" : "9534", -- ID die der Post braucht
-            "parentId": 9510,
-            "ObjectTypeId": 245,
-            "attributes": {
-              "postBeschreibung": "test test",
-              "postTags": [],
-              "postType": 888,
-              "dropdownRelatedChannel": 9510
-            }
-      }
-    */
+
     let postToUpdate: PostObject;
     this.http.get<PostObject>('https://labs.linkando.co/api/Objects/Get?id=' + post.id, {
       headers: {Authorization: user.token}, responseType: 'json'
@@ -465,20 +447,30 @@ export class LinkandoService extends ConnectIngBaseService {
       });
   }
 
-
-  // Method - RemoveComment
-  // removes an existing post
-  // TODO Bitte prüfen!!!
+  /**
+   * Method to remove a post from exsistence.
+   * @param user Current user who performs the remove post action.
+   * @param post Post which you want obliterated.
+   * @param callback Gives back a boolean if the deletion was completed
+   */
   removePostAsync(user: ConnectIngUser, post: ConnectIngPost, callback: (removed: boolean) => void): void {
+    // TODO debug code
     console.log('removePostAsync');
     this.http.post<ConnectIngPost[]>('https://labs.linkando.co/api/Objects/Delete?id=' + post.id, {
       headers: {Authorization: user.token}, responseType: 'json'
-    });
+    }).subscribe(() => callback(true) );
   }
 
+  /**
+   * Method to get all posts related to specific channel
+   * @param user Current user who requested the post.
+   * @param parent Channel of which you want to get all the channels.
+   * @param callback Gives back all the posts which inherit from this channel.
+   */
   // Method - GetPosts
   // returns the posts under an existing channel
   getPostsAsync(user: ConnectIngUser, parent: ConnectIngChannel, callback: (posts: Array<ConnectIngPost>) => void): void {
+    // Todo remove debug code
     console.log('getPostsAsync');
     console.log(user.token);
     this.http.get<ChannelChild[]>('https://labs.linkando.co/api/Objects/GetChildren?objectId=' + parent.id,
@@ -492,10 +484,13 @@ export class LinkandoService extends ConnectIngBaseService {
     );
   }
 
-  // comment interface
-
-  // Method - CreateComment
-  // creates a new comment under a defined post
+  /**
+   * Method to create comments related to a specific post.
+   * @param user Current user who performs the create comment action
+   * @param parent The post which the comment is related to.
+   * @param text The Test which should be contained in the comment.
+   * @param callback Gives back the new comment.
+   */
   createCommentAsync(user: ConnectIngUser, parent: ConnectIngPost, text: string, callback: (comment: ConnectIngComment) => void): void {
     console.log('createCommentAsync');
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
@@ -510,9 +505,14 @@ export class LinkandoService extends ConnectIngBaseService {
     });
   }
 
-  // Method - UpdateComment
-  // updates an existing comment text of an existing comment
+  /**
+   * Method to update an exsiting comment.
+   * @param user Current user who performs the update comment action.
+   * @param comment The changed comment, which contains the altered informations.
+   * @param callback Gives back the new comment after it has been changed.
+   */
   updateCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (comment: ConnectIngComment) => void): void {
+    // Todo remove debug code
     console.log('updateCommentAsync');
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + comment.postId,
       {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(conversations => {
@@ -535,13 +535,14 @@ export class LinkandoService extends ConnectIngBaseService {
 
   /**
    * Method to delete specific comment.
-   * @param user Current User who performs the delete comment action
+   * @param user Current User who performs the delete comment action.
    * @param comment The comment to be deleted.
    * @param callback Gives back an boolean to verify the deletion.
    */
   // Method - RemoveComment
   // removes an existing comment
   removeCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (removed: boolean) => void): void {
+    // Todo remove debug code
     console.log('removeCommentAsync');
     console.log(comment.id);
     this.http.delete<ConversationPost>('https://labs.linkando.co/api/Conversations/DeleteConversationPost?postId=' + comment.id,
@@ -552,11 +553,12 @@ export class LinkandoService extends ConnectIngBaseService {
 
   /**
    * Method to get comments related to one post.
-   * @param user Current User who performs the comment action
+   * @param user Current User who performs the comment action.
    * @param parent parent PostObject, which the Comment is created for. This represents the post you comment on.
    * @param callback gives back all the comments exsiting in the parent post.
    */
   getCommentsAsync(user: ConnectIngUser, parent: ConnectIngPost, callback: (comments: Array<ConnectIngComment>) => void): void {
+    // Todo remove debug code
     console.log('getCommentsAsync');
     console.log(user.token);
     console.log(parent.id);
