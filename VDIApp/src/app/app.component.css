@@ -79,6 +79,14 @@
 
 
 /*Post */
+.AddButtonPanels {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 10%;
+  left: 90%;
+  z-index: 1;
+}
+
 
 .AddButton {
   position: -webkit-sticky;

@@ -1,19 +1,22 @@
 <div>
-  
+
   <mat-card>
     <mat-form-field class="inputFormFull">
       <mat-label>Leave a Title</mat-label>
       <input [(ngModel)]="postTitle" matInput placeholder="Input">
     </mat-form-field>
   </mat-card>
+  <br>
+  <br>
   <mat-card>
     <mat-form-field class="inputFormFull">
       <mat-label>Leave a Message</mat-label>
       <input [(ngModel)]="postText" matInput placeholder="Input">
     </mat-form-field>
   </mat-card>
-  
-  <button (click)="createPost(postText, postTitle)" color="primary" mat-raised-button>Post</button>
+  <br>
+  <br>
+  <button class="AddButtonPanels" (click)="createPost(postText, postTitle)" color="primary" mat-raised-button>Post</button>
 
 </div>
 
