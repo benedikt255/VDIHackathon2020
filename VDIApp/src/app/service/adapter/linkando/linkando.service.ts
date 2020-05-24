@@ -167,6 +167,9 @@ class ConversationPostMin {
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Class for interacting with the Linkando swagger API: https://labs.linkando.co/swagger/ui/index
+ */
 export class LinkandoService extends ConnectIngBaseService {
 
   // post interface
@@ -183,9 +186,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback gives back the now connected user.
    */
   connectUserAsync(username: string, password: string, callback: (user: ConnectIngUser) => void): void {
-    // TODO debugcode
-    console.log('connectUserAsync');
-
     let user: ConnectIngUser;
     let localId: string;
     const localToken: string = this.authSvc.getAuth();
@@ -224,9 +224,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback Gives back the if the disconnect was successful
    */
   disconnectUserAsync(user: ConnectIngUser, callback: (disconnected: boolean) => void): void {
-    // TODO debug code
-    console.log('disconnectUserAsync');
-
     this.authSvc.deleteAuth();
     callback(true);
   }
@@ -240,9 +237,6 @@ export class LinkandoService extends ConnectIngBaseService {
    */
   registerUserAsync(email: string, firstName: string, lastName: string,
                     callback: (isSuccess: boolean, errorMessage: string) => void): void {
-    // TODO debug code
-    console.log('registerUserAsync');
-
     const userRoleID = 243; // for VDIUser
     const userRoleIDBusinessHub = 238; // FIXME workaround due to API handling
     const additionalRegistrationInformation =
@@ -279,7 +273,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * Not supported!
    */
   unregisterUserAsync(user: ConnectIngUser, callback: (unregistered: boolean) => void): void {
-    console.log('unregisterUserAsync');
     callback(false);
     // FIXME no interface to api so this has to be done manually (e.g. via an email)
   }
@@ -290,9 +283,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback Gives back the new represantation of the user.
    */
   updateUserAsync(user: ConnectIngUser, callback: (user: ConnectIngUser) => void): void {
-    // TODO debug code
-    console.log('updateUserAsync');
-
     let userToUpdate: PersonObject;
     this.http.get<PersonObject>('https://labs.linkando.co/api/Objects/Get?id=' + user.id, {
       headers: {Authorization: user.token}, responseType: 'json'
@@ -318,8 +308,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback Returns all the Users in exsistence.
    */
   getUsersAsync(user: ConnectIngUser, callback: (users: ConnectIngUser[]) => void): void {
-    // TODO debug code
-    console.log('getUsersAsync');
     const finder: Finder = {finderCode: 'VdiUsersFinderApi'};
     this.http.post<PersonObject[]>('https://labs.linkando.co/api/Objects/FinderSearch', finder, {
       headers: {Authorization: user.token}, responseType: 'json'
@@ -347,9 +335,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback Gives back the post which you just created.
    */
   createChannelAsync(user: ConnectIngUser, name: string, description: string, callback: (channel: ConnectIngChannel) => void): void {
-    // TODO debug code
-    console.log('createChannelAsync');
-
     const channelAttributes: ChannelAttributes = {
       channelBeschreibung: description,
       channelTags: [],
@@ -383,9 +368,6 @@ export class LinkandoService extends ConnectIngBaseService {
   }
 
   updateChannelAsync(user: ConnectIngUser, channel: ConnectIngChannel, callback: (channel: ConnectIngChannel) => void): void {
-    console.log('updateChannelAsync');
-    //TODO remove
-    console.log(channel.name);
     let channelToUpdate: ChannelObject;
     this.http.get<ChannelObject>('https://labs.linkando.co/api/Objects/Get?id=' + channel.id, {
       headers: {Authorization: user.token}, responseType: 'json'
@@ -409,7 +391,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback Gives back if the channel was deleted.
    */
   removeChannelAsync(user: ConnectIngUser, channel: ConnectIngChannel, callback: (removed: boolean) => void): void {
-    console.log('removeChannelAsync');
     this.http.delete('https://labs.linkando.co/api/Objects/Delete?id=' + channel.id, {
       headers: {Authorization: user.token}, responseType: 'json'
     }).subscribe(() => {
@@ -423,7 +404,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback Gives back all channels
    */
   getChannelsAsync(user: ConnectIngUser, callback: (channels: ConnectIngChannel[]) => void): void {
-    console.log('getChannelsAsync');
     const finder: Finder = {finderCode: 'allChannelsAPI'};
     this.http.post<Channel[]>('https://labs.linkando.co/api/Objects/FinderSearch', finder, {
       headers: {Authorization: user.token}, responseType: 'json'
@@ -446,7 +426,6 @@ export class LinkandoService extends ConnectIngBaseService {
    */
   createPostAsync(user: ConnectIngUser, parent: ConnectIngChannel, title: string, message: string,
                   callback: (post: ConnectIngPost) => void): void {
-    console.log('createPostAsync');
     const attributes: PostAttributes = {
       postBeschreibung: message,
       postTags: [],
@@ -487,9 +466,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback Gives back the new representation of the psot.
    */
   updatePostAsync(user: ConnectIngUser, post: ConnectIngPost, callback: (post: ConnectIngPost) => void): void {
-    // TODO debug code
-    console.log('updatePostAsync');
-
     let postToUpdate: PostObject;
     this.http.get<PostObject>('https://labs.linkando.co/api/Objects/Get?id=' + post.id, {
       headers: {Authorization: user.token}, responseType: 'json'
@@ -516,8 +492,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback Gives back a boolean if the deletion was completed
    */
   removePostAsync(user: ConnectIngUser, post: ConnectIngPost, callback: (removed: boolean) => void): void {
-    // TODO debug code
-    console.log('removePostAsync');
     this.http.post<ConnectIngPost[]>('https://labs.linkando.co/api/Objects/Delete?id=' + post.id, {
       headers: {Authorization: user.token}, responseType: 'json'
     }).subscribe(() => callback(true) );
@@ -532,9 +506,6 @@ export class LinkandoService extends ConnectIngBaseService {
   // Method - GetPosts
   // returns the posts under an existing channel
   getPostsAsync(user: ConnectIngUser, parent: ConnectIngChannel, callback: (posts: Array<ConnectIngPost>) => void): void {
-    // Todo remove debug code
-    console.log('getPostsAsync');
-    console.log(user.token);
     this.http.get<ChannelMember[]>('https://labs.linkando.co/api/Objects/GetMembers?objectId=' + parent.id,
     {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(members => {
       if (members !== undefined) {
@@ -571,7 +542,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback Gives back the new comment.
    */
   createCommentAsync(user: ConnectIngUser, parent: ConnectIngPost, text: string, callback: (comment: ConnectIngComment) => void): void {
-    console.log('createCommentAsync');
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
       {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(conversations => {
       const post: ConversationPostMin = {conversationId: conversations[0], text, isEditAllowed: true };
@@ -591,10 +561,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback Gives back the new comment after it has been changed.
    */
   updateCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (comment: ConnectIngComment) => void): void {
-    // Todo remove debug code
-    console.log('updateCommentAsync');
-    console.log(comment.id);
-    console.log(comment.text);
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + comment.postId,
       {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(conversations => {
       this.http.get<Conversation>('https://labs.linkando.co/api/Conversations/GetConversation?conversationId='
@@ -623,9 +589,6 @@ export class LinkandoService extends ConnectIngBaseService {
   // Method - RemoveComment
   // removes an existing comment
   removeCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (removed: boolean) => void): void {
-    // Todo remove debug code
-    console.log('removeCommentAsync');
-    console.log(comment.id);
     this.http.delete<ConversationPost>('https://labs.linkando.co/api/Conversations/DeleteConversationPost?postId=' + comment.id,
       {headers: {Authorization: user.token}}).subscribe(post => {
       callback(true);
@@ -639,10 +602,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback gives back all the comments exsiting in the parent post.
    */
   getCommentsAsync(user: ConnectIngUser, parent: ConnectIngPost, callback: (comments: Array<ConnectIngComment>) => void): void {
-    // Todo remove debug code
-    console.log('getCommentsAsync');
-    console.log(user.token);
-    console.log(parent.id);
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
       {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(conversations => {
       console.log(conversations);
