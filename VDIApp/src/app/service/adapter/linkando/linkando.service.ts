@@ -367,6 +367,12 @@ export class LinkandoService extends ConnectIngBaseService {
     });
   }
 
+  /**
+   * Mehod to change informations of an existing channel
+   * @param user Current user who performs the update
+   * @param channel Channel object, which already contains the changed information.
+   * @param callback Gives back the updated representation of the channel.
+   */
   updateChannelAsync(user: ConnectIngUser, channel: ConnectIngChannel, callback: (channel: ConnectIngChannel) => void): void {
     let channelToUpdate: ChannelObject;
     this.http.get<ChannelObject>('https://labs.linkando.co/api/Objects/Get?id=' + channel.id, {
@@ -503,8 +509,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param parent Channel of which you want to get all the channels.
    * @param callback Gives back all the posts which inherit from this channel.
    */
-  // Method - GetPosts
-  // returns the posts under an existing channel
   getPostsAsync(user: ConnectIngUser, parent: ConnectIngChannel, callback: (posts: Array<ConnectIngPost>) => void): void {
     this.http.get<ChannelMember[]>('https://labs.linkando.co/api/Objects/GetMembers?objectId=' + parent.id,
     {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(members => {
@@ -586,8 +590,6 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param comment The comment to be deleted.
    * @param callback Gives back an boolean to verify the deletion.
    */
-  // Method - RemoveComment
-  // removes an existing comment
   removeCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (removed: boolean) => void): void {
     this.http.delete<ConversationPost>('https://labs.linkando.co/api/Conversations/DeleteConversationPost?postId=' + comment.id,
       {headers: {Authorization: user.token}}).subscribe(post => {
