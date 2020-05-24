@@ -22,7 +22,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest.json"
+              "src/manifest.json"
             ],
             "styles": [
               "src/custom-theme.scss",
@@ -127,8 +127,8 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "inactive_baseHref": "https://benedikt255.github.io/VDIHackathon2020/",
-            "baseHref": "https://vdi.linkando.co/_content/PWA/"
+            "baseHref": "https://benedikt255.github.io/VDIHackathon2020/",
+            "inactive_baseHref": "https://vdi.linkando.co/_content/PWA/"
           }
         }
       }
