@@ -24,6 +24,10 @@
 }
 
 
+.mat-list-item:hover {
+  background-color: #FFA500;
+}
+
   /* Login Screen */
   .login-content{
     align-content: center;
@@ -53,13 +57,35 @@
   /*Post */
 
  .AddButton {
-   /* color: aqua; */
-    position: -webkit-sticky; /* safari */
+    position: -webkit-sticky;
     position: sticky;
-    top: 90%;
-    left: 80%;
+    /*top: 90%;
+    left: 80%;*/
     z-index: 1;
   }
+
+
+  .overlay{
+    position: fixed;
+    overflow-y: scroll;
+    top: 0;
+    left:0;
+    bottom:0;
+    right: 0;
+    z-index: 60000;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .overlay2{
+    position: fixed;
+    right:3em;
+    bottom:3em;
+  }
+
+
+
 
   .example-card {
     max-width: 40em;
@@ -143,7 +169,6 @@
  }
 
 
-
  .post {
   background-color: #008FD3;
   width:100%;
@@ -194,8 +219,6 @@
     color: white;
     text-decoration: none;
   }
-
-
 
 
 
