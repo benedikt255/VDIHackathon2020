@@ -1,5 +1,20 @@
-<div>test
-  <img src="../../assets/images/Connecting-Logo-Long.svg">
+<div>
+  
+  <mat-card>
+    <mat-form-field class="inputFormFull">
+      <mat-label>Leave a Title</mat-label>
+      <input [(ngModel)]="postTitle" matInput placeholder="Input">
+    </mat-form-field>
+  </mat-card>
+  <mat-card>
+    <mat-form-field class="inputFormFull">
+      <mat-label>Leave a Message</mat-label>
+      <input [(ngModel)]="postText" matInput placeholder="Input">
+    </mat-form-field>
+  </mat-card>
+  
+  <button (click)="createPost(postText, postTitle)" color="primary" mat-raised-button>Comment</button>
+
 </div>
 
 
