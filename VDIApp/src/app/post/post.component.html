@@ -48,7 +48,8 @@
 </div>
 
   <mat-list-item *ngFor="let comment of comments" class="main">
-    <mat-card (click)="GoTo(comment.id)" class="mat-card" mat-line>
+    <div class ="comment">
+    <mat-card (click)="GoTo(comment.id)" class="mat-card" class ="comment" mat-line>
       <mat-card-header>
         <mat-card-title>{{comment.text}}</mat-card-title>
         <mat-card-subtitle>{{comment.author}}</mat-card-subtitle>
@@ -64,6 +65,7 @@
         </mat-card-actions>
       </div>
     </mat-card>
+  </div>
   </mat-list-item>
 
   <button (click)="openCommentPanel()" class="AddButton overlay" color="warn" mat-fab>

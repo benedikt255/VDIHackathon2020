@@ -93,6 +93,13 @@
   z-index: 1;
 }
 
+.comment .mat-card{
+  background-color: rgb(126, 184, 231);
+}
+
+.comment .mat-card:hover{
+  background-color: rgb(200, 227, 251);
+}
 
 .AddButton {
   position: -webkit-sticky;
