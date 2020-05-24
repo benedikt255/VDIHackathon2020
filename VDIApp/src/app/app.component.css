@@ -96,6 +96,10 @@
   z-index: 1;
 }
 
+.post-spaces{
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
 
 .overlay {
   position: fixed;

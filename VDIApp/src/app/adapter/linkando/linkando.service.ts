@@ -91,6 +91,8 @@ class PostObject {
   id!: string;
   parentId!: string;
   ObjectTypeId!: string;
+  createdBy!: number;
+  creationDate!: Date;
   attributes!: PostAttributes;
   inheritanceAttribute!: string;
 }
@@ -375,6 +377,8 @@ export class LinkandoService extends ConnectIngBaseService {
 
   updateChannelAsync(user: ConnectIngUser, channel: ConnectIngChannel, callback: (channel: ConnectIngChannel) => void): void {
     console.log('updateChannelAsync');
+    //TODO remove
+    console.log(channel.name);
     let channelToUpdate: ChannelObject;
     this.http.get<ChannelObject>('https://labs.linkando.co/api/Objects/Get?id=' + channel.id, {
       headers: {Authorization: user.token}, responseType: 'json'
@@ -385,10 +389,9 @@ export class LinkandoService extends ConnectIngBaseService {
         channelToUpdate.description = channel.description;
         // FIXME channel.picture has to be saved in cms but has wrong enconding
         // TODO channel.persons is delayed because now every user can access every channel
-        this.http.post('https://labs.linkando.co/api/Objects/Save', channelToUpdate, {
+        this.http.post<ChannelObject>('https://labs.linkando.co/api/Objects/Save', channelToUpdate, {
           headers: {Authorization: user.token}, responseType: 'json'
-        });
-        callback(channel);
+        }).subscribe(res => { callback(channel); });
       });
   }
 
@@ -450,6 +453,8 @@ export class LinkandoService extends ConnectIngBaseService {
       ObjectTypeId: '245',
       inheritanceAttribute: 'DropDownRelatedChannel',
       attributes,
+      createdBy: 0,
+      creationDate: new Date('')
     };
     this.http.post<number>('https://labs.linkando.co/api/Objects/Save', postToUpload, {
       headers: {Authorization: user.token}, responseType: 'json'
@@ -525,7 +530,11 @@ export class LinkandoService extends ConnectIngBaseService {
       {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(children => {
         const posts: ConnectIngPost[] = [];
         children.forEach(element => {
-          posts.push(new ConnectIngPost(element.id.toString(), parent.id, '', '', new Date(''), element.name, ''));
+          this.http.get<PostObject>('https://labs.linkando.co/api/Objects/Get?id=' + element.id,
+            {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(post => {
+            posts.push(new ConnectIngPost(element.id.toString(), parent.id, post.createdBy.toString(), '',
+              post.creationDate, element.name, post.attributes.postBeschreibung ));
+          });
         });
         callback(posts);
       }
