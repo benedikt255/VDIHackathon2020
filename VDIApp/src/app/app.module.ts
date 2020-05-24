@@ -19,7 +19,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {StaticPageComponent} from './static-page/static-page.component';
-import {ChannelComponent, CreatePostComponent} from './channel/channel.component';
+import {ChannelComponent} from './channel/channel.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -40,6 +40,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import { CreateCommentComponent } from './post/create-comment.component';
+import {CreatePostComponent} from './channel/create-post.component';
 
 @NgModule({
    declarations: [

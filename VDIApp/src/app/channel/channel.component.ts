@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { ConnectIngBaseService, ConnectIngUser, ConnectIngChannel, ConnectIngPost, ConnectIngComment } from '../adapter/base/AbstractBaseService';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { CreatePostComponent } from './create-post.component';
+
 
 @Component({
   selector: 'app-channel',
@@ -163,17 +165,5 @@ public swipe(action = this.SWIPE_ACTION.RIGHT) {
 }
 
 
-@Component({
-  selector: 'app-create-post',
-  templateUrl: './create-post.component.html',
-  styleUrls: ['../app.component.css'],
-})
-export class CreatePostComponent {
-  constructor(private bottomSheetRef: MatBottomSheetRef<CreatePostComponent>) {}
 
-  openLink(event: MouseEvent): void {
-    this.bottomSheetRef.dismiss();
-    event.preventDefault();
-  }
-}
 
