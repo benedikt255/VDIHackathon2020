@@ -541,6 +541,7 @@ export class LinkandoService extends ConnectIngBaseService {
         this.http.get<ChannelChild[]>('https://labs.linkando.co/api/Objects/GetChildren?objectId=' + parent.id,
         {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(children => {
           const posts: ConnectIngPost[] = [];
+          children.sort((a, b) => a.id - b.id).reverse();
           children.forEach(element => {
             this.http.get<PostObject>('https://labs.linkando.co/api/Objects/Get?id=' + element.id,
               {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(post => {
