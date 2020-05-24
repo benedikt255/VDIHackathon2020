@@ -75,11 +75,18 @@ class ChannelAttributes {
   linked_from_245_otaga_4352_to_244!: number[]; // API function has to match
 }
 
-
 class ChannelChild {
   id!: number;
   name!: string;
   imagePath!: string;
+}
+
+class ChannelMember {
+    username!: string;
+    href!: string;
+    id!: number;
+    name!: string;
+    imagePath!: string;
 }
 
 class Finder {
@@ -176,7 +183,7 @@ export class LinkandoService extends ConnectIngBaseService {
    * @param callback gives back the now connected user.
    */
   connectUserAsync(username: string, password: string, callback: (user: ConnectIngUser) => void): void {
-    // TODO debugcode 
+    // TODO debugcode
     console.log('connectUserAsync');
 
     let user: ConnectIngUser;
@@ -526,19 +533,31 @@ export class LinkandoService extends ConnectIngBaseService {
     // Todo remove debug code
     console.log('getPostsAsync');
     console.log(user.token);
-    this.http.get<ChannelChild[]>('https://labs.linkando.co/api/Objects/GetChildren?objectId=' + parent.id,
-      {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(children => {
-        const posts: ConnectIngPost[] = [];
-        children.forEach(element => {
-          this.http.get<PostObject>('https://labs.linkando.co/api/Objects/Get?id=' + element.id,
-            {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(post => {
-            posts.push(new ConnectIngPost(element.id.toString(), parent.id, post.createdBy.toString(), '',
-              post.creationDate, element.name, post.attributes.postBeschreibung ));
+    this.http.get<ChannelMember[]>('https://labs.linkando.co/api/Objects/GetMembers?objectId=' + parent.id,
+    {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(members => {
+      if (members !== undefined) {
+        this.http.get<ChannelChild[]>('https://labs.linkando.co/api/Objects/GetChildren?objectId=' + parent.id,
+        {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(children => {
+          const posts: ConnectIngPost[] = [];
+          children.forEach(element => {
+            this.http.get<PostObject>('https://labs.linkando.co/api/Objects/Get?id=' + element.id,
+              {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(post => {
+                let creator = '';
+                const member = members.find(x => x.id === post.createdBy);
+                if (member !== undefined) {
+                  creator = member.name;
+                }
+                posts.push(new ConnectIngPost(element.id.toString(), parent.id, post.createdBy.toString(),
+                  creator, post.creationDate, element.name, post.attributes.postBeschreibung ));
+            });
           });
+          callback(posts);
         });
-        callback(posts);
       }
-    );
+      else {
+        callback([]);
+      }
+    });
   }
 
   /**
