@@ -2,12 +2,6 @@
  * ConnectING Base User
  */
 
-class RegisterResponse {
-  isSuccess!: boolean;
-  message!: string;
-  location!: string;
-}
-
 export class ConnectIngUser {
   readonly id: string;
   userName: string;
