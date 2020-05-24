@@ -167,6 +167,12 @@ export class LinkandoService extends ConnectIngBaseService {
     super();
   }
 
+  /**
+   * Method to connect user to service.
+   * @param username Username to register
+   * @param password Password for provided user
+   * @param callback gives back the now connected user.
+   */
   // user interface
   connectUserAsync(username: string, password: string, callback: (user: ConnectIngUser) => void): void {
     console.log('connectUserAsync');
@@ -202,8 +208,15 @@ export class LinkandoService extends ConnectIngBaseService {
     }
   }
 
+  /**
+   * Method to disconnect from the application, by deleting the authentification.
+   * @param user User to be disconnected.
+   * @param callback Gives back the if the disconnect was successful
+   */
   disconnectUserAsync(user: ConnectIngUser, callback: (disconnected: boolean) => void): void {
+    // TODO debug code
     console.log('disconnectUserAsync');
+
     this.authSvc.deleteAuth();
     callback(true);
   }
@@ -217,7 +230,9 @@ export class LinkandoService extends ConnectIngBaseService {
    */
   registerUserAsync(email: string, firstName: string, lastName: string,
                     callback: (isSuccess: boolean, errorMessage: string) => void): void {
+    // TODO debug code
     console.log('registerUserAsync');
+
     const userRoleID = 243; // for VDIUser
     const userRoleIDBusinessHub = 238; // FIXME workaround due to API handling
     const additionalRegistrationInformation =
