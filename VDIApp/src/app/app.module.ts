@@ -42,6 +42,7 @@ import {CreatePostComponent} from './channel/create-post.component';
 import {RegisterDialogComponent} from './register-dialog/register-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PwaInstallComponent } from './pwa-install/pwa-install.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     WelcomeComponent,
     CreateCommentComponent,
     CreatePostComponent,
-    RegisterDialogComponent
+    RegisterDialogComponent,
+    PwaInstallComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSliderModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('./ngsw-worker.js', {enabled: environment.production}),
     MatCardModule,
     MatButtonModule,
     MatExpansionModule,

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
 
@@ -20,7 +20,6 @@ import {animate, query, stagger, style, transition, trigger} from '@angular/anim
 })
 export class AppComponent {
   title = 'ConnectING';
-
 
   getAnimationData(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
