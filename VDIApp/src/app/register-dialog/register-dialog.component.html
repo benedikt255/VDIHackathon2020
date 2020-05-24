@@ -35,10 +35,9 @@
     </mat-form-field>
    </form>
    -->
-
+  <button (click)="register()" [disabled]="loading" class="btn btn-primary" mat-button>
+    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+    Register
+  </button>
+  <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
 </div>
-<button (click)="register()" [disabled]="loading" class="btn btn-primary" mat-button>
-  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-  Register
-</button>
-<div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>

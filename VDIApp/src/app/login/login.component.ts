@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.result = false;
   }
 
   public Connect(): void {
@@ -79,9 +80,9 @@ export class LoginComponent implements OnInit {
     const dialogRef = this.dialog.open(RegisterDialogComponent, {
       width: '250px',
     });
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe(success => {
       console.log('The dialog was closed');
-      this.result = true;
+      if (success) { this.result = true; }
     });
   }
 

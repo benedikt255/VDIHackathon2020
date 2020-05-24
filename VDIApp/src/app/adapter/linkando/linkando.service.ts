@@ -167,9 +167,16 @@ export class LinkandoService extends ConnectIngBaseService {
     super();
   }
 
-  // user interface
+  /**
+   * Method to connect user to service.
+   * @param username Username to register
+   * @param password Password for provided user
+   * @param callback gives back the now connected user.
+   */
   connectUserAsync(username: string, password: string, callback: (user: ConnectIngUser) => void): void {
+    // TODO debugcode 
     console.log('connectUserAsync');
+
     let user: ConnectIngUser;
     let localId: string;
     const localToken: string = this.authSvc.getAuth();
@@ -202,15 +209,31 @@ export class LinkandoService extends ConnectIngBaseService {
     }
   }
 
+  /**
+   * Method to disconnect from the application, by deleting the authentification.
+   * @param user User to be disconnected.
+   * @param callback Gives back the if the disconnect was successful
+   */
   disconnectUserAsync(user: ConnectIngUser, callback: (disconnected: boolean) => void): void {
+    // TODO debug code
     console.log('disconnectUserAsync');
+
     this.authSvc.deleteAuth();
     callback(true);
   }
 
+  /**
+   * Method to create a new User.
+   * @param email Email of the new User.
+   * @param firstName First name of the User.
+   * @param lastName Last name of the User.
+   * @param callback Gives back if the process was successful and an error message if it was unsuccessfull.
+   */
   registerUserAsync(email: string, firstName: string, lastName: string,
-                    callback: (isSuccess: boolean, message: string) => void): void {
+                    callback: (isSuccess: boolean, errorMessage: string) => void): void {
+    // TODO debug code
     console.log('registerUserAsync');
+
     const userRoleID = 243; // for VDIUser
     const userRoleIDBusinessHub = 238; // FIXME workaround due to API handling
     const additionalRegistrationInformation =
@@ -243,14 +266,24 @@ export class LinkandoService extends ConnectIngBaseService {
   }
   */
 
+  /**
+   * Not supported!
+   */
   unregisterUserAsync(user: ConnectIngUser, callback: (unregistered: boolean) => void): void {
     console.log('unregisterUserAsync');
     callback(false);
     // FIXME no interface to api so this has to be done manually (e.g. via an email)
   }
 
+  /**
+   * Method to change informations of an User
+   * @param user New User Object, which contains the changes.
+   * @param callback Gives back the new represantation of the user.
+   */
   updateUserAsync(user: ConnectIngUser, callback: (user: ConnectIngUser) => void): void {
+    // TODO debug code
     console.log('updateUserAsync');
+
     let userToUpdate: PersonObject;
     this.http.get<PersonObject>('https://labs.linkando.co/api/Objects/Get?id=' + user.id, {
       headers: {Authorization: user.token}, responseType: 'json'
@@ -270,9 +303,15 @@ export class LinkandoService extends ConnectIngBaseService {
       });
   }
 
+  /**
+   * Method to obtain all Users.
+   * @param user Current User, who requested all the Users
+   * @param callback Returns all the Users in exsistence.
+   */
   getUsersAsync(user: ConnectIngUser, callback: (users: ConnectIngUser[]) => void): void {
+    // TODO debug code
     console.log('getUsersAsync');
-    const finder: Finder = {finderCode: 'allChannelsAPI'};
+    const finder: Finder = {finderCode: 'VdiUsersFinderApi'};
     this.http.post<PersonObject[]>('https://labs.linkando.co/api/Objects/FinderSearch', finder, {
       headers: {Authorization: user.token}, responseType: 'json'
     }).subscribe(data => {
@@ -290,21 +329,18 @@ export class LinkandoService extends ConnectIngBaseService {
     });
   }
 
-  // channel interface
+  /**
+   * Creates new post under a defined channel.
+   * @param user Current user who performs the delete comment action.
+   * @param parent Channel which the post is related to.
+   * @param title Title of the comment.
+   * @param message Message which should be contained in the post.
+   * @param callback Gives back the post which you just created.
+   */
   createChannelAsync(user: ConnectIngUser, name: string, description: string, callback: (channel: ConnectIngChannel) => void): void {
+    // TODO debug code
     console.log('createChannelAsync');
-    /*Beispiel
-    url. https://labs.linkando.co/api/Objects/Save
-    response = objectId
-          {
-                "name": "channel 6",
-                "ObjectTypeId": 244,
-                "attributes": {
-              "channelBeschreibung": "test",
-              "channelTyp": 880,
-          }
-          }
-    */
+
     const channelAttributes: ChannelAttributes = {
       channelBeschreibung: description,
       channelTags: [],
@@ -356,6 +392,12 @@ export class LinkandoService extends ConnectIngBaseService {
       });
   }
 
+  /**
+   * Mehtod to delete specific Channel
+   * @param user Current user who performs the deletion
+   * @param channel Channel to be deleted.
+   * @param callback Gives back if the channel was deleted.
+   */
   removeChannelAsync(user: ConnectIngUser, channel: ConnectIngChannel, callback: (removed: boolean) => void): void {
     console.log('removeChannelAsync');
     this.http.delete('https://labs.linkando.co/api/Objects/Delete?id=' + channel.id, {
@@ -365,7 +407,11 @@ export class LinkandoService extends ConnectIngBaseService {
     });
   }
 
-  
+  /**
+   * Method to obtain all the channels.
+   * @param user Current user who requested the channels.
+   * @param callback Gives back all channels
+   */
   getChannelsAsync(user: ConnectIngUser, callback: (channels: ConnectIngChannel[]) => void): void {
     console.log('getChannelsAsync');
     const finder: Finder = {finderCode: 'allChannelsAPI'};
