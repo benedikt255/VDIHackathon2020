@@ -515,9 +515,9 @@ export class LinkandoService extends ConnectIngBaseService {
   // removes an existing comment
   removeCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (removed: boolean) => void): void {
     console.log('removeCommentAsync');
-    this.http.delete('https://labs.linkando.co/api/Conversations/DeleteConversationPost?postId=' + comment.id,
-      { headers: { Authorization: user.token } });
-    callback(true);
+    console.log(comment.id);
+    this.http.delete<ConversationPost>('https://labs.linkando.co/api/Conversations/DeleteConversationPost?postId=' + comment.id,
+      { headers: { Authorization: user.token } }).subscribe(post => {callback(true); } );
   }
 
   // Method - GetComments
@@ -535,8 +535,10 @@ export class LinkandoService extends ConnectIngBaseService {
         // tslint:disable-next-line: prefer-const
         let comments: ConnectIngComment[] = [];
         conversation.posts.forEach(element => {
-          comments.push(new ConnectIngComment(element.postId.toString(), parent.id.toString(),
-            element.person.id.toString(), element.person.name, element.postDate, element.text));
+          if (element.deletedByPersonName === null) {
+            comments.push(new ConnectIngComment(element.postId.toString(), parent.id.toString(),
+              element.person.id.toString(), element.person.name, element.postDate, element.text));
+          }
         });
         callback(comments);
       }

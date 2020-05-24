@@ -51,6 +51,7 @@ export class CommentComponent implements OnInit {
     this.baseService.removeCommentAsync(this.currentUser, this.current, (removed: boolean) => {
       if (removed) {
         // successfull
+        this.router.navigate(['/post']);
       } else {
         // failed
         // nop
