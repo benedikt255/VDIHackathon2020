@@ -24,12 +24,13 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
-import {PostComponent, CreateCommentComponent} from './post/post.component';
+import {PostComponent} from './post/post.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MainNavComponent} from './main-nav/main-nav.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -38,6 +39,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
+import { CreateCommentComponent } from './post/create-comment.component';
 
 @NgModule({
    declarations: [
@@ -70,6 +72,7 @@ import {MatInputModule} from '@angular/material/input';
     MatGridListModule,
     MatTabsModule,
     HammerModule,
+    MatFormFieldModule,
     FormsModule,
     MatBottomSheetModule,
     MatInputModule

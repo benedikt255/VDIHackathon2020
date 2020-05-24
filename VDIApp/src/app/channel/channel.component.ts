@@ -140,19 +140,20 @@ export class ChannelComponent implements OnInit {
 
 
 
-  /**
-   * Method to recognize swipe features
-   * @param action 
-   */
-  public swipe(action = this.SWIPE_ACTION.RIGHT) {
-    if (action === this.SWIPE_ACTION.RIGHT) {
-      this.GoBack();
-    }
 
-    // swipe left, previous avatar
-    if (action === this.SWIPE_ACTION.LEFT) {
+/**
+ * Method to recognize swipe features
+ * @param action
+ */
+public swipe(action = this.SWIPE_ACTION.RIGHT) {
+  if (action === this.SWIPE_ACTION.RIGHT) {
+    this.GoBack();
+  }
 
-    }
+  // swipe left, previous avatar
+  if (action === this.SWIPE_ACTION.LEFT) {
+
+  }
 
   }
 
@@ -168,11 +169,11 @@ export class ChannelComponent implements OnInit {
   styleUrls: ['../app.component.css'],
 })
 export class CreatePostComponent {
-  constructor(private bottomSheetRef: MatBottomSheetRef<CreatePostComponent>) { }
-
+  constructor(private bottomSheetRef: MatBottomSheetRef<CreatePostComponent>) {}
 
   openLink(event: MouseEvent): void {
     this.bottomSheetRef.dismiss();
     event.preventDefault();
   }
 }
+
