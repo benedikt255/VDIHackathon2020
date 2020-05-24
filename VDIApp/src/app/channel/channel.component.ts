@@ -36,7 +36,7 @@ export class ChannelComponent implements OnInit{
   }
 
   openPostPanel(): void {
-    this.bottomSheet.open(CreatePostComponent);
+    //this.bottomSheet.open(CreatePostComponent);
   }
 
   public GoTo(post: string): void
@@ -143,7 +143,7 @@ public GoBack(): void{
 
 /**
  * Method to recognize swipe features
- * @param action 
+ * @param action
  */
 public swipe(action = this.SWIPE_ACTION.RIGHT) {
   if (action === this.SWIPE_ACTION.RIGHT) {
@@ -162,17 +162,3 @@ public swipe(action = this.SWIPE_ACTION.RIGHT) {
 
 }
 
-
-@Component({
-  selector: 'app-create-post',
-  templateUrl: './create-post.component.html',
-  styleUrls: ['../app.component.css'],
-})
-export class CreatePostComponent {
-  constructor(private bottomSheetRef: MatBottomSheetRef<CreatePostComponent>) {}
-
-  openLink(event: MouseEvent): void {
-    this.bottomSheetRef.dismiss();
-    event.preventDefault();
-  }
-}

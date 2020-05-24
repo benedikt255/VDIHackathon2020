@@ -67,21 +67,9 @@
 
   .overlay{
     position: fixed;
-    overflow-y: scroll;
-    top: 0;
-    left:0;
-    bottom:0;
-    right: 0;
-    z-index: 60000;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-  }
-
-  .overlay2{
-    position: fixed;
     right:3em;
     bottom:3em;
+    z-index: 600;
   }
 
 
