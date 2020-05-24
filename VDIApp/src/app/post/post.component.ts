@@ -39,7 +39,7 @@ export class PostComponent implements OnInit {
 
 
   openCommentPanel(): void {
-    this.bottomSheet.open(CreateCommentComponent);
+    this.bottomSheet.open(CreateCommentComponent).afterDismissed().subscribe(() => { this.loadComments(); });
   }
 
 
@@ -77,23 +77,6 @@ export class PostComponent implements OnInit {
         // nop
       } else {
         this.current = updatedPost;
-        this.loadComments();
-      }
-    });
-  }
-
-  /**
-   * Method - Create a new Comment
-   * @param text Comment Text
-   */
-  public createComment(text: string) {
-    this.baseService.createCommentAsync(this.currentUser, this.current, text, (comment: ConnectIngComment) => {
-      if (comment === ConnectIngComment.GetDefault()) {
-        // Create failed
-        // nop
-      } else {
-        // Create successfull
-        // Update Channel List
         this.loadComments();
       }
     });
@@ -156,10 +139,33 @@ public swipe(action = this.SWIPE_ACTION.RIGHT) {
   styleUrls: ['../app.component.css'],
 })
 export class CreateCommentComponent {
-  constructor(private bottomSheetRef: MatBottomSheetRef<CreateCommentComponent>) {}
+  private baseService: ConnectIngBaseService;
+
+  public commentText: string;
+
+  constructor(baseService: ConnectIngBaseService, private bottomSheetRef: MatBottomSheetRef<CreateCommentComponent>) {
+    this.baseService = baseService;
+    this.commentText = 'Please write in your comment!';
+  }
 
   openLink(event: MouseEvent): void {
     this.bottomSheetRef.dismiss();
     event.preventDefault();
+  }
+
+  /**
+   * Method - Create a new Comment
+   * @param text Comment Text
+   */
+  public createComment(text: string) {
+    this.baseService.createCommentAsync(this.baseService.currentUser, this.baseService.currentPost, text, (comment: ConnectIngComment) => {
+      if (comment === ConnectIngComment.GetDefault()) {
+        // Create failed
+        // nop
+      } else {
+        // Create successfull
+        // Update Channel List
+      }
+    });
   }
 }

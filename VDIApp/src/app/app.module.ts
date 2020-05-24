@@ -38,6 +38,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { CommentComponent } from './comment/comment.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { FormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
    declarations: [
@@ -71,6 +73,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatListModule,
     MatGridListModule,
     MatTabsModule,
+    FormsModule,
+    MatInputModule,
     HammerModule
   ],
   providers: [

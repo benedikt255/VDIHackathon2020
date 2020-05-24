@@ -1,15 +1,12 @@
-<div>Kommentareingabe
-  <!-- <img src="../../assets/images/Connecting-Logo-Long.svg"> -->
-
-
+<div>
   <mat-card>
   <mat-form-field class="inputFormFull">
     <mat-label>Leave a comment</mat-label>
-    <textarea matInput placeholder=""></textarea>
+    <input matInput placeholder="Input" [(ngModel)]="commentText">
   </mat-form-field>
   </mat-card>
 
-  <button mat-raised-button color="primary" (click)="createComment('test')">Comment</button>
+  <button mat-raised-button color="primary" (click)="createComment(commentText)">Comment</button>
 
 </div>
 
