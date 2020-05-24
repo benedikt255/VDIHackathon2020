@@ -10,15 +10,15 @@ export class HttpCacheService {
 
   constructor() { }
 
-  put(url: string, response: HttpResponse<any>): void {
+  public put(url: string, response: HttpResponse<any>): void {
     this.requests[url] = response;
   }
 
-  get(url: string): HttpResponse<any> {
+  public get(url: string): HttpResponse<any> {
     return this.requests[url];
   }
 
-  invalidateCache(): void {
+  public invalidateCache(): void {
     this.requests = { };
   }
 }
