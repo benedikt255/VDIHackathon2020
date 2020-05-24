@@ -114,7 +114,7 @@
 }
 
 .example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-image: url('../assets/images/csm_Ingos_SuJ_01_c08901e48c.jpg');
   background-size: cover;
 }
 
@@ -149,6 +149,8 @@
   z-index: 1;
   background-color: blue;
 }
+
+
 
 .connecting-toolbar {
   /* position: sticky;
