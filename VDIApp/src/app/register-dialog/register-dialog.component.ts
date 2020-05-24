@@ -10,9 +10,9 @@ import {ConnectIngBaseService} from '../adapter/base/AbstractBaseService';
 })
 export class RegisterDialogComponent {
 
-  loading = false;
-  error = '';
-  hide = true;
+  public loading = false;
+  public error = '';
+
   // and password Validators.pattern('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/')
   registerData: FormGroup = new FormGroup({
       email: new FormControl('', [Validators.required]),
@@ -51,17 +51,19 @@ export class RegisterDialogComponent {
       return;
     }
     this.loading = true;
+    window.location.reload();
     this.baseService.registerUserAsync(this.registerData.value.email,
       this.registerData.value.firstName,
       this.registerData.value.lastName,
-      (isSuccess: boolean, message: string) => {
+      (isSuccess: boolean, errorMessage: string) => {
         if (isSuccess) {
           console.log('Successful Registration');
           this.dialogRef.close(true);
         } else {
-          console.log(message);
-          this.error = message;
+          console.log(errorMessage);
+          this.error = errorMessage;
           this.loading = false;
+          window.location.reload();
         }
       });
   }

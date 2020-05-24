@@ -5,7 +5,7 @@
     <br>
     <mat-form-field class="inputFormFull">
       <mat-label>Leave a comment</mat-label>
-      <textarea matInput placeholder="Write a comment!">{{current.text}}</textarea>
+      <textarea matInput placeholder="Write a comment!" [(ngModel)]='current.text'></textarea>
     </mat-form-field>
 
     <mat-card-actions>

@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
   private baseService: ConnectIngBaseService;
   private router: Router;
 
+  public result = false;
+
   constructor(baseService: ConnectIngBaseService,
               router: Router,
               private route: ActivatedRoute,
@@ -51,6 +53,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.result = false;
   }
 
   public Connect(): void {
@@ -74,8 +77,12 @@ export class LoginComponent implements OnInit {
   }
 
   public Register(): void {
-    this.dialog.open(RegisterDialogComponent, {
+    const dialogRef = this.dialog.open(RegisterDialogComponent, {
       width: '250px',
+    });
+    dialogRef.afterClosed().subscribe(success => {
+      console.log('The dialog was closed');
+      if (success) { this.result = true; }
     });
   }
 
