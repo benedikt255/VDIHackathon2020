@@ -194,18 +194,13 @@
   border-radius: 8px;
   margin-bottom: 2em;
 }
-/*
-.mat-card:hover {
-  background-color: rgb(38, 255, 0);
-}
-*/
-.hov:hover{
-  background-color: grey;
-  opacity: 70%;
-  z-index: 400;
-  border-radius: 8px;
 
+.post2:hover{
+  background-color: rgb(54, 161, 211);
+  border-radius: 8px;
+  margin-bottom: 2em;
 }
+
 
 .adjustWidth {
   width: 100%;
