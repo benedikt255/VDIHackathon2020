@@ -1,14 +1,13 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, HammerModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import 'hammerjs';
-import { HammerModule } from '@angular/platform-browser';
 
 import {AuthService} from './adapter/linkando/auth/auth.service';
 import {CookieService} from './cookie/cookie.service';
 
-import { ConnectIngBaseService, ConnectIngMockService } from './adapter/base/AbstractBaseService';
-import { LinkandoService } from './adapter/linkando/linkando.service';
+import {ConnectIngBaseService} from './adapter/base/AbstractBaseService';
+import {LinkandoService} from './adapter/linkando/linkando.service';
 
 
 import {HttpClientModule} from '@angular/common/http';
@@ -34,29 +33,29 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MainNavComponent} from './main-nav/main-nav.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { CommentComponent } from './comment/comment.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import {CommentComponent} from './comment/comment.component';
+import {WelcomeComponent} from './welcome/welcome.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
-import { CreateCommentComponent } from './post/create-comment.component';
+import {CreateCommentComponent} from './post/create-comment.component';
 import {CreatePostComponent} from './channel/create-post.component';
-import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
+import {RegisterDialogComponent} from './register-dialog/register-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
-   declarations: [
-     AppComponent,
-     MainNavComponent,
-     LoginComponent,
-     StaticPageComponent,
-     ChannelComponent,
-     PostComponent,
-     CommentComponent,
-     WelcomeComponent,
-     CreateCommentComponent,
-     CreatePostComponent,
-     RegisterDialogComponent
+  declarations: [
+    AppComponent,
+    MainNavComponent,
+    LoginComponent,
+    StaticPageComponent,
+    ChannelComponent,
+    PostComponent,
+    CommentComponent,
+    WelcomeComponent,
+    CreateCommentComponent,
+    CreatePostComponent,
+    RegisterDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { ConnectIngChannel, ConnectIngBaseService, ConnectIngUser } from '../adapter/base/AbstractBaseService';
-
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ConnectIngBaseService, ConnectIngChannel, ConnectIngUser} from '../adapter/base/AbstractBaseService';
 
 
 @Component({
@@ -11,14 +10,11 @@ import { ConnectIngChannel, ConnectIngBaseService, ConnectIngUser } from '../ada
 })
 export class WelcomeComponent implements OnInit {
 
+  // Connection State Properties
+  public currentUser: ConnectIngUser;
+  public channels: ConnectIngChannel[];
   private baseService: ConnectIngBaseService;
   private router: Router;
-
-    // Connection State Properties
-    public currentUser: ConnectIngUser;
-    public channels: ConnectIngChannel[];
-
-
 
   constructor(baseService: ConnectIngBaseService, router: Router) {
     this.router = router;
@@ -26,17 +22,18 @@ export class WelcomeComponent implements OnInit {
     this.currentUser = this.baseService.currentUser;
     this.channels = [];
     this.loadChannels();
-   }
+  }
 
   ngOnInit(): void {
   }
 
 
-  public GoTo(channel: string): void
-  {
-      if(channel === undefined) { return; }
-      this.baseService.currentChannel = this.channels.filter(value => value.id === channel)[0];
-      this.router.navigate(['/channel']);
+  public GoTo(channel: string): void {
+    if (channel === undefined) {
+      return;
+    }
+    this.baseService.currentChannel = this.channels.filter(value => value.id === channel)[0];
+    this.router.navigate(['/channel']);
   }
 
 

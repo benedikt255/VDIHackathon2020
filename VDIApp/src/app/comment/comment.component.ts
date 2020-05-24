@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ConnectIngComment, ConnectIngBaseService, ConnectIngUser } from '../adapter/base/AbstractBaseService';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ConnectIngBaseService, ConnectIngComment, ConnectIngUser} from '../adapter/base/AbstractBaseService';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -10,18 +10,16 @@ import { Router } from '@angular/router';
 })
 export class CommentComponent implements OnInit {
 
-  private baseService: ConnectIngBaseService;
-  private router: Router;
-
   public currentUser: ConnectIngUser;
   public current: ConnectIngComment;
-
+  private baseService: ConnectIngBaseService;
+  private router: Router;
 
   constructor(baseService: ConnectIngBaseService, router: Router) {
     this.baseService = baseService;
     this.router = router;
     this.currentUser = this.baseService.currentUser;
-    this.current =  this.baseService.currentComment;
+    this.current = this.baseService.currentComment;
   }
 
   ngOnInit(): void {

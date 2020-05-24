@@ -1,12 +1,12 @@
 <div>
   <mat-card>
-  <mat-form-field class="inputFormFull">
-    <mat-label>Leave a comment</mat-label>
-    <input matInput placeholder="Input" [(ngModel)]="commentText">
-  </mat-form-field>
+    <mat-form-field class="inputFormFull">
+      <mat-label>Leave a comment</mat-label>
+      <input [(ngModel)]="commentText" matInput placeholder="Input">
+    </mat-form-field>
   </mat-card>
 
-  <button mat-raised-button color="primary" (click)="createComment(commentText)">Comment</button>
+  <button (click)="createComment(commentText)" color="primary" mat-raised-button>Comment</button>
 
 </div>
 

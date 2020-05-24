@@ -2,7 +2,7 @@
 
   <mat-list>
     <div mat-subheader>ConnectING Channels</div>
-    <mat-list-item *ngFor="let channel of channels" (click)="GoTo(channel.id)">
+    <mat-list-item (click)="GoTo(channel.id)" *ngFor="let channel of channels">
       <mat-icon mat-list-icon>home</mat-icon>
       <div mat-line>{{channel.name}}</div>
       <div mat-line> {{channel.description}} </div>

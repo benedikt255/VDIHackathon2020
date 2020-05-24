@@ -1,7 +1,7 @@
 <div class="main">
-<mat-card class="example-card">
-  <mat-card-title>{{current.author}}</mat-card-title>
-  <mat-card-subtitle>Erstellt am: {{current.creationTS | date:'medium' }}</mat-card-subtitle>
+  <mat-card class="example-card">
+    <mat-card-title>{{current.author}}</mat-card-title>
+    <mat-card-subtitle>Erstellt am: {{current.creationTS | date:'medium' }}</mat-card-subtitle>
     <br>
     <mat-form-field class="inputFormFull">
       <mat-label>Leave a comment</mat-label>
@@ -9,8 +9,8 @@
     </mat-form-field>
 
     <mat-card-actions>
-      <button mat-button (click)="updateComment(current)">Speichern</button>
-      <button mat-button (click)="removeComment()">Löschen</button>
+      <button (click)="updateComment(current)" mat-button>Speichern</button>
+      <button (click)="removeComment()" mat-button>Löschen</button>
     </mat-card-actions>
-</mat-card>
+  </mat-card>
 </div>

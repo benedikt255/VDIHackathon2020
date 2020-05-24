@@ -7,8 +7,8 @@ import {ChannelComponent} from './channel/channel.component';
 //Screen 3
 import {PostComponent} from './post/post.component';
 //Screen 4
-import { WelcomeComponent } from './welcome/welcome.component';
-import { CommentComponent } from './comment/comment.component';
+import {WelcomeComponent} from './welcome/welcome.component';
+import {CommentComponent} from './comment/comment.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},

@@ -1,8 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import { ConnectIngComment, ConnectIngPost, ConnectIngUser, ConnectIngBaseService } from '../adapter/base/AbstractBaseService';
-import { Router } from '@angular/router';
-import { MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
-import { CreateCommentComponent } from './create-comment.component';
+import {
+  ConnectIngBaseService,
+  ConnectIngComment,
+  ConnectIngPost,
+  ConnectIngUser
+} from '../adapter/base/AbstractBaseService';
+import {Router} from '@angular/router';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {CreateCommentComponent} from './create-comment.component';
 
 @Component({
   selector: 'app-post',
@@ -11,44 +16,42 @@ import { CreateCommentComponent } from './create-comment.component';
 })
 export class PostComponent implements OnInit {
 
-  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
-
-
-  private baseService: ConnectIngBaseService;
-  private router: Router;
-
+  SWIPE_ACTION = {LEFT: 'swipeleft', RIGHT: 'swiperight'};
   public currentUser: ConnectIngUser;
   public current: ConnectIngPost;
   public comments: ConnectIngComment[];
+  private baseService: ConnectIngBaseService;
+  private router: Router;
 
   constructor(baseService: ConnectIngBaseService, router: Router, private bottomSheet: MatBottomSheet) {
-  this.baseService = baseService;
-  this.router = router;
-  this.currentUser = this.baseService.currentUser;
-  this.current =  this.baseService.currentPost;
-  this.comments = [];
-  this.bottomSheet = bottomSheet;
+    this.baseService = baseService;
+    this.router = router;
+    this.currentUser = this.baseService.currentUser;
+    this.current = this.baseService.currentPost;
+    this.comments = [];
+    this.bottomSheet = bottomSheet;
 
 
-
-  this.loadComments();
+    this.loadComments();
   }
 
   ngOnInit(): void {
   }
 
 
-
   openCommentPanel(): void {
-    this.bottomSheet.open(CreateCommentComponent).afterDismissed().subscribe(() => { this.loadComments(); });
+    this.bottomSheet.open(CreateCommentComponent).afterDismissed().subscribe(() => {
+      this.loadComments();
+    });
   }
 
 
-  public GoTo(comment: string): void
-  {
-      if(comment === undefined) { return; }
-      this.baseService.currentComment = this.comments.filter(value => value.id === comment)[0];
-      this.router.navigate(['/comment']);
+  public GoTo(comment: string): void {
+    if (comment === undefined) {
+      return;
+    }
+    this.baseService.currentComment = this.comments.filter(value => value.id === comment)[0];
+    this.router.navigate(['/comment']);
   }
 
   /**
@@ -62,9 +65,9 @@ export class PostComponent implements OnInit {
       } else {
         // successfull
         this.comments = comments;
-        }
+      }
     });
-    }
+  }
 
 
   /**
@@ -98,38 +101,31 @@ export class PostComponent implements OnInit {
   }
 
 
-
-
-
-/**
- * Method to GoBack to Channel View
- */
-public GoBack(): void{
-  this.baseService.currentComment = ConnectIngComment.GetDefault();
-  this.baseService.currentPost = ConnectIngPost.GetDefault();
-  this.router.navigate(['/channel']);
-}
-
-
-
-
-/**
- * Method to recognize swipe features
- * @param action
- */
-public swipe(action = this.SWIPE_ACTION.RIGHT) {
-  if (action === this.SWIPE_ACTION.RIGHT) {
-    this.GoBack();
+  /**
+   * Method to GoBack to Channel View
+   */
+  public GoBack(): void {
+    this.baseService.currentComment = ConnectIngComment.GetDefault();
+    this.baseService.currentPost = ConnectIngPost.GetDefault();
+    this.router.navigate(['/channel']);
   }
 
-  // swipe left, previous avatar
-  if (action === this.SWIPE_ACTION.LEFT) {
+
+  /**
+   * Method to recognize swipe features
+   * @param action
+   */
+  public swipe(action = this.SWIPE_ACTION.RIGHT) {
+    if (action === this.SWIPE_ACTION.RIGHT) {
+      this.GoBack();
+    }
+
+    // swipe left, previous avatar
+    if (action === this.SWIPE_ACTION.LEFT) {
+
+    }
 
   }
-
-}
-
-
 
 
 }

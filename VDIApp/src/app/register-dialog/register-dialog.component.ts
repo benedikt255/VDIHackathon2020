@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
-import {ConnectIngBaseService, ConnectIngUser} from '../adapter/base/AbstractBaseService';
+import {ConnectIngBaseService} from '../adapter/base/AbstractBaseService';
 import {RegisterResponse} from "../adapter/linkando/linkando.service";
 
 @Component({
@@ -59,8 +59,7 @@ export class RegisterDialogComponent {
         if (registered.isSuccess) {
           console.log('Successful Registration');
           this.dialogRef.close(true);
-        }
-        else {
+        } else {
           console.log(registered);
           this.error = registered.message;
           this.loading = false;

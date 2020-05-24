@@ -1,4 +1,4 @@
-<div class="content" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
+<div (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" class="content">
 
   <mat-card class="main post">
     <mat-card-header>
@@ -13,31 +13,31 @@
 
     <div class="btnright">
       <mat-card-actions class="btns">
-        <button mat-raised-button color="primary">LIKE</button>
-        <button mat-raised-button color="primary">SHARE</button>
+        <button color="primary" mat-raised-button>LIKE</button>
+        <button color="primary" mat-raised-button>SHARE</button>
       </mat-card-actions>
     </div>
   </mat-card>
 
 
-  <mat-list-item class="main" *ngFor="let comment of comments">
-    <mat-card mat-line class="mat-card" (click)="GoTo(comment.id)">
+  <mat-list-item *ngFor="let comment of comments" class="main">
+    <mat-card (click)="GoTo(comment.id)" class="mat-card" mat-line>
       <mat-card-header>
         <mat-card-title>{{comment.text}}</mat-card-title>
         <mat-card-subtitle>{{comment.author}}</mat-card-subtitle>
       </mat-card-header>
       <div class="btnright">
         <mat-card-actions class="btns">
-          <button mat-raised-button color="primary">
+          <button color="primary" mat-raised-button>
             <mat-icon aria-label="Side nav toggle icon">thumb_up</mat-icon>
           </button>
-          <button mat-raised-button color="primary">SHARE</button>
+          <button color="primary" mat-raised-button>SHARE</button>
         </mat-card-actions>
       </div>
     </mat-card>
   </mat-list-item>
 
-  <button mat-fab color="warn" class="AddButton overlay" (click)="openCommentPanel()">
+  <button (click)="openCommentPanel()" class="AddButton overlay" color="warn" mat-fab>
     <mat-icon aria-label="Side nav toggle icon">add</mat-icon>
   </button>
 </div>
