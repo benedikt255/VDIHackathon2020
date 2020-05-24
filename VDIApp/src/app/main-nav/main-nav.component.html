@@ -7,13 +7,13 @@
     <mat-nav-list>
       <a mat-list-item routerLink="/welcome">Welcome</a>
       <a mat-list-item routerLink="/login"> Login</a>
- 
+
       <!-- <a mat-list-item routerLink="/create-post">Create Post</a> -->
-     
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar class = connecting-toolbar>
       <button
         (click)="drawer.toggle()"
         *ngIf="isHandset$ | async"
