@@ -9,13 +9,14 @@ import {PostComponent} from './post/post.component';
 // Screen 4
 import {WelcomeComponent} from './welcome/welcome.component';
 import {CommentComponent} from './comment/comment.component';
+//Screen 5
+import {PromptComponent} from './prompt/prompt.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'channel', component: ChannelComponent},
   {path: 'post', component: PostComponent},
-  {path: 'welcome', component: WelcomeComponent},
-  {path: 'comment', component: CommentComponent},
+  {path: 'prompt', component: PromptComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: '**', component: LoginComponent}
 ];

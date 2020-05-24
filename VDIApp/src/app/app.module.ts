@@ -9,7 +9,7 @@ import {CookieService} from './service/cookie/cookie.service';
 import {ConnectIngBaseService} from './service/adapter/base/AbstractBaseService';
 import {LinkandoService} from './service/adapter/linkando/linkando.service';
 
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
@@ -44,6 +44,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PromptComponent } from './prompt/prompt.component';
 import {PwaService} from './service/pwa/pwa.service';
+import {CacheInterceptor} from "./service/cache.interceptor";
 
 const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
@@ -93,6 +94,7 @@ const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt()
     AuthService,
     CookieService,
     {provide: APP_INITIALIZER, useFactory: initializer, deps: [PwaService], multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
