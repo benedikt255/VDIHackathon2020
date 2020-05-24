@@ -42,7 +42,6 @@ import {CreatePostComponent} from './channel/create-post.component';
 import {RegisterDialogComponent} from './register-dialog/register-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { PwaInstallComponent } from './pwa-install/pwa-install.component';
 
 @NgModule({
   declarations: [
@@ -56,8 +55,7 @@ import { PwaInstallComponent } from './pwa-install/pwa-install.component';
     WelcomeComponent,
     CreateCommentComponent,
     CreatePostComponent,
-    RegisterDialogComponent,
-    PwaInstallComponent
+    RegisterDialogComponent
   ],
   imports: [
     BrowserModule,
