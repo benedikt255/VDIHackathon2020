@@ -151,6 +151,7 @@ class ConversationPost {
 class ConversationPostMin {
   conversationId!: number;
   text!: string;
+  isEditAllowed!: boolean;
 }
 
 // adapter class
@@ -501,7 +502,7 @@ export class LinkandoService extends ConnectIngBaseService {
     console.log('createCommentAsync');
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
       {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(conversations => {
-      const post: ConversationPostMin = {conversationId: conversations[0], text};
+      const post: ConversationPostMin = {conversationId: conversations[0], text, isEditAllowed: true };
       this.http.post<ConversationPost>('https://labs.linkando.co/api/Conversations/CreateConversationPost', post,
         {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(comment => {
         const commRet: ConnectIngComment = new ConnectIngComment(comment.postId.toString(), parent.id,
@@ -515,6 +516,8 @@ export class LinkandoService extends ConnectIngBaseService {
   // updates an existing comment text of an existing comment
   updateCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (comment: ConnectIngComment) => void): void {
     console.log('updateCommentAsync');
+    console.log(comment.id);
+    console.log(comment.text);
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + comment.postId,
       {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(conversations => {
       this.http.get<Conversation>('https://labs.linkando.co/api/Conversations/GetConversation?conversationId='
@@ -534,6 +537,12 @@ export class LinkandoService extends ConnectIngBaseService {
     });
   }
 
+  /**
+   * Method to delete specific comment.
+   * @param user Current User who performs the delete comment action
+   * @param comment The comment to be deleted.
+   * @param callback Gives back an boolean to verify the deletion.
+   */
   // Method - RemoveComment
   // removes an existing comment
   removeCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (removed: boolean) => void): void {
@@ -545,8 +554,12 @@ export class LinkandoService extends ConnectIngBaseService {
     });
   }
 
-  // Method - GetComments
-  // returns the comments under an existing post
+  /**
+   * Method to get comments related to one post.
+   * @param user Current User who performs the comment action
+   * @param parent parent PostObject, which the Comment is created for. This represents the post you comment on.
+   * @param callback gives back all the comments exsiting in the parent post.
+   */
   getCommentsAsync(user: ConnectIngUser, parent: ConnectIngPost, callback: (comments: Array<ConnectIngComment>) => void): void {
     console.log('getCommentsAsync');
     console.log(user.token);

@@ -38,6 +38,7 @@ export class CommentComponent implements OnInit {
       } else {
         // successfull
         this.current = newComment;
+        this.router.navigate(['/post']);
       }
     });
   }
