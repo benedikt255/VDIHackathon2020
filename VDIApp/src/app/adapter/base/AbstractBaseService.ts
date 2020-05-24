@@ -405,8 +405,8 @@ export class ConnectIngMockService implements ConnectIngBaseService {
     callback(true);
   }
 
-  registerUserAsync(email: string, firstName: string, lastName: string, callback: (registered: RegisterResponse) => void): void {
-    callback(new RegisterResponse());
+  registerUserAsync(email: string, firstName: string, lastName: string, callback: (isSuccess: boolean, message: string) => void): void {
+    callback(true, '');
   }
 
   unregisterUserAsync(user: ConnectIngUser, callback: (unregistered: boolean) => void): void {
