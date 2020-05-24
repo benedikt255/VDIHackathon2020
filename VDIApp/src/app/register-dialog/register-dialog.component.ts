@@ -50,17 +50,20 @@ export class RegisterDialogComponent {
     if (this.registerData.invalid) {
       return;
     }
+    this.loading = true;
+    window.location.reload();
     this.baseService.registerUserAsync(this.registerData.value.email,
       this.registerData.value.firstName,
       this.registerData.value.lastName,
-      (isSuccess: boolean, message: string) => {
+      (isSuccess: boolean, errorMessage: string) => {
         if (isSuccess) {
           console.log('Successful Registration');
           this.dialogRef.close(true);
         } else {
-          console.log(message);
-          this.error = message;
+          console.log(errorMessage);
+          this.error = errorMessage;
           this.loading = false;
+          window.location.reload();
         }
       });
   }
