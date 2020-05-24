@@ -63,7 +63,8 @@ export class PostComponent implements OnInit {
         // failed
         // nop
       } else {
-        // successfull
+        // this.loadComments();
+        // this.bottomSheet.dismiss();
         this.comments = comments;
       }
     });
