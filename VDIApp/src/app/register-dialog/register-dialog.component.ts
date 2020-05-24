@@ -51,7 +51,7 @@ export class RegisterDialogComponent {
       return;
     }
     this.loading = true;
-    window.location.reload();
+    // window.location.reload(); TODO: showing the error or processing isn ot working
     this.baseService.registerUserAsync(this.registerData.value.email,
       this.registerData.value.firstName,
       this.registerData.value.lastName,
@@ -63,7 +63,7 @@ export class RegisterDialogComponent {
           console.log(errorMessage);
           this.error = errorMessage;
           this.loading = false;
-          window.location.reload();
+          // window.location.reload();
         }
       });
   }

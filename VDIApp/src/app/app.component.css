@@ -48,9 +48,9 @@
 }
 
 
-.mat-list-item:hover {
+/*.mat-list-item:hover {
   background-color: #FFA500;
-}
+}*/
 
 /* Login Screen */
 .login-content {
@@ -88,6 +88,10 @@
   z-index: 1;
 }
 
+.post-spaces{
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
 
 .overlay {
   position: fixed;
@@ -140,12 +144,18 @@
 
 /*channel - by Matthias Walter, NEUE Version*/
 
+.header {
+  width: 100%;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .content {
   width: 100%;
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
-  /*background-color: rgb(200, 200, 200);*/
 }
 
 
@@ -166,7 +176,8 @@
   margin-right: auto;
   justify-content: center;
   align-items: center;
-  display: flex;
+  /*display: flex;*/
+  display: block;
 }
 
 .mat-card {
@@ -185,11 +196,7 @@
 
 .post1 {
   background-color: #FFA500;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
+  text-align: center;
 }
 
 .post2 {
@@ -198,9 +205,16 @@
   margin-bottom: 2em;
 }
 
+.post2:hover{
+  background-color: rgb(54, 161, 211);
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+
+
 .adjustWidth {
   width: 100%;
-  border-radius: 40px;
+  border-radius: 8px;
 }
 
 
