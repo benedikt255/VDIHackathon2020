@@ -1,8 +1,9 @@
-
-
 /**
  * ConnectING Base User
  */
+import {RegisterResponse} from "../linkando/linkando.service";
+
+
 export class ConnectIngUser {
     readonly id: string;
     userName: string;
@@ -94,7 +95,7 @@ export class ConnectIngPost {
       this.title = title;
       this.message = message;
     }
-  
+
     public static GetDefault(): ConnectIngPost {
       return new ConnectIngPost('', '', '', '', new Date(''), '', '');
     }
@@ -172,46 +173,47 @@ export abstract class ConnectIngBaseService
 
 
     /**
-     * 
-     * @param username 
-     * @param password 
-     * @param callback 
+     *
+     * @param username
+     * @param password
+     * @param callback
      */
     abstract connectUserAsync(username: string, password: string, callback: (user: ConnectIngUser) => void): void;
 
     /**
-     * 
-     * @param user 
-     * @param callback 
+     *
+     * @param user
+     * @param callback
      */
     abstract disconnectUserAsync(user: ConnectIngUser, callback: (disconnected: boolean) => void): void;
 
     /**
-     * 
-     * @param user 
-     * @param password 
-     * @param callback 
+     *
+     * @param email
+     * @param firstName
+     * @param lastName
+     * @param callback
      */
-    abstract registerUserAsync(user: ConnectIngUser, password: string, callback: (registered: boolean) => void): void;
+    abstract registerUserAsync(email: string, firstName: string, lastName: string, callback: (registered: RegisterResponse) => void): void;
 
     /**
-     * 
-     * @param user 
-     * @param callback 
+     *
+     * @param user
+     * @param callback
      */
     abstract unregisterUserAsync(user: ConnectIngUser, callback: (unregistered: boolean) => void): void;
 
     /**
-     * 
-     * @param user 
-     * @param callback 
+     *
+     * @param user
+     * @param callback
      */
     abstract updateUserAsync(user: ConnectIngUser, callback: (user: ConnectIngUser) => void): void;
 
     /**
-     * 
-     * @param user 
-     * @param callback 
+     *
+     * @param user
+     * @param callback
      */
     abstract getUsersAsync(user: ConnectIngUser, callback: (users: ConnectIngUser[]) => void): void;
 
@@ -223,107 +225,104 @@ export abstract class ConnectIngBaseService
 
 
     /**
-     * 
-     * @param user 
-     * @param name 
-     * @param description 
-     * @param callback 
+     *
+     * @param user
+     * @param name
+     * @param description
+     * @param callback
      */
     abstract createChannelAsync(user: ConnectIngUser, name: string, description: string, callback: (channel: ConnectIngChannel) => void): void;
 
     /**
-     * 
-     * @param user 
-     * @param channel 
-     * @param callback 
+     *
+     * @param user
+     * @param channel
+     * @param callback
      */
     abstract updateChannelAsync(user: ConnectIngUser, channel: ConnectIngChannel, callback: (channel: ConnectIngChannel) => void): void;
-  
+
     /**
-     * 
-     * @param user 
-     * @param channel 
-     * @param callback 
+     *
+     * @param user
+     * @param channel
+     * @param callback
      */
     abstract removeChannelAsync(user: ConnectIngUser, channel: ConnectIngChannel, callback: (removed: boolean) => void): void;
-  
+
     /**
-     * 
-     * @param user 
-     * @param callback 
+     *
+     * @param user
+     * @param callback
      */
     abstract getChannelsAsync(user: ConnectIngUser, callback: (channels: ConnectIngChannel[]) => void): void;
 
 
 
     /**
-     * 
-     * @param user 
-     * @param parent 
-     * @param title 
-     * @param message 
-     * @param callback 
+     *
+     * @param user
+     * @param parent
+     * @param title
+     * @param message
+     * @param callback
      */
     abstract createPostAsync(user: ConnectIngUser, parent: ConnectIngChannel, title: string, message: string, callback: (post: ConnectIngPost) => void): void;
 
     /**
-     * 
-     * @param user 
-     * @param post 
-     * @param callback 
+     *
+     * @param user
+     * @param post
+     * @param callback
      */
     abstract updatePostAsync(user: ConnectIngUser, post: ConnectIngPost, callback: (post: ConnectIngPost) => void): void;
 
     /**
-     * 
-     * @param user 
-     * @param post 
-     * @param callback 
+     *
+     * @param user
+     * @param post
+     * @param callback
      */
     abstract removePostAsync(user: ConnectIngUser, post: ConnectIngPost, callback: (removed: boolean) => void): void;
 
     /**
-     * 
-     * @param user 
-     * @param parent 
-     * @param callback 
+     *
+     * @param user
+     * @param parent
+     * @param callback
      */
     abstract getPostsAsync(user: ConnectIngUser, parent: ConnectIngChannel, callback: (posts: Array<ConnectIngPost>) => void): void;
 
 
-
-
-
     /**
-     * 
-     * @param user 
-     * @param parent 
-     * @param text 
-     * @param callback 
+     *
+     * @param user
+     * @param parent
+     * @param text
+     * @param callback
      */
     abstract createCommentAsync(user: ConnectIngUser, parent: ConnectIngPost, text: string, callback: (comment: ConnectIngComment) => void): void;
 
     /**
-     * 
-     * @param user 
-     * @param comment 
-     * @param callback 
+     *
+     * @param user
+     * @param comment
+     * @param callback
      */
     abstract updateCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (comment: ConnectIngComment) => void): void;
 
     /**
-     * 
-     * @param user 
-     * @param comment 
-     * @param callback 
+     *
+     * @param user
+     * @param comment
+     * @param callback
      */
     abstract removeCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (removed: boolean) => void): void;
 
     /**
-     * 
-     * @param user 
-     * @param parent 
-     * @param callback 
+     *
+     * @param user
+     * @param parent
+     * @param callback
      */
     abstract getCommentsAsync(user: ConnectIngUser, parent: ConnectIngPost, callback: (comments: Array<ConnectIngComment>) => void): void;
 
@@ -356,7 +355,7 @@ export class ConnectIngMockService implements ConnectIngBaseService
     public currentComment: ConnectIngComment;
 
 
-    
+
     /**
      * Abstract Constructor
      */
@@ -490,15 +489,15 @@ export class ConnectIngMockService implements ConnectIngBaseService
       createPostAsync(user: ConnectIngUser, parent: ConnectIngChannel, title: string, message: string, callback: (post: ConnectIngPost) => void): void {
         callback(this.post);
       }
-    
+
       getPostsAsync(user: ConnectIngUser, parent: ConnectIngChannel, callback: (posts: Array<ConnectIngPost>) => void): void {
         callback([this.post]);
       }
-    
+
       removePostAsync(user: ConnectIngUser, post: ConnectIngPost, callback: (removed: boolean) => void): void {
         callback(false);
       }
-    
+
       updatePostAsync(user: ConnectIngUser, post: ConnectIngPost, callback: (post: ConnectIngPost) => void): void {
         callback(this.post);
       }
@@ -509,15 +508,15 @@ export class ConnectIngMockService implements ConnectIngBaseService
       createCommentAsync(user: ConnectIngUser, parent: ConnectIngPost, text: string, callback: (comment: ConnectIngComment) => void): void {
         callback(this.comment);
       }
-    
+
       getCommentsAsync(user: ConnectIngUser, parent: ConnectIngPost, callback: (comments: Array<ConnectIngComment>) => void): void {
         callback([this.comment]);
       }
-    
+
       removeCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (removed: boolean) => void): void {
         callback(false);
       }
-    
+
       updateCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (comment: ConnectIngComment) => void): void {
         callback(this.comment);
       }

@@ -37,10 +37,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { CommentComponent } from './comment/comment.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import { CreateCommentComponent } from './post/create-comment.component';
 import {CreatePostComponent} from './channel/create-post.component';
+import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
    declarations: [
@@ -53,7 +55,8 @@ import {CreatePostComponent} from './channel/create-post.component';
      CommentComponent,
      WelcomeComponent,
      CreateCommentComponent,
-     CreatePostComponent
+     CreatePostComponent,
+     RegisterDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,9 @@ import {CreatePostComponent} from './channel/create-post.component';
     MatFormFieldModule,
     FormsModule,
     MatBottomSheetModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [
     {provide: ConnectIngBaseService, useClass: LinkandoService},

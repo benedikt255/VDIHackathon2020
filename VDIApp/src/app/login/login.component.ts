@@ -2,8 +2,11 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './../adapter/linkando/auth/auth.service'; // bypass für den linkando login,
 // für die Serienvariante brauchen wir da noch was schöneres
-import { environment } from './../../environments/environment'; // umgebungsvariablen, hauptsächlich link auf Pfad
+import { environment } from '../../environments/environment'; // umgebungsvariablen, hauptsächlich link auf Pfad
 import { ConnectIngBaseService, ConnectIngUser } from '../adapter/base/AbstractBaseService';
+import {RegisterDialogComponent} from '../register-dialog/register-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {filter} from 'rxjs/operators';
 
 // Beispiel für Integration eines Service mit Interface in Angular
 // https://medium.com/hackernoon/creating-interfaces-for-angular-services-1bb41fbbe47c
@@ -29,7 +32,11 @@ export class LoginComponent implements OnInit {
   public userName: string;
   public userPassword: string;
 
-  constructor(baseService: ConnectIngBaseService, router: Router, private route: ActivatedRoute, private authSvc: AuthService) {
+  constructor(baseService: ConnectIngBaseService,
+              router: Router,
+              private route: ActivatedRoute,
+              private authSvc: AuthService,
+              public dialog: MatDialog) {
     this.router = router;
     this.baseService = baseService;
     this.userName = 'Please insert your Username';
@@ -37,7 +44,7 @@ export class LoginComponent implements OnInit {
 
     // helper für linkado login, subscribe code param
     this.route.queryParams.subscribe(params => {
-      this.accessCode = params['code'];
+      this.accessCode = params.code;
       if (this.authSvc.getAuth() === '') {
         if (this.accessCode !== undefined) {
           this.authSvc.requestAuthWithAccessCode(this.accessCode);
@@ -73,7 +80,9 @@ export class LoginComponent implements OnInit {
   }
 
   public Register(): void{
-    throw Error('Not implemented yet');
+    this.dialog.open(RegisterDialogComponent, {
+      width: '250px',
+    });
   }
 
 

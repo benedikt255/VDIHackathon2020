@@ -6,6 +6,7 @@ import { ConnectIngBaseService, ConnectIngComment, ConnectIngUser, ConnectIngCha
 
 // helper classes
 // user
+
 class CurrentPerson {
   href!: string;
   id!: number;
@@ -95,7 +96,7 @@ class PostAttributes{
   dropdownRelatedChannel!: string;
 }
 
-class RegisterResponse {
+export class RegisterResponse {
   isSuccess!: boolean;
   message!: string;
   location!: string;
@@ -141,13 +142,17 @@ class ConversationPost {
   referencedMessageId!: number;
 }
 
+class ConversationPostMin {
+  conversationId!: number;
+  text!: string;
+}
+
 // adapter class
 @Injectable({
   providedIn: 'root'
 })
 export class LinkandoService extends ConnectIngBaseService {
 
-  public userRoleID = 243;
   // post interface
   offlineMode = false;
 
@@ -198,6 +203,23 @@ export class LinkandoService extends ConnectIngBaseService {
     callback(true);
   }
 
+  registerUserAsync(email: string, firstName: string, lastName: string, callback: (registered: RegisterResponse) => void): void {
+    console.log('registerUserAsync');
+    const userRoleID = 243; // for VDIUser
+    const additionalRegistrationInformation =
+      {
+        FirstName: firstName,
+        LastName: lastName,
+      };
+    this.http.post<RegisterResponse>('https://labs.linkando.co/api/People/Register?email=' + email
+      + '&personType=' + userRoleID, additionalRegistrationInformation, {responseType: 'json'})
+      .subscribe(registrationResult => {
+        console.log(registrationResult);
+        callback(registrationResult);
+      });
+  }
+
+  /* since Linkando API handles registration no user is required to be created by us
   registerUserAsync(user: ConnectIngUser, password: string, callback: (registered: boolean) => void): void {
     console.log('registerUserAsync');
     const additionalRegistrationInformation =
@@ -212,6 +234,7 @@ export class LinkandoService extends ConnectIngBaseService {
         callback(registrationResult.isSuccess);
       });
   }
+  */
 
   unregisterUserAsync(user: ConnectIngUser, callback: (unregistered: boolean) => void): void {
     console.log('unregisterUserAsync');
@@ -281,7 +304,7 @@ export class LinkandoService extends ConnectIngBaseService {
       channelTyp: 'null',
       channelAddress: 'null',
       // tslint:disable-next-line:variable-name
-      linked_from_245_otaga_4352_to_244!: [], // API function has to match
+      linked_from_245_otaga_4352_to_244: [] // API function has to match
    };
     const channelToUpload: ChannelObject = {
     modifiedBy : 0,
@@ -473,11 +496,7 @@ export class LinkandoService extends ConnectIngBaseService {
     console.log('createCommentAsync');
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
     { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(conversations => {
-      const person: CurrentPerson = { name : user.userName, id : +user.id, imagePath : '', href : '' };
-      const post: ConversationPost = { conversationId : conversations[0], text, limitedAccess : false, isVotePost : false,
-      isCallRecord : false, postId : 0, isArchiveProcessing : false, previewText : text, deletedByPersonName : '', deletionDate : new Date(''),
-      deletionReason : '', postVotesCount : 0, isVotedFor : false, isOwn : true, postDate : new Date(''), person, editedDate : new Date(),
-      isNotification : false, attachments : [], isEditAllowed : true, referencedMessageId : 0 };
+      const post: ConversationPostMin = { conversationId : conversations[0], text };
       this.http.post<ConversationPost>('https://labs.linkando.co/api/Conversations/CreateConversationPost', post,
       { headers: { Authorization: user.token } , responseType: 'json' }).subscribe(comment => {
         const commRet: ConnectIngComment = new ConnectIngComment(comment.postId.toString(), parent.id,
@@ -514,9 +533,9 @@ export class LinkandoService extends ConnectIngBaseService {
   // removes an existing comment
   removeCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (removed: boolean) => void): void {
     console.log('removeCommentAsync');
-    this.http.delete('https://labs.linkando.co/api/Conversations/DeleteConversationPost?postId=' + comment.id,
-      { headers: { Authorization: user.token } });
-    callback(true);
+    console.log(comment.id);
+    this.http.delete<ConversationPost>('https://labs.linkando.co/api/Conversations/DeleteConversationPost?postId=' + comment.id,
+      { headers: { Authorization: user.token } }).subscribe(post => {callback(true); } );
   }
 
   // Method - GetComments
@@ -534,8 +553,10 @@ export class LinkandoService extends ConnectIngBaseService {
         // tslint:disable-next-line: prefer-const
         let comments: ConnectIngComment[] = [];
         conversation.posts.forEach(element => {
-          comments.push(new ConnectIngComment(element.postId.toString(), parent.id.toString(),
-            element.person.id.toString(), element.person.name, element.postDate, element.text));
+          if (element.deletedByPersonName === null) {
+            comments.push(new ConnectIngComment(element.postId.toString(), parent.id.toString(),
+              element.person.id.toString(), element.person.name, element.postDate, element.text));
+          }
         });
         callback(comments);
       }
