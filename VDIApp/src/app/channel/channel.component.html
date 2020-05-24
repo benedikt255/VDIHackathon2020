@@ -1,24 +1,19 @@
 <div class="content" (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)">
 
 
-  <div class="main"><!--Kanalinfo-->
+  <div class="main">
+    <!--Kanalinfo-->
     <mat-card class="post1">
-      <p class = "otxt">{{current.name}}</p>
+      <p class="otxt">{{current.name}}</p>
     </mat-card>
   </div>
 
 
+  <!--Beitrag-->
+  <div class="main">
+    <mat-list-item class="adjustWidth" *ngFor="let post of posts">
 
-  <!-- Original von Adreas
-    <div class = "overview">
-      <p>{{current.name}}</p>
-    </div>-->
-
-
-
-    <div class="main"><!--Beitrag-->
-    <mat-list-item class="adjustWidth"  *ngFor="let post of posts">
-      <mat-card class="post2" mat-line (click)="GoTo(post.id)">
+      <mat-card mat-line (click)="loadPost(post.id)" class="post2">
         <mat-card-header>
           <div class="example-header-image" mat-card-avatar></div>
           <mat-card-title>{{post.title}}</mat-card-title>
@@ -36,15 +31,15 @@
           </mat-card-actions>
         </div>
       </mat-card>
-    </mat-list-item>
 
+    </mat-list-item>
+  </div>
+
+
+  <div class="overlay2">
+      <button mat-fab color="warn" class="AddButton" (click)="openPostPanel()">
+        <mat-icon aria-label="Side nav toggle icon">add</mat-icon>
+      </button>
   </div>
 
 </div>
-
-<div class="overlay">
-<div class="overlay2">
-<button mat-fab color="warn" class="AddButton" (click)="openPostPanel()"><mat-icon aria-label="Side nav toggle icon">add</mat-icon></button>
-</div>
-</div>
-
