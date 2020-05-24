@@ -63,7 +63,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSliderModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('./ngsw-worker.js', {enabled: environment.production}),
     MatCardModule,
     MatButtonModule,
     MatExpansionModule,
