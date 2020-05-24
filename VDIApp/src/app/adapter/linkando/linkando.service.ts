@@ -151,6 +151,7 @@ class ConversationPost {
 class ConversationPostMin {
   conversationId!: number;
   text!: string;
+  isEditAllowed!: boolean;
 }
 
 // adapter class
@@ -211,13 +212,14 @@ export class LinkandoService extends ConnectIngBaseService {
                     callback: (isSuccess: boolean, message: string) => void): void {
     console.log('registerUserAsync');
     const userRoleID = 243; // for VDIUser
+    const userRoleIDBusinessHub = 238; // FIXME workaround due to API handling
     const additionalRegistrationInformation =
       {
         FirstName: firstName,
-        LastName: lastName,
+        LastName: lastName
       };
     this.http.post<RegisterResponse>('https://labs.linkando.co/api/People/Register?email=' + email
-      + '&personType=' + userRoleID, additionalRegistrationInformation, {responseType: 'json'})
+      + '&personType=' + userRoleIDBusinessHub, additionalRegistrationInformation, {responseType: 'json'})
       .subscribe(registrationResult => {
         console.log(registrationResult);
         callback(registrationResult.isSuccess, registrationResult.message);
@@ -495,7 +497,7 @@ export class LinkandoService extends ConnectIngBaseService {
     console.log('createCommentAsync');
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
       {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(conversations => {
-      const post: ConversationPostMin = {conversationId: conversations[0], text};
+      const post: ConversationPostMin = {conversationId: conversations[0], text, isEditAllowed: true };
       this.http.post<ConversationPost>('https://labs.linkando.co/api/Conversations/CreateConversationPost', post,
         {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(comment => {
         const commRet: ConnectIngComment = new ConnectIngComment(comment.postId.toString(), parent.id,
@@ -514,6 +516,8 @@ export class LinkandoService extends ConnectIngBaseService {
   updateCommentAsync(user: ConnectIngUser, comment: ConnectIngComment, callback: (comment: ConnectIngComment) => void): void {
     // Todo remove debug code
     console.log('updateCommentAsync');
+    console.log(comment.id);
+    console.log(comment.text);
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + comment.postId,
       {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(conversations => {
       this.http.get<Conversation>('https://labs.linkando.co/api/Conversations/GetConversation?conversationId='
