@@ -208,8 +208,15 @@ export class LinkandoService extends ConnectIngBaseService {
     callback(true);
   }
 
+  /**
+   * Method to create a new User.
+   * @param email Email of the new User.
+   * @param firstName First name of the User.
+   * @param lastName Last name of the User.
+   * @param callback Gives back if the process was successful and an error message if it was unsuccessfull.
+   */
   registerUserAsync(email: string, firstName: string, lastName: string,
-                    callback: (isSuccess: boolean, message: string) => void): void {
+                    callback: (isSuccess: boolean, errorMessage: string) => void): void {
     console.log('registerUserAsync');
     const userRoleID = 243; // for VDIUser
     const userRoleIDBusinessHub = 238; // FIXME workaround due to API handling
@@ -243,6 +250,9 @@ export class LinkandoService extends ConnectIngBaseService {
   }
   */
 
+  /**
+   * Not supported!
+   */
   unregisterUserAsync(user: ConnectIngUser, callback: (unregistered: boolean) => void): void {
     console.log('unregisterUserAsync');
     callback(false);
@@ -257,7 +267,7 @@ export class LinkandoService extends ConnectIngBaseService {
   updateUserAsync(user: ConnectIngUser, callback: (user: ConnectIngUser) => void): void {
     // TODO debug code
     console.log('updateUserAsync');
-    
+
     let userToUpdate: PersonObject;
     this.http.get<PersonObject>('https://labs.linkando.co/api/Objects/Get?id=' + user.id, {
       headers: {Authorization: user.token}, responseType: 'json'
