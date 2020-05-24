@@ -3,7 +3,7 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import 'hammerjs';
 
-import {AuthService} from './service/adapter/base/auth/auth.service';
+import {AuthService} from './service/adapter/linkando/auth/auth.service';
 import {CookieService} from './service/cookie/cookie.service';
 
 import {ConnectIngBaseService} from './service/adapter/base/AbstractBaseService';
