@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ConnectIngBaseService, ConnectIngPost} from '../adapter/base/AbstractBaseService';
+import {ConnectIngBaseService, ConnectIngPost} from '../service/adapter/base/AbstractBaseService';
 import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 @Component({
