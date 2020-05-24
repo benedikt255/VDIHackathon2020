@@ -1,5 +1,5 @@
 import {BrowserModule, HammerModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import 'hammerjs';
 
@@ -42,6 +42,10 @@ import {CreatePostComponent} from './channel/create-post.component';
 import {RegisterDialogComponent} from './register-dialog/register-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PromptComponent } from './prompt/prompt.component';
+import {PwaService} from './pwa.service';
+
+const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
 @NgModule({
   declarations: [
@@ -55,7 +59,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     WelcomeComponent,
     CreateCommentComponent,
     CreatePostComponent,
-    RegisterDialogComponent
+    RegisterDialogComponent,
+    PromptComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +91,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   providers: [
     {provide: ConnectIngBaseService, useClass: LinkandoService},
     AuthService,
-    CookieService
+    CookieService,
+    {provide: APP_INITIALIZER, useFactory: initializer, deps: [PwaService], multi: true},
   ],
   bootstrap: [AppComponent]
 })
