@@ -51,8 +51,8 @@
     <div class ="comment">
     <mat-card (click)="GoTo(comment.id)" class="mat-card" class ="comment" mat-line>
       <mat-card-header>
-        <mat-card-title>{{comment.text}}</mat-card-title>
-        <mat-card-subtitle>{{comment.author}}</mat-card-subtitle>
+        <mat-card-title>{{comment.author}}</mat-card-title>
+        <mat-card-subtitle>{{comment.text}}</mat-card-subtitle>
       </mat-card-header>
       <div class="btnright">
         <mat-card-actions class="btns">
@@ -67,6 +67,9 @@
     </mat-card>
   </div>
   </mat-list-item>
+
+
+
 
   <button (click)="openCommentPanel()" class="AddButton overlay" color="warn" mat-fab>
     <mat-icon aria-label="Side nav toggle icon">add</mat-icon>
