@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {ConnectIngBaseService} from '../adapter/base/AbstractBaseService';
-import {RegisterResponse} from '../adapter/linkando/linkando.service';
 
 @Component({
   selector: 'app-register-dialog',
@@ -55,13 +54,13 @@ export class RegisterDialogComponent {
     this.baseService.registerUserAsync(this.registerData.value.email,
       this.registerData.value.firstName,
       this.registerData.value.lastName,
-      (registered: RegisterResponse) => {
-        if (registered.isSuccess) {
+      (isSuccess: boolean, message: string) => {
+        if (isSuccess) {
           console.log('Successful Registration');
           this.dialogRef.close(true);
         } else {
-          console.log(registered);
-          this.error = registered.message;
+          console.log(message);
+          this.error = message;
           this.loading = false;
         }
       });

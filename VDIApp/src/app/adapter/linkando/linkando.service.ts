@@ -102,7 +102,7 @@ class PostAttributes {
   dropdownRelatedChannel!: string;
 }
 
-export class RegisterResponse {
+class RegisterResponse {
   isSuccess!: boolean;
   message!: string;
   location!: string;
@@ -207,7 +207,8 @@ export class LinkandoService extends ConnectIngBaseService {
     callback(true);
   }
 
-  registerUserAsync(email: string, firstName: string, lastName: string, callback: (registered: RegisterResponse) => void): void {
+  registerUserAsync(email: string, firstName: string, lastName: string,
+                    callback: (isSuccess: boolean, message: string) => void): void {
     console.log('registerUserAsync');
     const userRoleID = 243; // for VDIUser
     const additionalRegistrationInformation =
@@ -219,7 +220,7 @@ export class LinkandoService extends ConnectIngBaseService {
       + '&personType=' + userRoleID, additionalRegistrationInformation, {responseType: 'json'})
       .subscribe(registrationResult => {
         console.log(registrationResult);
-        callback(registrationResult);
+        callback(registrationResult.isSuccess, registrationResult.message);
       });
   }
 

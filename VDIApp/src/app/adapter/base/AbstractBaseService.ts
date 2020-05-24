@@ -1,8 +1,12 @@
 /**
  * ConnectING Base User
  */
-import {RegisterResponse} from '../linkando/linkando.service';
 
+class RegisterResponse {
+  isSuccess!: boolean;
+  message!: string;
+  location!: string;
+}
 
 export class ConnectIngUser {
   readonly id: string;
@@ -189,7 +193,8 @@ export abstract class ConnectIngBaseService {
    * @param lastName
    * @param callback
    */
-  abstract registerUserAsync(email: string, firstName: string, lastName: string, callback: (registered: RegisterResponse) => void): void;
+  abstract registerUserAsync(email: string, firstName: string, lastName: string,
+                             callback: (isSuccess: boolean, message: string) => void): void;
 
   /**
    *
@@ -400,7 +405,7 @@ export class ConnectIngMockService implements ConnectIngBaseService {
     callback(true);
   }
 
-  registerUserAsync(user: ConnectIngUser, password: string, callback: (registered: RegisterResponse) => void): void {
+  registerUserAsync(email: string, firstName: string, lastName: string, callback: (registered: RegisterResponse) => void): void {
     callback(new RegisterResponse());
   }
 
