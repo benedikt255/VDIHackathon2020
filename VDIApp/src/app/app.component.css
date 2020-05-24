@@ -122,7 +122,7 @@
   position: fixed;
   right: 3em;
   bottom: 3em;
-  z-index: 600;
+  z-index: 2;
 }
 
 .post-spaces{
@@ -179,7 +179,7 @@
   top: 0;
   z-index: 1; */
   color: white;
-  background-color: rgb(0, 69, 104);
+  background-color: rgb(49, 39, 131);
 
 }
 
