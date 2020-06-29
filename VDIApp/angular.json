@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/VDIApp",
+            "outputPath": "dist/vdiapp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "VDIApp:build"
+            "browserTarget": "vdiapp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "VDIApp:build:production"
+              "browserTarget": "vdiapp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "VDIApp:build"
+            "browserTarget": "vdiapp:build"
           }
         },
         "test": {
@@ -116,11 +116,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "VDIApp:serve"
+            "devServerTarget": "vdiapp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "VDIApp:serve:production"
+              "devServerTarget": "vdiapp:serve:production"
             }
           }
         },
@@ -134,7 +134,7 @@
       }
     }
   },
-  "defaultProject": "VDIApp",
+  "defaultProject": "vdiapp",
   "cli": {
     "analytics": false
   }
