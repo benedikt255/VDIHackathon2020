@@ -44,6 +44,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PromptComponent } from './prompt/prompt.component';
 import {PwaService} from './service/pwa/pwa.service';
 
+// Fix Scroll Problem
+import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
+
+export class MyHammerConfig extends HammerGestureConfig {
+    overrides = <any> {
+        'pinch': { enable: false },
+        'rotate': { enable: false }
+    };
+}
+
 const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
 @NgModule({
@@ -91,6 +101,10 @@ const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt()
     AuthService,
     CookieService,
     {provide: APP_INITIALIZER, useFactory: initializer, deps: [PwaService], multi: true},
+    {
+        provide: HAMMER_GESTURE_CONFIG,
+        useClass: MyHammerConfig
+    },
   ],
   bootstrap: [AppComponent]
 })
