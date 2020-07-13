@@ -48,10 +48,10 @@ import {PwaService} from './service/pwa/pwa.service';
 import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 
 export class MyHammerConfig extends HammerGestureConfig {
-    overrides = <any> {
+    overrides = {
         'pinch': { enable: false },
         'rotate': { enable: false }
-    };
+    } as any;
 }
 
 const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
