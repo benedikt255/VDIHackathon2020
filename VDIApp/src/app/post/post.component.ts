@@ -3,7 +3,8 @@ import {
   ConnectIngBaseService,
   ConnectIngComment,
   ConnectIngPost,
-  ConnectIngUser
+  ConnectIngUser,
+  ConnectIngChannel
 } from '../service/adapter/base/AbstractBaseService';
 import {Router} from '@angular/router';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
@@ -22,6 +23,7 @@ export class PostComponent implements OnInit {
   public comments: ConnectIngComment[];
   private baseService: ConnectIngBaseService;
   private router: Router;
+  public channel: ConnectIngChannel; 
 
   constructor(baseService: ConnectIngBaseService, router: Router, private bottomSheet: MatBottomSheet) {
     this.baseService = baseService;
@@ -30,7 +32,7 @@ export class PostComponent implements OnInit {
     this.current = this.baseService.currentPost;
     this.comments = [];
     this.bottomSheet = bottomSheet;
-
+    this.channel = this.baseService.currentChannel;
 
     this.loadComments();
   }
