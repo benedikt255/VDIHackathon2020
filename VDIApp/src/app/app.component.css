@@ -103,8 +103,8 @@
 
 .AddButton {
   position: fixed;
-  right: 3em;
-  bottom: 3em;
+  right: 1.5em;
+  bottom: 1.5em;
   z-index: 2;
 }
 
@@ -232,11 +232,12 @@
   width: 100%;
 }
 
+/*
 .post1 {
-  background-color: #FFA500;
+  background-color: #F09216;
   text-align: center;
 }
-
+*/
 .post2 {
   background-color: #008FD3;
   border-radius: 8px;

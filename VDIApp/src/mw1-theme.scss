@@ -40,9 +40,21 @@ $VDIApp-theme: mat-light-theme($VDIApp-primary, $VDIApp-accent, $VDIApp-accent2)
 
 // Test des mixin-features
 @import '~@angular/material/theming';
+
+
 .my-class {
  background-color: rgb(0,0,255);
 }
 
 
+.post1 {
+  background-color: mat-color($VDIApp-accent2);
+  text-align: center;
+  color: white;
+}
+
+
+.mat-list-item-content:hover{
+  background-color: mat-color($VDIApp-primary, A200);
+}
 
