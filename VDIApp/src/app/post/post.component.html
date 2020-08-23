@@ -5,7 +5,7 @@
     <div class="main">
       <!--Kanalinfo-->
       <mat-card class="post1">
-        <p class="otxt">{{channel.name}}</p>
+        <p class="otxt">{{channel.name}} &#10152; {{current.title}}</p>
       </mat-card>
     </div>
   </div>
@@ -81,7 +81,7 @@
 <!-- </mat-list> -->
 
 
-    <button (click)="openCommentPanel()" class="AddButton" color="warn" mat-fab>
+    <button (click)="openCommentPanel()" class="AddButton" color="accent" mat-fab>
       <mat-icon aria-label="Side nav toggle icon">add</mat-icon>
     </button>
   </div>

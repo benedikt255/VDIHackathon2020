@@ -4,11 +4,12 @@
 
     <div class="main">
       <!--Kanalinfo-->
-      <mat-card class="post1">
-        <p class="otxt">{{current.name}}</p>
+      <mat-card class="post1" >
+        <p class="otxt" >Channel: {{current.name}}</p>
       </mat-card>
     </div>
   </div>
+
 
   <div class = content>
   <!--Beitrag-->
@@ -42,7 +43,7 @@
   </mat-list-item>
 <!-- </mat-list> -->
 
-    <button (click)="openPostPanel()" class="AddButton" color="warn" mat-fab>
+    <button (click)="openPostPanel()" class="AddButton" color="accent" mat-fab>
       <mat-icon aria-label="Side nav toggle icon">add</mat-icon>
     </button>
 

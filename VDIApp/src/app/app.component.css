@@ -94,7 +94,7 @@
 }
 
 .comment .mat-card{
-  background-color: rgb(126, 184, 231);
+ background-color: rgb(126, 184, 231);
 }
 
 .comment .mat-card:hover{
@@ -168,19 +168,16 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: blue;
+  /*background-color: blue;*/
 }
 
 
-
+/*
 .connecting-toolbar {
-  /* position: sticky;
-  top: 0;
-  z-index: 1; */
   color: white;
   background-color: rgb(49, 39, 131);
-
 }
+*/
 
 
 /*channel - by Matthias Walter, NEUE Version*/
