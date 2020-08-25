@@ -6,6 +6,117 @@ https://www.youtube.com/watch?v=EBnTZwr0RSs
 
 
 
+$dark-primary-text: rgba(black, 0.87);
+//...
+$light-primary-text: white;
+//...
+
+$mat-vdi-blue: (
+  //palette by http://mcg.mbitson.com/
+  50 : #e0f2fa,
+  100 : #b3ddf4,
+  200 : #80c7ec,
+  300 : #4db1e4,
+  400 : #26a0df,
+  500 : #008fd9,
+  600 : #0087d5,
+  700 : #007ccf,
+  800 : #0072ca,
+  900 : #0060c0,
+  A100 : #e9f2ff,
+  A200 : #b6d6ff,
+  A400 : #83b9ff,
+  A700 : #69aaff,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+
+$mat-vdi-orange: (
+  50 : #fdf2e3,
+  100 : #fbdeb9,
+  200 : #f8c98b,
+  300 : #f5b35c,
+  400 : #f2a239,
+  500 : #f09216,
+  600 : #ee8a13,
+  700 : #ec7f10,
+  800 : #e9750c,
+  900 : #e56306,
+  A100 : #ffffff,
+  A200 : #ffe7da,
+  A400 : #ffc7a7,
+  A700 : #ffb78d,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $dark-primary-text,
+    700: $dark-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: black,
+  )
+);
+
+
+$mat-vdi-black: (
+  50 : #e7e7e7,
+  100 : #c3c4c4,
+  200 : #9b9d9d,
+  300 : #737575,
+  400 : #555858,
+  500 : #373a3a,
+  600 : #313434,
+  700 : #2a2c2c,
+  800 : #232525,
+  900 : #161818,
+  A100 : #6af6f6,
+  A200 : #3af3f3,
+  A400 : #00fafa,
+  A700 : #00e0e0,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+
+
+
+
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
