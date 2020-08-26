@@ -99,7 +99,7 @@ class PostObject {
   parentId!: string;
   ObjectTypeId!: string;
   createdBy!: number;
-  creationDate!: Date;
+  creationDate!: string;
   attributes!: PostAttributes;
   inheritanceAttribute!: string;
 }
@@ -194,7 +194,6 @@ export class LinkandoService extends ConnectIngBaseService {
         {headers: {Authorization: localToken}, responseType: 'json'})
         .subscribe(person => {
           localId = person.id.toString();
-          console.log(person);
           this.http.get<PersonObject>('https://labs.linkando.co/api/Objects/Get?id=' + localId.toString(),
             {headers: {Authorization: localToken}, responseType: 'json'})
             .subscribe(object => {
@@ -209,7 +208,6 @@ export class LinkandoService extends ConnectIngBaseService {
                 userName: object.username,
                 token: localToken
               };
-              console.log(object);
               callback(user);
             });
         });
@@ -446,9 +444,8 @@ export class LinkandoService extends ConnectIngBaseService {
       inheritanceAttribute: 'DropDownRelatedChannel',
       attributes,
       createdBy: 0,
-      creationDate: new Date()
+      creationDate: ''
     };
-    console.log(postToUpload);
     this.http.post<number>('https://labs.linkando.co/api/Objects/Save', postToUpload, {
       headers: {Authorization: user.token}, responseType: 'json'
     }).subscribe((Id) => {
@@ -481,7 +478,6 @@ export class LinkandoService extends ConnectIngBaseService {
         postToUpdate.name = post.title;
         postToUpdate.parentId = post.channelId;
         postToUpdate.attributes.postBeschreibung = post.message;
-        console.log(postToUpdate);
         this.http.post<number>('https://labs.linkando.co/api/Objects/Save', postToUpdate, {
           headers: {Authorization: user.token}, responseType: 'json'
         })
@@ -526,9 +522,10 @@ export class LinkandoService extends ConnectIngBaseService {
                   creator = member.name;
                 }
                 posts.push(new ConnectIngPost(element.id.toString(), parent.id, post.createdBy.toString(),
-                  creator, post.creationDate, element.name, post.attributes.postBeschreibung ));
+                  creator, new Date(post.creationDate), element.name, post.attributes.postBeschreibung ));
             });
           });
+          posts.sort((a, b) => b.creationTS.valueOf() - a.creationTS.valueOf());
           callback(posts);
         });
       }
@@ -606,7 +603,6 @@ export class LinkandoService extends ConnectIngBaseService {
   getCommentsAsync(user: ConnectIngUser, parent: ConnectIngPost, callback: (comments: Array<ConnectIngComment>) => void): void {
     this.http.get<number[]>('https://labs.linkando.co/api/Objects/GetConversationIds?objectId=' + parent.id,
       {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(conversations => {
-      console.log(conversations);
       this.http.get<Conversation>('https://labs.linkando.co/api/Conversations/GetConversation?conversationId='
         + conversations[0].toString() + '&count=100&offset=0',
         {headers: {Authorization: user.token}, responseType: 'json'}).subscribe(conversation => {

@@ -1,5 +1,5 @@
 import {BrowserModule, HammerModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import { APP_INITIALIZER, NgModule, Injectable } from '@angular/core';
 
 import 'hammerjs';
 
@@ -47,6 +47,7 @@ import {PwaService} from './service/pwa/pwa.service';
 // Fix Scroll Problem
 import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 
+@Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
     overrides = <any> {
         'pinch': { enable: false },
